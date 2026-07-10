@@ -8,7 +8,7 @@ import {
   type CategorySlug,
   type Product,
 } from "@/data/products";
-import { site, waLink, defaultWaMessage } from "@/lib/site";
+import { site, waLink, defaultWaMessage, assetPath } from "@/lib/site";
 
 const faqs = [
   {
@@ -74,10 +74,10 @@ function ProductRail({
 }
 
 const categoryImages: Record<CategorySlug, string> = {
-  rings: "/images/products/aura-solitaire-ring.webp",
-  earrings: "/images/products/stella-diamond-studs.webp",
-  necklaces: "/images/products/riviera-tennis-necklace.webp",
-  bracelets: "/images/products/icon-tennis-bracelet.webp",
+  rings: assetPath("/images/products/aura-solitaire-ring.webp"),
+  earrings: assetPath("/images/products/stella-diamond-studs.webp"),
+  necklaces: assetPath("/images/products/riviera-tennis-necklace.webp"),
+  bracelets: assetPath("/images/products/icon-tennis-bracelet.webp"),
 };
 
 const diamondShapes = [
@@ -85,37 +85,37 @@ const diamondShapes = [
     name: "עגול",
     note: "קלאסי ומלא אור",
     type: "round",
-    image: "/images/diamond-shapes/round.webp",
+    image: assetPath("/images/diamond-shapes/round.webp"),
   },
   {
     name: "אובל",
     note: "רך ומוארך",
     type: "oval",
-    image: "/images/diamond-shapes/oval.webp",
+    image: assetPath("/images/diamond-shapes/oval.webp"),
   },
   {
     name: "אמרלד",
     note: "קווים נקיים",
     type: "emerald",
-    image: "/images/diamond-shapes/emerald.webp",
+    image: assetPath("/images/diamond-shapes/emerald.webp"),
   },
   {
     name: "קושן",
     note: "רך ורומנטי",
     type: "cushion",
-    image: "/images/diamond-shapes/cushion.webp",
+    image: assetPath("/images/diamond-shapes/cushion.webp"),
   },
   {
     name: "טיפה",
     note: "עדין ובעל תנועה",
     type: "pear",
-    image: "/images/diamond-shapes/pear.webp",
+    image: assetPath("/images/diamond-shapes/pear.webp"),
   },
   {
     name: "פרינסס",
     note: "חד ומדויק",
     type: "princess",
-    image: "/images/diamond-shapes/princess.webp",
+    image: assetPath("/images/diamond-shapes/princess.webp"),
   },
 ] as const;
 
@@ -138,7 +138,7 @@ export default function HomePage() {
       <section className="hero-editorial relative isolate overflow-hidden border-b border-line">
         <div className="absolute inset-0 lg:hidden">
           <Image
-            src="/images/hero/home-hero-ring-mobile-portrait.webp"
+            src={assetPath("/images/hero/home-hero-ring-mobile-portrait.webp")}
             alt="טבעת יהלום מעבדה בזהב צהוב על שיש בהיר"
             fill
             priority
@@ -192,7 +192,7 @@ export default function HomePage() {
             <div className="hero-ring-light" />
             <div className="absolute left-[48%] top-1/2 z-10 w-[132%] max-w-none -translate-x-1/2 -translate-y-1/2 sm:w-[104%] lg:w-[114%]">
               <Image
-                src="/images/hero/home-hero-ring-flat-cutout.webp"
+                src={assetPath("/images/hero/home-hero-ring-flat-cutout.webp")}
                 alt="טבעת יהלום מעבדה מרכזית בזהב צהוב"
                 width={1143}
                 height={643}

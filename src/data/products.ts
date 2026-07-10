@@ -1,3 +1,5 @@
+import { assetPath } from "@/lib/site";
+
 export type Metal = "yellow" | "white" | "rose";
 export type CategorySlug = "rings" | "earrings" | "necklaces" | "bracelets";
 export type ArtType =
@@ -39,7 +41,7 @@ export interface Product {
 }
 
 export function productImage(product: Pick<Product, "slug">): string {
-  return `/images/products/${product.slug}.webp`;
+  return assetPath(`/images/products/${product.slug}.webp`);
 }
 
 export interface Category {

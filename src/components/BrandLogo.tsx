@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { assetPath } from "@/lib/site";
 
 type BrandLogoProps = {
   className?: string;
@@ -22,7 +23,7 @@ export default function BrandLogo({
     >
       {variant === "minimal" ? (
         <img
-          src="/brand/libi-diamonds-logo.svg"
+          src={assetPath("/brand/libi-diamonds-logo.svg")}
           alt=""
           className="brand-logo-asset"
           width="360"
