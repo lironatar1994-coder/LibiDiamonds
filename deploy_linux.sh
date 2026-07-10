@@ -69,11 +69,19 @@ pm2 save > /dev/null
 log "Writing Nginx route snippet for vee-app.co.il$ROUTE_BASE..."
 cat > "$NGINX_SNIPPET" <<NGINX
 location = $ROUTE_BASE {
-    return 301 $ROUTE_BASE/\$is_args\$args;
+    proxy_pass http://127.0.0.1:$FRONTEND_PORT;
+    proxy_http_version 1.1;
+    proxy_set_header Upgrade \$http_upgrade;
+    proxy_set_header Connection 'upgrade';
+    proxy_set_header Host \$host;
+    proxy_cache_bypass \$http_upgrade;
+    proxy_set_header X-Real-IP \$remote_addr;
+    proxy_set_header X-Forwarded-For \$proxy_add_x_forwarded_for;
+    proxy_set_header X-Forwarded-Proto \$scheme;
 }
 
 location = $LOWER_ROUTE_BASE {
-    return 301 $ROUTE_BASE/\$is_args\$args;
+    return 301 $ROUTE_BASE\$is_args\$args;
 }
 
 location ^~ $LOWER_ROUTE_BASE/ {
@@ -118,7 +126,7 @@ systemctl reload nginx
 
 log "Running health check..."
 for attempt in {1..20}; do
-    if curl -fsS "http://127.0.0.1:$FRONTEND_PORT$ROUTE_BASE/" > /dev/null 2>&1; then
+    if curl -fsS "http://127.0.0.1:$FRONTEND_PORT$ROUTE_BASE" > /dev/null 2>&1; then
         break
     fi
     if [ "$attempt" -eq 20 ]; then
@@ -129,7 +137,7 @@ for attempt in {1..20}; do
     sleep 1
 done
 
-curl -kfsS --resolve vee-app.co.il:443:127.0.0.1 "https://vee-app.co.il$ROUTE_BASE/" > /dev/null
+curl -kfsS --resolve vee-app.co.il:443:127.0.0.1 "https://vee-app.co.il$ROUTE_BASE" > /dev/null
 
 log "LIBI DIAMONDS deployment complete." "SUCCESS"
-log "Public: https://vee-app.co.il$ROUTE_BASE/" "SUCCESS"
+log "Public: https://vee-app.co.il$ROUTE_BASE" "SUCCESS"

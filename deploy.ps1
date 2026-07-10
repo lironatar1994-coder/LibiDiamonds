@@ -126,5 +126,5 @@ if ($LASTEXITCODE -ne 0) {
 Write-Host "`n================================================" -ForegroundColor Green
 Write-Host "      LIBI DIAMONDS DEPLOYED SUCCESSFULLY" -ForegroundColor Green
 Write-Host "================================================" -ForegroundColor Green
-Write-Host "Public: https://vee-app.co.il/LibiDiamonds/" -ForegroundColor Cyan
+Write-Host "Public: https://vee-app.co.il/LibiDiamonds" -ForegroundColor Cyan
 Write-Host "GitHub target: $REMOTE_REPO" -ForegroundColor Cyan
