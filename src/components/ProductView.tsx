@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { metalNames, productImages, type Product, type Metal } from "@/data/products";
 import { formatPrice, waLink } from "@/lib/site";
 import { WhatsAppIcon } from "@/components/icons";
@@ -14,16 +15,34 @@ const METAL_SWATCH: Record<Metal, string> = {
 
 const confidenceItems = ["IGI/GIA", "משלוח מבוטח", "התאמת מידה ראשונה"];
 
+const libiStandardItems = [
+  {
+    title: "בחירה לפי המראה, לא רק לפי המספרים",
+    detail:
+      "אנחנו מחברים בין נתוני האבן לבין התוצאה על היד: קראט, צבע, ניקיון וליטוש נבחנים לצד מבנה השיבוץ, גוון הזהב והתקציב.",
+  },
+  {
+    title: "התאמה לפני תחילת העבודה",
+    detail:
+      "משקל האבן, גוון הזהב והמידה נסגרים יחד, כדי שהפרופורציות, גובה השיבוץ ונוחות הענידה יתאימו לבחירה הסופית.",
+  },
+  {
+    title: "שקיפות מלאה בהזמנה",
+    detail:
+      "לפני האישור מקבלים סיכום ברור של האבן והתכשיט, המחיר הסופי, סוג התעודה ומועד האספקה המשוער — בלי פרטים שנשארים פתוחים.",
+  },
+  {
+    title: "ליווי גם אחרי המסירה",
+    detail:
+      "התכשיט מגיע עם תעודה גמולוגית לאבן המרכזית, אחריות על השיבוץ והמתכת, משלוח מבוטח והתאמת מידה ראשונה.",
+  },
+];
+
 const serviceItems = [
   {
     title: "משלוח ואספקה",
     detail:
       "משלוח מבוטח עד הבית בכל הארץ, באריזת מתנה מוקפדת. אספקה תוך 7–14 ימי עסקים; פריטים בהתאמה אישית — 3–4 שבועות.",
-  },
-  {
-    title: "תעודה ואחריות",
-    detail:
-      "היהלום המרכזי מגיע עם תעודה גמולוגית בינלאומית (IGI/GIA). על התכשיט חלה אחריות מלאה על השיבוץ והמתכת, והתאמת מידה ראשונה כלולה.",
   },
   {
     title: "החזרות והחלפות",
@@ -51,7 +70,7 @@ export default function ProductView({ product }: { product: Product }) {
 
   return (
     <>
-      <div className="grid gap-9 pb-24 lg:grid-cols-[minmax(0,1.15fr)_minmax(23rem,0.85fr)] lg:items-start lg:gap-16 lg:pb-0 xl:gap-20">
+      <div className="grid gap-9 lg:grid-cols-[minmax(0,1.15fr)_minmax(23rem,0.85fr)] lg:items-start lg:gap-16 xl:gap-20">
         <section className="lg:sticky lg:top-28">
           <div className="art-bg relative aspect-square overflow-hidden bg-[#f7f6f1]">
             <Image
@@ -189,6 +208,12 @@ export default function ProductView({ product }: { product: Product }) {
               ))}
             </dl>
             <p className="mt-7 max-w-xl text-sm leading-7 text-stone sm:text-[0.98rem]">{product.description}</p>
+            <Link
+              href="/journal/what-is-a-lab-diamond"
+              className="mt-5 inline-block border-b border-gold/55 pb-1 text-xs font-semibold tracking-[0.06em] text-ink-soft hover:border-gold hover:text-ink"
+            >
+              מה זה יהלום מעבדה?
+            </Link>
           </section>
 
           <div className="border-b border-line">
@@ -206,6 +231,33 @@ export default function ProductView({ product }: { product: Product }) {
           </div>
         </section>
       </div>
+
+      <section
+        className="mt-14 mb-24 border-y border-line py-10 sm:mt-16 sm:py-12 lg:mt-20 lg:mb-0 lg:grid lg:grid-cols-[minmax(15rem,0.72fr)_minmax(0,1.28fr)] lg:gap-16 lg:py-16"
+        aria-labelledby="libi-standard-title"
+      >
+        <div>
+          <p className="text-[0.68rem] font-semibold tracking-[0.2em] text-gold-deep">LIBI DIAMONDS</p>
+          <h2 id="libi-standard-title" className="mt-3 max-w-xs font-display text-3xl font-medium leading-tight sm:text-4xl">
+            הסטנדרט של LIBI.
+          </h2>
+        </div>
+
+        <ol className="mt-8 border-t border-line lg:mt-0">
+          {libiStandardItems.map((item, index) => (
+            <li
+              key={item.title}
+              className="grid grid-cols-[2rem_minmax(0,1fr)] gap-3 border-b border-line py-5 sm:grid-cols-[2.5rem_minmax(10rem,0.72fr)_minmax(0,1.28fr)] sm:gap-5 sm:py-6"
+            >
+              <span className="pt-0.5 font-display text-sm text-gold-deep" aria-hidden>
+                {String(index + 1).padStart(2, "0")}
+              </span>
+              <h3 className="font-display text-xl font-medium leading-snug sm:text-[1.35rem]">{item.title}</h3>
+              <p className="col-start-2 mt-1 text-sm leading-7 text-stone sm:col-start-3 sm:mt-0">{item.detail}</p>
+            </li>
+          ))}
+        </ol>
+      </section>
 
       {showStickyCta && (
         <div className="fixed inset-x-0 bottom-0 z-40 border-t border-line bg-ivory/95 px-4 py-3 shadow-[0_-8px_24px_rgba(33,30,24,0.08)] backdrop-blur lg:hidden">

@@ -3,13 +3,28 @@ export interface GuideSection {
   paragraphs: string[];
 }
 
+export interface GuideComparison {
+  heading: string;
+  columns: [string, string, string];
+  rows: [string, string, string][];
+}
+
+export interface GuideSource {
+  label: string;
+  href: string;
+}
+
 export interface Guide {
   slug: string;
   title: string;
   excerpt: string;
   readingMinutes: number;
   date: string;
+  updated?: string;
   sections: GuideSection[];
+  comparison?: GuideComparison;
+  sources?: GuideSource[];
+  relatedGuideSlugs?: string[];
 }
 
 export const guides: Guide[] = [
@@ -18,8 +33,31 @@ export const guides: Guide[] = [
     title: "מה זה יהלום מעבדה — והאם הוא יהלום אמיתי?",
     excerpt:
       "אותו הרכב כימי, אותה קשיחות, אותו ברק. מה באמת ההבדל בין יהלום מעבדה ליהלום מכרה — והאם אפשר להבחין ביניהם?",
-    readingMinutes: 5,
+    readingMinutes: 6,
     date: "2026-06-01",
+    updated: "2026-07-12",
+    comparison: {
+      heading: "יהלום מעבדה מול יהלום טבעי",
+      columns: ["נושא", "יהלום מעבדה", "יהלום טבעי"],
+      rows: [
+        ["ההרכב", "פחמן גבישי", "פחמן גבישי"],
+        ["מקור האבן", "תהליך גידול מבוקר", "תהליך גיאולוגי בטבע"],
+        ["מראה לעין", "דומה מאוד ליהלום טבעי", "יהלום טבעי"],
+        ["זיהוי המקור", "מעבדה גמולוגית יכולה לזהות", "מעבדה גמולוגית יכולה לזהות"],
+        ["תיעוד", "דוח גמולוגי לפי האבן", "דוח גמולוגי לפי האבן"],
+      ],
+    },
+    sources: [
+      {
+        label: "GIA: ההבדל בין יהלומים טבעיים ליהלומי מעבדה",
+        href: "https://www.gia.edu/gia-news-research/difference-between-natural-laboratory-grown-diamonds",
+      },
+      {
+        label: "GIA: שירותי זיהוי והערכה ליהלומי מעבדה",
+        href: "https://www.gia.edu/gia-website/laboratory-grown-diamond",
+      },
+    ],
+    relatedGuideSlugs: ["cvd-vs-hpht", "the-four-cs"],
     sections: [
       {
         paragraphs: [
@@ -40,10 +78,10 @@ export const guides: Guide[] = [
         ],
       },
       {
-        heading: "אז למה הוא משתלם יותר?",
+        heading: "מה בודקים לפני שקונים?",
         paragraphs: [
-          "תהליך ייצור מבוקר ושרשרת אספקה קצרה משמעותית מוזילים את העלות — כך שבאותו תקציב אפשר לבחור אבן גדולה, נקייה ובהירה יותר. זו הסיבה שיותר ויותר זוגות בעולם בוחרים יהלום מעבדה לטבעת האירוסין: אותו יהלום, בחירה חכמה יותר.",
-          "כל יהלום מרכזי אצלנו מגיע עם תעודה גמולוגית של מעבדה בינלאומית (IGI/GIA), המתעדת את נתוני האבן במלואם — קראט, צבע, ניקיון וליטוש.",
+          "בוחרים קודם את האבן עצמה: משקל בקראט, צבע, ניקיון וליטוש. נתונים אלה משפיעים על המראה ועל המחיר, והבחירה הנכונה תלויה בסגנון, בתקציב ובשיבוץ שבו האבן תוצג.",
+          "חשוב לבקש דוח גמולוגי המתאים לאבן הספציפית ולוודא שהוא מזהה את האבן כיהלום מעבדה. הדוח מתעד את מאפייני האבן ואת תהליך ההערכה של המעבדה.",
         ],
       },
     ],

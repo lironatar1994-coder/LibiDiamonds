@@ -374,6 +374,26 @@ export default function HomePage() {
         </div>
       </section>
 
+      <section className="border-t border-line/60 py-10 lg:py-14">
+        <div className="mx-auto max-w-2xl px-4 sm:px-6">
+          <h2 className="font-display text-2xl font-medium sm:text-3xl">יהלומי מעבדה, בקצרה.</h2>
+          <p className="mt-4 max-w-xl text-sm leading-7 text-stone sm:text-base">
+            יהלום מעבדה הוא יהלום אמיתי שנוצר בתהליך מבוקר ולא במעמקי האדמה. לפני שבוחרים, כדאי להבין את מקור האבן, את תפקידה של התעודה הגמולוגית ואת ארבעת הנתונים שמגדירים את המראה שלה.
+          </p>
+          <div className="mt-5 flex flex-wrap gap-x-5 gap-y-3 text-sm font-semibold text-ink-soft">
+            <Link href="/journal/what-is-a-lab-diamond" className="border-b border-gold/55 pb-1 hover:border-gold hover:text-ink">
+              האם יהלום מעבדה הוא יהלום אמיתי?
+            </Link>
+            <Link href="/journal/cvd-vs-hpht" className="border-b border-gold/55 pb-1 hover:border-gold hover:text-ink">
+              CVD מול HPHT
+            </Link>
+            <Link href="/journal/the-four-cs" className="border-b border-gold/55 pb-1 hover:border-gold hover:text-ink">
+              4C בפשטות
+            </Link>
+          </div>
+        </div>
+      </section>
+
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}

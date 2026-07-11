@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getGuide, guides } from "@/data/guides";
-import { waLink } from "@/lib/site";
+import { site, waLink } from "@/lib/site";
 import { WhatsAppIcon } from "@/components/icons";
 
 interface Props {
@@ -25,7 +25,27 @@ export default async function GuidePage({ params }: Props) {
   const guide = getGuide(slug);
   if (!guide) notFound();
 
-  const more = guides.filter((g) => g.slug !== guide.slug).slice(0, 2);
+  const more = guide.relatedGuideSlugs?.length
+    ? guides.filter((candidate) => guide.relatedGuideSlugs?.includes(candidate.slug))
+    : guides.filter((candidate) => candidate.slug !== guide.slug).slice(0, 2);
+  const articleUrl = `${site.domain}/journal/${guide.slug}`;
+  const updatedLabel = guide.updated
+    ? new Intl.DateTimeFormat("he-IL", { day: "numeric", month: "long", year: "numeric" }).format(
+        new Date(`${guide.updated}T00:00:00`),
+      )
+    : null;
+  const articleJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    headline: guide.title,
+    description: guide.excerpt,
+    datePublished: guide.date,
+    dateModified: guide.updated ?? guide.date,
+    mainEntityOfPage: articleUrl,
+    inLanguage: "he-IL",
+    author: { "@type": "Organization", name: site.name },
+    publisher: { "@type": "Organization", name: site.name, url: site.domain },
+  };
 
   return (
     <div className="mx-auto max-w-3xl px-4 py-14 sm:px-6">
@@ -37,7 +57,10 @@ export default async function GuidePage({ params }: Props) {
 
       <article>
         <header className="mt-8">
-          <p className="eyebrow">{guide.readingMinutes} דקות קריאה</p>
+          <p className="eyebrow">
+            {guide.readingMinutes} דקות קריאה
+            {updatedLabel && ` · עודכן ${updatedLabel}`}
+          </p>
           <h1 className="mt-4 font-display text-3xl font-medium leading-snug sm:text-4xl">
             {guide.title}
           </h1>
@@ -46,6 +69,50 @@ export default async function GuidePage({ params }: Props) {
         <div className="mt-10 space-y-8">
           {guide.sections.map((section, i) => (
             <section key={i}>
+              {i === 1 && guide.comparison && (
+                <div className="mb-10 border-y border-line py-6 sm:py-7">
+                  <h2 className="font-display text-2xl font-medium">{guide.comparison.heading}</h2>
+                  <div className="mt-5 divide-y divide-line/70 border-y border-line sm:hidden">
+                    {guide.comparison.rows.map((row) => (
+                      <div key={row[0]} className="py-4">
+                        <p className="text-sm font-semibold text-ink">{row[0]}</p>
+                        <div className="mt-2 grid grid-cols-2 gap-4 text-xs leading-5 text-ink-soft">
+                          <p>
+                            <span className="block text-stone">{guide.comparison!.columns[1]}</span>
+                            {row[1]}
+                          </p>
+                          <p>
+                            <span className="block text-stone">{guide.comparison!.columns[2]}</span>
+                            {row[2]}
+                          </p>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                  <table className="mt-5 hidden w-full text-right text-sm sm:table">
+                    <thead className="border-b border-line text-xs font-semibold tracking-[0.06em] text-stone">
+                      <tr>
+                        {guide.comparison.columns.map((column) => (
+                          <th key={column} className="px-3 py-3 first:pr-0 last:pl-0">
+                            {column}
+                          </th>
+                        ))}
+                      </tr>
+                    </thead>
+                    <tbody className="divide-y divide-line/70 text-ink-soft">
+                      {guide.comparison.rows.map((row) => (
+                        <tr key={row[0]}>
+                          {row.map((value, index) => (
+                            <td key={`${row[0]}-${index}`} className={`px-3 py-3.5 leading-6 ${index === 0 ? "font-semibold text-ink" : ""}`}>
+                              {value}
+                            </td>
+                          ))}
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              )}
               {section.heading && (
                 <h2 className="mb-3 font-display text-2xl font-medium">
                   {section.heading}
@@ -60,6 +127,26 @@ export default async function GuidePage({ params }: Props) {
           ))}
         </div>
       </article>
+
+      {guide.sources && guide.sources.length > 0 && (
+        <section className="mt-12 border-t border-line pt-8">
+          <h2 className="font-display text-2xl font-medium">מקורות והמשך קריאה</h2>
+          <ul className="mt-4 space-y-3 text-sm leading-relaxed text-stone">
+            {guide.sources.map((source) => (
+              <li key={source.href}>
+                <a
+                  href={source.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="border-b border-gold/55 pb-0.5 text-ink-soft hover:border-gold hover:text-ink"
+                >
+                  {source.label}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
 
       <aside className="mt-14 bg-cream p-8 text-center">
         <h2 className="font-display text-2xl">נשארו שאלות?</h2>
@@ -93,6 +180,8 @@ export default async function GuidePage({ params }: Props) {
           </div>
         </section>
       )}
+
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleJsonLd) }} />
     </div>
   );
 }
