@@ -72,14 +72,71 @@ h3,
     linear-gradient(180deg, #f7f2e8 0%, #f2eadb 100%);
 }
 
+.section-gallery {
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.58) 0%, rgba(250, 248, 243, 0.9) 100%),
+    #fffdfa;
+}
+
 .section-proof {
   background:
     linear-gradient(90deg, rgba(250, 248, 243, 0.72) 0%, rgba(233, 225, 208, 0.74) 50%, rgba(250, 248, 243, 0.72) 100%);
 }
 
+.section-cta-signature {
+  background:
+    radial-gradient(34rem 11rem at 80% 48%, rgba(216, 202, 166, 0.22) 0%, rgba(216, 202, 166, 0) 70%),
+    linear-gradient(180deg, #faf8f3 0%, #f4edde 100%);
+}
+
 .footer-warm {
   background:
+    radial-gradient(42rem 16rem at 50% 0%, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0) 62%),
     linear-gradient(180deg, #efe8d9 0%, #e8dec9 100%);
+}
+
+.product-card-frame {
+  box-shadow: 0 18px 42px rgba(42, 35, 25, 0);
+  transition:
+    border-color 0.3s ease,
+    box-shadow 0.3s ease,
+    transform 0.3s ease;
+}
+
+.group:hover .product-card-frame {
+  box-shadow: 0 18px 42px rgba(42, 35, 25, 0.07);
+  transform: translateY(-2px);
+}
+
+.product-card-trust {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.product-card-trust::before,
+.product-card-trust::after {
+  content: "";
+  width: 1.1rem;
+  height: 1px;
+  background: rgba(168, 141, 83, 0.26);
+}
+
+@media (max-width: 639px) {
+  .product-card-trust::before,
+  .product-card-trust::after {
+    width: 0.65rem;
+  }
+
+  .brand-logo-asset {
+    width: 6.35rem;
+  }
+
+  .btn-primary,
+  .btn-outline,
+  .btn-whatsapp {
+    min-height: 46px;
+  }
 }
 
 /* header nav link — gold hairline grows from center on hover */
@@ -206,6 +263,10 @@ h3,
 
 .brand-logo-footer .brand-logo-rule {
   width: 4.2rem;
+}
+
+.footer-logo-centered {
+  align-items: center;
 }
 
 /* Section eyebrow label */
