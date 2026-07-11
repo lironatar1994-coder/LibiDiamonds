@@ -156,10 +156,6 @@ h3,
     width: 0.65rem;
   }
 
-  .brand-logo-asset {
-    width: 6.35rem;
-  }
-
   .btn-primary,
   .btn-outline,
   .btn-whatsapp {
@@ -211,8 +207,14 @@ h3,
 
 .brand-logo-asset {
   display: block;
-  width: 7.1rem;
+  width: 7.8rem;
   height: auto;
+}
+
+@media (max-width: 639px) {
+  .brand-logo-asset {
+    width: 6.65rem;
+  }
 }
 
 .brand-logo-name {
