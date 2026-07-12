@@ -7,7 +7,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const siteUpdated = new Date("2026-07-12T00:00:00+03:00");
   const staticPages = ["", "/about", "/contact", "/service", "/journal"].map(
     (path) => ({
-      url: absoluteUrl(path || "/"),
+      url: absoluteUrl(path),
       lastModified: siteUpdated,
       changeFrequency: "monthly" as const,
       priority: path === "" ? 1 : 0.6,

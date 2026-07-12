@@ -137,6 +137,7 @@ export const products: Product[] = [
     gallery: [
       { src: "/images/products/v2/aura-solitaire-ring-primary.webp", alt: "טבעת אורה בזהב צהוב במבט חזיתי" },
       { src: "/images/products/v2/aura-solitaire-ring-detail.webp", alt: "פרופיל שיבוץ ארבע השיניים של טבעת אורה" },
+      { src: "/images/products/v3/aura-solitaire-ring-worn.webp", alt: "טבעת אורה על היד במבט צד להמחשת גובה השיבוץ" },
     ],
     featured: true,
     bestseller: true,
@@ -160,6 +161,7 @@ export const products: Product[] = [
     gallery: [
       { src: "/images/products/v2/nova-halo-ring-primary.webp", alt: "טבעת נובה בזהב ורוד במבט חזיתי" },
       { src: "/images/products/v2/nova-halo-ring-detail.webp", alt: "פרופיל סל ההיילו של טבעת נובה" },
+      { src: "/images/products/v3/nova-halo-ring-worn.webp", alt: "טבעת נובה בזהב ורוד על היד" },
     ],
     featured: true,
     bestseller: true,
@@ -201,6 +203,7 @@ export const products: Product[] = [
     gallery: [
       { src: "/images/products/v2/lumiere-pave-ring-primary.webp", alt: "טבעת לומייר בזהב צהוב במבט חזיתי" },
       { src: "/images/products/v2/lumiere-pave-ring-detail.webp", alt: "פרט שיבוץ הפאווה והאבן המרכזית בטבעת לומייר" },
+      { src: "/images/products/v3/lumiere-pave-ring-worn.webp", alt: "טבעת לומייר על היד להמחשת שיבוץ הפאווה" },
     ],
     bestseller: true,
   },
@@ -224,6 +227,7 @@ export const products: Product[] = [
     gallery: [
       { src: "/images/products/v2/stella-diamond-studs-primary.webp", alt: "זוג עגילי סטלה בזהב לבן במבט קדמי" },
       { src: "/images/products/v2/stella-diamond-studs-detail.webp", alt: "פרופיל הסל והמוטות של עגילי סטלה" },
+      { src: "/images/products/v3/stella-diamond-studs-worn.webp", alt: "עגיל סטלה בזהב לבן על האוזן" },
     ],
     featured: true,
     bestseller: true,
@@ -264,6 +268,7 @@ export const products: Product[] = [
     gallery: [
       { src: "/images/products/v2/luna-diamond-hoops-primary.webp", alt: "חישוקי לונה בזהב ורוד במבט קדמי" },
       { src: "/images/products/v2/luna-diamond-hoops-detail.webp", alt: "פרט הסגירה הצירית ושורת היהלומים בחישוקי לונה" },
+      { src: "/images/products/v3/luna-diamond-hoops-worn.webp", alt: "חישוק לונה בזהב ורוד על האוזן" },
     ],
     bestseller: true,
   },
@@ -284,8 +289,9 @@ export const products: Product[] = [
     description:
       "שורה רציפה של יהלומים עגולים בשיבוץ ארבע שיניים ובחיבור גמיש בין החוליות. סוגר קופסה עם מנגנון בטיחות משלים את המבנה האחיד סביב הצוואר.",
     gallery: [
-      { src: "/images/products/v2/riviera-tennis-necklace-primary.webp", alt: "שרשרת ריביירה בזהב לבן במבט על" },
+      { src: "/images/products/v3/riviera-tennis-necklace-primary.webp", alt: "שרשרת ריביירה בזהב לבן במבט על" },
       { src: "/images/products/v2/riviera-tennis-necklace-detail.webp", alt: "פרט סוגר הקופסה ושורת היהלומים בשרשרת ריביירה" },
+      { src: "/images/products/v3/riviera-tennis-necklace-worn.webp", alt: "שרשרת ריביירה בזהב לבן על הצוואר" },
     ],
     featured: true,
     bestseller: true,
@@ -306,6 +312,9 @@ export const products: Product[] = [
     specs: { color: "E–F", clarity: "VS1", cut: "Excellent", cert: "IGI" },
     description:
       "יהלום מעבדה אחד, בדיוק במרכז. תליון הסוליטר הוא המתנה הקלאסית ביותר שיש — עדין מספיק ליום־יום, משמעותי מספיק לרגעים הגדולים.",
+    gallery: [
+      { src: "/images/products/v3/claire-solitaire-pendant-primary.webp", alt: "תליון קלייר בזהב צהוב במבט על" },
+    ],
     featured: true,
     bestseller: true,
   },
@@ -325,6 +334,9 @@ export const products: Product[] = [
     specs: { color: "F–G", clarity: "VS2", cut: "Excellent", cert: "IGI" },
     description:
       "היהלום עטוף במסגרת זהב מלאה — שיבוץ בצל (Bezel) שנותן מראה מודרני, נקי ועמיד במיוחד. השרשרת של מי שאוהבת שקט עיצובי.",
+    gallery: [
+      { src: "/images/products/v3/drop-bezel-necklace-primary.webp", alt: "שרשרת דרופ בזהב ורוד ושיבוץ בזל במבט על" },
+    ],
   },
   {
     slug: "icon-tennis-bracelet",
@@ -343,8 +355,9 @@ export const products: Product[] = [
     description:
       "שורת יהלומים עגולים מחוברת בחוליות גמישות ומסתיימת בסוגר קופסה עם אבטחה כפולה. בתי האבן הפתוחים שומרים על קו אחיד ומאפשרים לאור לעבור דרך כל יהלום.",
     gallery: [
-      { src: "/images/products/v2/icon-tennis-bracelet-primary.webp", alt: "צמיד אייקון בזהב לבן במבט על" },
+      { src: "/images/products/v3/icon-tennis-bracelet-primary.webp", alt: "צמיד אייקון בזהב לבן במבט על" },
       { src: "/images/products/v2/icon-tennis-bracelet-detail.webp", alt: "פרט הסוגר והחוליות בצמיד אייקון" },
+      { src: "/images/products/v3/icon-tennis-bracelet-worn.webp", alt: "צמיד אייקון בזהב לבן על פרק היד" },
     ],
     featured: true,
     bestseller: true,
@@ -365,6 +378,9 @@ export const products: Product[] = [
     specs: { color: "F–G", clarity: "VS2", cut: "Excellent", cert: "IGI" },
     description:
       "חישוק זהב חלק ונקי, ובמרכזו יהלום מעבדה אחד בשיבוץ בצל. הצמיד שעונדים ולא מורידים — לבד או בשכבות עם שעון וצמידים נוספים.",
+    gallery: [
+      { src: "/images/products/v3/one-diamond-bangle-primary.webp", alt: "צמיד וואן בזהב צהוב ויהלום בשיבוץ בזל" },
+    ],
     bestseller: true,
   },
 ];

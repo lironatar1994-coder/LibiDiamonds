@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { metalNames, productImages, type Product, type Metal } from "@/data/products";
-import { formatPrice, waLink } from "@/lib/site";
+import { assetPath, formatPrice, waLink } from "@/lib/site";
 import { WhatsAppIcon } from "@/components/icons";
 
 const METAL_SWATCH: Record<Metal, string> = {
@@ -215,6 +215,45 @@ export default function ProductView({ product }: { product: Product }) {
             >
               למה לבחור יהלום מעבדה?
             </Link>
+          </section>
+
+          <section className="border-b border-line py-8 lg:py-10" aria-labelledby="order-includes-title">
+            <h2 id="order-includes-title" className="font-display text-2xl font-medium sm:text-3xl">
+              מה מצורף להזמנה.
+            </h2>
+            <div className="mt-5 grid gap-5 sm:grid-cols-2">
+              <figure>
+                <div className="relative aspect-[4/3] overflow-hidden bg-[#f7f6f1]">
+                  <Image
+                    src={assetPath("/images/trust/v1/libi-packaging-mockup.webp")}
+                    alt="הדמיה של אריזת LIBI DIAMONDS בגוון שנהב"
+                    fill
+                    sizes="(min-width: 1024px) 21vw, (min-width: 640px) 46vw, 100vw"
+                    className="object-cover"
+                  />
+                </div>
+                <figcaption className="mt-3">
+                  <span className="block text-xs font-semibold tracking-[0.08em] text-ink-soft">הדמיית אריזה</span>
+                  <span className="mt-1 block text-xs leading-5 text-stone">האריזה הסופית עשויה להשתנות בפרטים הקטנים.</span>
+                </figcaption>
+              </figure>
+
+              <figure>
+                <div className="relative aspect-[4/3] overflow-hidden bg-[#f7f6f1]">
+                  <Image
+                    src={assetPath("/images/trust/v1/certificate-sample-mockup.webp")}
+                    alt="דוגמה כללית למבנה של תעודה גמולוגית"
+                    fill
+                    sizes="(min-width: 1024px) 21vw, (min-width: 640px) 46vw, 100vw"
+                    className="object-cover"
+                  />
+                </div>
+                <figcaption className="mt-3">
+                  <span className="block text-xs font-semibold tracking-[0.08em] text-ink-soft">דוגמה להמחשה בלבד</span>
+                  <span className="mt-1 block text-xs leading-5 text-stone">התעודה בפועל מותאמת ליהלום שנבחר ומצורפת למסירה.</span>
+                </figcaption>
+              </figure>
+            </div>
           </section>
 
           <div className="border-b border-line">

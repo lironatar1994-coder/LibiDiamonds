@@ -1,113 +1,87 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
-import { HeroDiamond } from "@/components/JewelryArt";
-import { waLink, defaultWaMessage } from "@/lib/site";
-import { pageMetadata } from "@/lib/seo";
 import { WhatsAppIcon } from "@/components/icons";
+import { assetPath, defaultWaMessage, waLink } from "@/lib/site";
+import { pageMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = pageMetadata({
-  title: "הסיפור שלנו",
+  title: "הסיפור של LIBI",
   description:
-    "LIBI DIAMONDS — תכשיטי יהלומי מעבדה בעיצוב אלגנטי ומדויק. הכירו את הערכים שמנחים אותנו: שקיפות, איכות בלי פשרות וליווי אישי.",
+    "כך נבחרים התכשיטים של LIBI DIAMONDS: בדיקת נתוני היהלום, התאמת הזהב והמידה ואישור ברור לפני תחילת העבודה.",
   path: "/about",
+  image: "/images/trust/v1/libi-packaging-mockup.webp",
+  imageAlt: "הדמיה של אריזת LIBI DIAMONDS",
 });
 
-const values = [
+const process = [
   {
-    t: "שקיפות מלאה",
-    d: "כל אבן מרכזית מגיעה עם תעודה גמולוגית בינלאומית, וכל נתון — משקל, צבע, ניקיון וליטוש — כתוב שחור על גבי לבן. אין אותיות קטנות.",
+    title: "נתוני האבן",
+    text: "באבן המרכזית בודקים קראט, צבע, ניקיון וליטוש לצד הקוטר והמראה בפועל. הנתונים נמסרים מראש, והתכשיט מגיע עם תעודה גמולוגית לאבן המרכזית.",
   },
   {
-    t: "איכות בלי פשרות",
-    d: "אנחנו עובדים רק עם יהלומי מעבדה בליטוש Excellent ובדרגות צבע וניקיון גבוהות, משובצים בעבודת יד בזהב אמיתי 14K או 18K.",
+    title: "התאמה לתכשיט",
+    text: "משקל היהלום, גוון הזהב והמידה נבחנים יחד. המטרה היא לשמור על פרופורציה נכונה בין האבן, גובה השיבוץ ורוחב התכשיט — לא לבחור כל פרט בנפרד.",
   },
   {
-    t: "ליווי אישי",
-    d: "תכשיט יהלום לא קונים כל יום. לכן כל לקוח מקבל ליווי אישי — בוואטסאפ או בפגישה — עד שהבחירה מרגישה מדויקת לגמרי.",
-  },
-  {
-    t: "מחיר הוגן",
-    d: "יהלומי מעבדה מאפשרים לנו להציע יותר יהלום על כל שקל — בלי מתווכים מיותרים ובלי פרמיית מותג מנופחת.",
+    title: "אישור לפני עבודה",
+    text: "לפני תחילת העבודה מסכמים את האבן, סוג הזהב, המידה, המחיר הסופי, סוג התעודה ומועד האספקה המשוער. כך ההזמנה נסגרת בלי פרטים שנשארים פתוחים.",
   },
 ];
 
 export default function AboutPage() {
   return (
     <>
-      <section className="bg-[linear-gradient(165deg,#f8f4ea_0%,#f2e9d6_60%,#e9dcc0_100%)]">
-        <div className="mx-auto grid max-w-7xl items-center gap-8 px-4 py-20 sm:px-6 lg:grid-cols-2 lg:px-8">
-          <div>
-            <p className="eyebrow">הסיפור שלנו</p>
-            <h1 className="mt-4 font-display text-4xl font-medium leading-snug sm:text-5xl">
-              יהלום מושלם.
+      <section className="bg-[#f5f2ea]">
+        <div className="mx-auto grid max-w-7xl items-center gap-10 px-4 py-12 sm:px-6 sm:py-16 lg:grid-cols-[0.86fr_1.14fr] lg:px-8 lg:py-20">
+          <div className="max-w-xl">
+            <h1 className="font-display text-4xl font-medium leading-[1.12] sm:text-5xl lg:text-6xl">
+              בחירה מדויקת,
               <br />
-              בהישג יד.
+              מהאבן ועד השיבוץ.
             </h1>
-            <p className="mt-6 max-w-lg leading-relaxed text-stone">
-              LIBI DIAMONDS נולדה מתוך אמונה פשוטה: הרגעים הגדולים של החיים
-              ראויים לתכשיט מושלם — ותכשיט מושלם לא חייב להיות רחוק מהישג יד.
+            <p className="mt-6 max-w-lg text-base leading-8 text-stone sm:text-lg">
+              LIBI DIAMONDS מתמקדת בתכשיטי יהלומי מעבדה בזהב 14K ו־18K. כל בחירה מתחילה במראה שרוצים להשיג על היד, באוזן או על הצוואר — ורק אחר כך נסגרת לפי נתוני האבן, מבנה התכשיט והתקציב.
             </p>
           </div>
-          <HeroDiamond className="mx-auto hidden w-full max-w-md opacity-90 lg:block" />
+
+          <figure>
+            <div className="relative aspect-[4/3] overflow-hidden bg-[#f7f6f1]">
+              <Image
+                src={assetPath("/images/trust/v1/libi-packaging-mockup.webp")}
+                alt="הדמיה של אריזת LIBI DIAMONDS בגוון שנהב"
+                fill
+                priority
+                sizes="(min-width: 1024px) 56vw, 100vw"
+                className="object-cover"
+              />
+            </div>
+            <figcaption className="mt-3 text-xs text-stone">הדמיית אריזה — העיצוב הסופי עשוי להשתנות.</figcaption>
+          </figure>
         </div>
       </section>
 
-      <section className="mx-auto max-w-3xl px-4 py-16 sm:px-6">
-        <div className="space-y-5 leading-relaxed text-ink-soft">
-          <p>
-            במשך עשורים, יהלום גדול ואיכותי היה סמל שמור למעטים. המהפכה של
-            יהלומי המעבדה שינתה את זה: היום אפשר לענוד יהלום אמיתי לכל דבר —
-            זהה כימית, פיזית ואופטית ליהלום מכרה — במחיר שמאפשר לבחור אבן
-            גדולה, נקייה ובהירה יותר.
-          </p>
-          <p>
-            אנחנו ב־LIBI בחרנו לעמוד בצד הזה של ההיסטוריה. כל תכשיט שלנו נולד
-            מעיצוב נקי ומוקפד, יהלומי מעבדה נבחרים עם תעודה גמולוגית, ועבודת
-            צורפות מדויקת בזהב אמיתי. בלי רעש, בלי מבצעים צעקניים — רק יופי
-            שקט שנשאר לתמיד.
-          </p>
-          <p>
-            ומעל הכל — שירות. אנחנו מלווים כל לקוח ולקוחה באופן אישי: עוזרים
-            להבין את נתוני האבן, משווים אפשרויות אמיתיות, ומוודאים שהבחירה
-            מרגישה נכונה. כי בסוף, תכשיט הוא לא מוצר. הוא רגע.
-          </p>
+      <section className="mx-auto max-w-7xl px-4 py-14 sm:px-6 sm:py-18 lg:px-8 lg:py-20">
+        <h2 className="font-display text-3xl font-medium sm:text-4xl">כך הבחירה נסגרת.</h2>
+        <div className="mt-8 grid border-t border-line sm:grid-cols-3 lg:mt-10">
+          {process.map((item, index) => (
+            <article key={item.title} className="border-b border-line py-7 sm:border-b-0 sm:border-l sm:px-7 sm:first:pr-0 sm:last:border-l-0 lg:px-10">
+              <span className="font-display text-sm text-gold-deep" aria-hidden>{String(index + 1).padStart(2, "0")}</span>
+              <h3 className="mt-3 font-display text-2xl font-medium">{item.title}</h3>
+              <p className="mt-3 text-sm leading-7 text-stone sm:text-base">{item.text}</p>
+            </article>
+          ))}
         </div>
       </section>
 
-      <section className="bg-cream/60 py-16">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <h2 className="text-center font-display text-3xl font-medium">
-            מה מנחה אותנו
-          </h2>
-          <div className="mt-12 grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
-            {values.map((v) => (
-              <div key={v.t} className="border-t-2 border-gold/60 pt-5">
-                <h3 className="font-display text-xl">{v.t}</h3>
-                <p className="mt-3 text-sm leading-relaxed text-stone">{v.d}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="mx-auto max-w-3xl px-4 py-20 text-center sm:px-6">
-        <h2 className="font-display text-3xl font-medium">בואו נכיר</h2>
-        <p className="mx-auto mt-4 max-w-md leading-relaxed text-stone">
-          יש לכם רגע גדול באופק? נשמח להיות חלק ממנו.
-        </p>
-        <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
-          <a
-            href={waLink(defaultWaMessage)}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="btn-primary"
-          >
+      <section className="section-cta-signature px-4 py-10 text-center text-ivory sm:px-6 lg:py-14">
+        <h2 className="font-display text-3xl font-medium sm:text-4xl">מתחילים מהתכשיט שאתם מחפשים.</h2>
+        <div className="mt-7 flex flex-col items-center justify-center gap-3 sm:flex-row">
+          <a href={waLink(defaultWaMessage)} target="_blank" rel="noopener noreferrer" className="btn-inverse">
             <WhatsAppIcon className="h-4 w-4" />
-            דברו איתנו
+            ייעוץ אישי בוואטסאפ
           </a>
-          <Link href="/jewelry/rings" className="btn-outline">
-            לקולקציה
-          </Link>
+          <Link href="/jewelry/rings" className="btn-outline-inverse">לקולקציה</Link>
         </div>
       </section>
     </>

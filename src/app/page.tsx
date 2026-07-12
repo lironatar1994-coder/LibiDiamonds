@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
 import ProductCard from "@/components/ProductCard";
+import CustomerVoices from "@/components/CustomerVoices";
+import DiamondShapeSelector from "@/components/DiamondShapeSelector";
 import { WhatsAppIcon } from "@/components/icons";
 import {
   categories,
@@ -11,6 +13,7 @@ import {
   type Product,
 } from "@/data/products";
 import { guides } from "@/data/guides";
+import { reviews } from "@/data/reviews";
 import { site, waLink, defaultWaMessage, assetPath, formatPrice } from "@/lib/site";
 import { onlineStoreJsonLd, pageMetadata } from "@/lib/seo";
 
@@ -124,8 +127,8 @@ function EditorialBestsellers({ items }: { items: Product[] }) {
 const categoryImages: Record<CategorySlug, string> = {
   rings: assetPath("/images/products/v2/aura-solitaire-ring-primary.webp"),
   earrings: assetPath("/images/products/v2/stella-diamond-studs-primary.webp"),
-  necklaces: assetPath("/images/products/v2/riviera-tennis-necklace-primary.webp"),
-  bracelets: assetPath("/images/products/v2/icon-tennis-bracelet-primary.webp"),
+  necklaces: assetPath("/images/products/v3/riviera-tennis-necklace-primary.webp"),
+  bracelets: assetPath("/images/products/v3/icon-tennis-bracelet-primary.webp"),
 };
 
 const diamondShapes = [
@@ -264,30 +267,7 @@ export default function HomePage() {
       <section className="section-diamond-light py-10 lg:py-18">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <SectionHeading title="בחרו את החיתוך" variant="centered" />
-          <div className="mt-6 grid grid-cols-3 gap-x-2 gap-y-5 sm:mt-8 sm:gap-x-6 sm:gap-y-8 lg:mt-9 lg:grid-cols-6 lg:gap-5">
-            {diamondShapes.map((shape) => (
-              <a
-                key={shape.type}
-                href={waLink(`היי, אשמח לבדוק יהלום בצורת ${shape.name}`)}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group flex flex-col items-center justify-center px-1 py-1 text-center"
-              >
-                <div className="shape-stone-field relative h-[82px] w-[82px] min-[390px]:h-[90px] min-[390px]:w-[90px] sm:h-[122px] sm:w-[122px] lg:h-[132px] lg:w-[132px]">
-                  <Image
-                    src={shape.image}
-                    alt={`יהלום בחיתוך ${shape.name}`}
-                    fill
-                    sizes="(min-width: 1024px) 124px, (min-width: 640px) 118px, 92px"
-                    className="mix-blend-multiply object-contain p-[9%] transition-transform duration-700 ease-out group-hover:scale-[1.045]"
-                  />
-                </div>
-                <div>
-                  <h3 className="mt-2 font-display text-base text-ink sm:mt-3 sm:text-xl">{shape.name}</h3>
-                </div>
-              </a>
-            ))}
-          </div>
+          <DiamondShapeSelector shapes={diamondShapes} />
         </div>
       </section>
 
@@ -331,6 +311,8 @@ export default function HomePage() {
           className="object-cover object-[center_60%]"
         />
       </section>
+
+      <CustomerVoices reviews={reviews} />
 
       {/* ── Trust strip ──────────────────────────────────── */}
       <section className="section-proof border-y border-line">
