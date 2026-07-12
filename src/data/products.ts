@@ -2,6 +2,7 @@ import { assetPath } from "@/lib/site";
 
 export type Metal = "yellow" | "white" | "rose";
 export type CategorySlug = "rings" | "earrings" | "necklaces" | "bracelets";
+export type DiamondShape = "round" | "oval" | "emerald" | "cushion" | "pear" | "princess";
 export type ArtType =
   | "solitaire"
   | "halo"
@@ -30,6 +31,7 @@ export interface Product {
   name: string;
   subtitle: string;
   category: CategorySlug;
+  diamondShape?: DiamondShape;
   art: ArtType;
   priceFrom: number;
   carats: CaratOption[];
@@ -122,6 +124,7 @@ export const products: Product[] = [
     name: "טבעת סוליטר ״אורה״",
     subtitle: "יהלום מעבדה עגול · שיבוץ 4 שיניים",
     category: "rings",
+    diamondShape: "round",
     art: "solitaire",
     priceFrom: 4900,
     carats: [
@@ -147,6 +150,7 @@ export const products: Product[] = [
     name: "טבעת היילו ״נובה״",
     subtitle: "אבן מרכזית עגולה · היילו בשורה אחת",
     category: "rings",
+    diamondShape: "round",
     art: "halo",
     priceFrom: 6400,
     carats: [
@@ -171,6 +175,7 @@ export const products: Product[] = [
     name: "טבעת שלוש אבנים ״טריו״",
     subtitle: "עבר · הווה · עתיד",
     category: "rings",
+    diamondShape: "round",
     art: "three-stone",
     priceFrom: 7800,
     carats: [
@@ -189,6 +194,7 @@ export const products: Product[] = [
     name: "טבעת פאווה ״לומייר״",
     subtitle: "אבן עגולה · פאווה עדין לאורך הכתפיים",
     category: "rings",
+    diamondShape: "round",
     art: "pave",
     priceFrom: 5600,
     carats: [

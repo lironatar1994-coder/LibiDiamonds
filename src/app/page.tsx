@@ -302,14 +302,42 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="relative aspect-[4/5] overflow-hidden sm:aspect-[16/9] lg:aspect-[16/7]" aria-label="צילום אווירה של טבעת אורה">
-        <Image
-          src={assetPath("/images/editorial/bridal-still-life.webp")}
-          alt="טבעת סוליטר אורה על אבן בהירה לצד נייר משובח ומשי שנהב"
-          fill
-          sizes="100vw"
-          className="object-cover object-[center_60%]"
-        />
+      <section className="bg-[#eee8dc]" aria-labelledby="bespoke-inspiration-title">
+        <div className="mx-auto grid max-w-7xl lg:grid-cols-[1.08fr_0.92fr] lg:items-center">
+          <div className="relative aspect-[4/5] overflow-hidden sm:aspect-[16/11] lg:aspect-[4/5]">
+            <Image
+              src={assetPath("/images/editorial/v2/bespoke-inspiration.webp")}
+              alt="טבעת יהלום מזהב צהוב לצד סקיצה בעיפרון"
+              fill
+              sizes="(min-width: 1024px) 54vw, 100vw"
+              className="object-cover"
+            />
+          </div>
+
+          <div className="px-5 py-10 text-center sm:px-10 sm:py-14 lg:px-14 lg:py-16 lg:text-right xl:px-20">
+            <h2
+              id="bespoke-inspiration-title"
+              className="font-display text-[2rem] font-medium leading-tight sm:text-4xl lg:text-[2.7rem]"
+            >
+              יש לכם השראה לתכשיט?
+            </h2>
+            <p className="mx-auto mt-4 max-w-md text-sm leading-7 text-stone sm:text-base sm:leading-8 lg:mx-0">
+              שלחו לנו תמונה, סקיצה או רעיון. נתאים יחד את האבן, הזהב והפרופורציות ליצירה אישית משלכם.
+            </p>
+            <a
+              href={waLink("היי, יש לי השראה לתכשיט ואשמח לבדוק אפשרות לעיצוב אישי")}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn-primary mt-7 w-full sm:w-auto"
+            >
+              <WhatsAppIcon className="h-4 w-4" />
+              שליחת ההשראה בוואטסאפ
+            </a>
+            <p className="mt-4 text-xs leading-5 text-stone">
+              העיצוב יותאם אישית ולא יועתק אחד לאחד.
+            </p>
+          </div>
+        </div>
       </section>
 
       <CustomerVoices reviews={reviews} />
