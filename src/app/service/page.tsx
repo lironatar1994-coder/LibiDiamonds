@@ -1,12 +1,14 @@
 import type { Metadata } from "next";
 import { waLink, defaultWaMessage } from "@/lib/site";
 import { WhatsAppIcon } from "@/components/icons";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "משלוחים, אחריות והחזרות",
   description:
     "כל פרטי השירות של LIBI DIAMONDS: משלוח מבוטח, אחריות מלאה, תעודות גמולוגיות ומדיניות החזרות הוגנת.",
-};
+  path: "/service",
+});
 
 const sections = [
   {

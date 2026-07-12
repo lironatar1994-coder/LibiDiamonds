@@ -5,9 +5,12 @@ import ProductCard from "@/components/ProductCard";
 import {
   categories,
   getCategory,
+  productImages,
   productsByCategory,
   type CategorySlug,
 } from "@/data/products";
+import { absoluteUrl, site } from "@/lib/site";
+import { breadcrumbJsonLd, pageMetadata } from "@/lib/seo";
 
 interface Props {
   params: Promise<{ category: string }>;
@@ -21,10 +24,16 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { category } = await params;
   const cat = getCategory(category as CategorySlug);
   if (!cat) return {};
-  return {
-    title: cat.title,
-    description: cat.description,
-  };
+  const firstProduct = productsByCategory(cat.slug)[0];
+  const image = firstProduct ? productImages(firstProduct)[0] : undefined;
+
+  return pageMetadata({
+    title: `${cat.title} עם יהלומי מעבדה`,
+    description: `${cat.title} עם יהלומי מעבדה בזהב 14K ו־18K. בחרו סגנון, קראט וגוון זהב עם תעודה גמולוגית, משלוח מבוטח וליווי אישי של LIBI DIAMONDS.`,
+    path: `/jewelry/${cat.slug}`,
+    image: image?.src,
+    imageAlt: image?.alt,
+  });
 }
 
 export default async function CategoryPage({ params }: Props) {
@@ -34,6 +43,27 @@ export default async function CategoryPage({ params }: Props) {
 
   const items = productsByCategory(cat.slug);
   const others = categories.filter((c) => c.slug !== cat.slug);
+  const breadcrumb = breadcrumbJsonLd([
+    { name: "ראשי", path: "/" },
+    { name: cat.name, path: `/jewelry/${cat.slug}` },
+  ]);
+  const collectionJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    name: cat.title,
+    description: cat.description,
+    url: absoluteUrl(`/jewelry/${cat.slug}`),
+    inLanguage: site.language,
+    mainEntity: {
+      "@type": "ItemList",
+      itemListElement: items.map((product, index) => ({
+        "@type": "ListItem",
+        position: index + 1,
+        name: product.name,
+        url: absoluteUrl(`/product/${product.slug}`),
+      })),
+    },
+  };
 
   return (
     <div className="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8">
@@ -70,6 +100,9 @@ export default async function CategoryPage({ params }: Props) {
           ))}
         </div>
       </aside>
+
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(collectionJsonLd) }} />
     </div>
   );
 }

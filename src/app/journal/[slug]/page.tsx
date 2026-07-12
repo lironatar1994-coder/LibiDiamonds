@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getGuide, guides } from "@/data/guides";
-import { site, waLink } from "@/lib/site";
+import { absoluteUrl, assetPath, site, waLink } from "@/lib/site";
+import { breadcrumbJsonLd, pageMetadata } from "@/lib/seo";
 import { WhatsAppIcon } from "@/components/icons";
 
 interface Props {
@@ -17,7 +19,25 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const guide = getGuide(slug);
   if (!guide) return {};
-  return { title: guide.title, description: guide.excerpt };
+  const baseMetadata = pageMetadata({
+    title: guide.title,
+    description: guide.excerpt,
+    path: `/journal/${guide.slug}`,
+    image: guide.cover.src,
+    imageAlt: guide.cover.alt,
+    type: "article",
+  });
+
+  return {
+    ...baseMetadata,
+    openGraph: {
+      ...baseMetadata.openGraph,
+      type: "article",
+      publishedTime: guide.date,
+      modifiedTime: guide.updated ?? guide.date,
+      authors: [site.name],
+    },
+  };
 }
 
 export default async function GuidePage({ params }: Props) {
@@ -28,7 +48,12 @@ export default async function GuidePage({ params }: Props) {
   const more = guide.relatedGuideSlugs?.length
     ? guides.filter((candidate) => guide.relatedGuideSlugs?.includes(candidate.slug))
     : guides.filter((candidate) => candidate.slug !== guide.slug).slice(0, 2);
-  const articleUrl = `${site.domain}/journal/${guide.slug}`;
+  const articleUrl = absoluteUrl(`/journal/${guide.slug}`);
+  const breadcrumb = breadcrumbJsonLd([
+    { name: "ראשי", path: "/" },
+    { name: "LIBI Journal", path: "/journal" },
+    { name: guide.title, path: `/journal/${guide.slug}` },
+  ]);
   const updatedLabel = guide.updated
     ? new Intl.DateTimeFormat("he-IL", { day: "numeric", month: "long", year: "numeric" }).format(
         new Date(`${guide.updated}T00:00:00`),
@@ -37,14 +62,23 @@ export default async function GuidePage({ params }: Props) {
   const articleJsonLd = {
     "@context": "https://schema.org",
     "@type": "Article",
+    "@id": `${articleUrl}#article`,
     headline: guide.title,
     description: guide.excerpt,
+    url: articleUrl,
+    image: absoluteUrl(guide.cover.src),
     datePublished: guide.date,
     dateModified: guide.updated ?? guide.date,
     mainEntityOfPage: articleUrl,
     inLanguage: "he-IL",
-    author: { "@type": "Organization", name: site.name },
-    publisher: { "@type": "Organization", name: site.name, url: site.domain },
+    author: { "@id": `${site.domain}/#organization` },
+    publisher: {
+      "@id": `${site.domain}/#organization`,
+      "@type": "Organization",
+      name: site.name,
+      url: site.domain,
+      logo: { "@type": "ImageObject", url: absoluteUrl(site.logo) },
+    },
   };
 
   return (
@@ -66,10 +100,21 @@ export default async function GuidePage({ params }: Props) {
           </h1>
         </header>
 
+        <div className="relative mt-8 aspect-[3/2] overflow-hidden bg-[#f1efe9] sm:mt-10">
+          <Image
+            src={assetPath(guide.cover.src)}
+            alt={guide.cover.alt}
+            fill
+            priority
+            sizes="(min-width: 768px) 768px, 100vw"
+            className="object-cover"
+          />
+        </div>
+
         <div className="mt-10 space-y-8">
           {guide.sections.map((section, i) => (
             <section key={i}>
-              {i === 1 && guide.comparison && (
+              {i === (guide.comparisonAfterSection ?? 1) && guide.comparison && (
                 <div className="mb-10 border-y border-line py-6 sm:py-7">
                   <h2 className="font-display text-2xl font-medium">{guide.comparison.heading}</h2>
                   <div className="mt-5 divide-y divide-line/70 border-y border-line sm:hidden">
@@ -123,6 +168,18 @@ export default async function GuidePage({ params }: Props) {
                   {p}
                 </p>
               ))}
+              {section.steps && section.steps.length > 0 && (
+                <ol className="mt-5 divide-y divide-line border-y border-line">
+                  {section.steps.map((step, index) => (
+                    <li key={step} className="grid grid-cols-[2rem_minmax(0,1fr)] gap-3 py-4 sm:grid-cols-[2.5rem_minmax(0,1fr)] sm:py-5">
+                      <span className="pt-0.5 font-display text-sm text-gold-deep" aria-hidden>
+                        {String(index + 1).padStart(2, "0")}
+                      </span>
+                      <span className="leading-7 text-ink-soft">{step}</span>
+                    </li>
+                  ))}
+                </ol>
+              )}
             </section>
           ))}
         </div>
@@ -171,6 +228,15 @@ export default async function GuidePage({ params }: Props) {
           <div className="mt-6 grid gap-8 sm:grid-cols-2">
             {more.map((g) => (
               <Link key={g.slug} href={`/journal/${g.slug}`} className="group block">
+                <div className="relative mb-4 aspect-[3/2] overflow-hidden bg-[#f1efe9]">
+                  <Image
+                    src={assetPath(g.cover.src)}
+                    alt={g.cover.alt}
+                    fill
+                    sizes="(min-width: 640px) 360px, 100vw"
+                    className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.02]"
+                  />
+                </div>
                 <h3 className="font-display text-lg leading-snug transition-colors group-hover:text-gold-deep">
                   {g.title}
                 </h3>
@@ -182,6 +248,7 @@ export default async function GuidePage({ params }: Props) {
       )}
 
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleJsonLd) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }} />
     </div>
   );
 }

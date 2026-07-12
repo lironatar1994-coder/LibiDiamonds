@@ -2,13 +2,15 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { HeroDiamond } from "@/components/JewelryArt";
 import { waLink, defaultWaMessage } from "@/lib/site";
+import { pageMetadata } from "@/lib/seo";
 import { WhatsAppIcon } from "@/components/icons";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "הסיפור שלנו",
   description:
     "LIBI DIAMONDS — תכשיטי יהלומי מעבדה בעיצוב אלגנטי ומדויק. הכירו את הערכים שמנחים אותנו: שקיפות, איכות בלי פשרות וליווי אישי.",
-};
+  path: "/about",
+});
 
 const values = [
   {

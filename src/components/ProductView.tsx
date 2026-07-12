@@ -79,6 +79,7 @@ export default function ProductView({ product }: { product: Product }) {
               alt={images[selectedImage].alt}
               fill
               priority
+              fetchPriority="high"
               sizes="(min-width: 1024px) 56vw, 100vw"
               className="animate-fade-up object-cover"
             />
@@ -209,10 +210,10 @@ export default function ProductView({ product }: { product: Product }) {
             </dl>
             <p className="mt-7 max-w-xl text-sm leading-7 text-stone sm:text-[0.98rem]">{product.description}</p>
             <Link
-              href="/journal/what-is-a-lab-diamond"
+              href="/journal/why-choose-a-lab-diamond"
               className="mt-5 inline-block border-b border-gold/55 pb-1 text-xs font-semibold tracking-[0.06em] text-ink-soft hover:border-gold hover:text-ink"
             >
-              מה זה יהלום מעבדה?
+              למה לבחור יהלום מעבדה?
             </Link>
           </section>
 

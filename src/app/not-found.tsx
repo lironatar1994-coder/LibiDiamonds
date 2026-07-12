@@ -1,5 +1,11 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { HeroDiamond } from "@/components/JewelryArt";
+
+export const metadata: Metadata = {
+  title: "העמוד לא נמצא",
+  robots: { index: false, follow: false },
+};
 
 export default function NotFound() {
   return (

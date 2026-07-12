@@ -2,12 +2,14 @@ import type { Metadata } from "next";
 import ContactForm from "@/components/ContactForm";
 import { site, waLink, defaultWaMessage } from "@/lib/site";
 import { WhatsAppIcon, InstagramIcon } from "@/components/icons";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "צור קשר",
+export const metadata: Metadata = pageMetadata({
+  title: "צור קשר וייעוץ אישי",
   description:
     "נשמח ללוות אתכם בבחירת תכשיט היהלום — בוואטסאפ, במייל או בפגישה אישית. מענה מהיר ואישי.",
-};
+  path: "/contact",
+});
 
 export default function ContactPage() {
   return (

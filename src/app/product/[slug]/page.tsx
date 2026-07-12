@@ -6,10 +6,13 @@ import ProductView from "@/components/ProductView";
 import {
   getCategory,
   getProduct,
+  metalNames,
+  productImages,
   products,
   relatedProducts,
 } from "@/data/products";
-import { site } from "@/lib/site";
+import { absoluteUrl, site } from "@/lib/site";
+import { breadcrumbJsonLd, pageMetadata } from "@/lib/seo";
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -23,10 +26,15 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const product = getProduct(slug);
   if (!product) return {};
-  return {
-    title: product.name,
-    description: `${product.subtitle}. ${product.description.slice(0, 140)}`,
-  };
+  const image = productImages(product)[0];
+
+  return pageMetadata({
+    title: `${product.name} עם יהלום מעבדה`,
+    description: `${product.name} מבית LIBI DIAMONDS. ${product.subtitle}. בחירת קראט וגוון זהב, תעודה גמולוגית וליווי אישי. החל מ־${new Intl.NumberFormat("he-IL").format(product.carats[0].price)} ₪.`,
+    path: `/product/${product.slug}`,
+    image: image.src,
+    imageAlt: image.alt,
+  });
 }
 
 export default async function ProductPage({ params }: Props) {
@@ -36,20 +44,41 @@ export default async function ProductPage({ params }: Props) {
 
   const category = getCategory(product.category)!;
   const related = relatedProducts(product);
+  const images = productImages(product);
+  const productUrl = absoluteUrl(`/product/${product.slug}`);
+  const breadcrumb = breadcrumbJsonLd([
+    { name: "ראשי", path: "/" },
+    { name: category.name, path: `/jewelry/${category.slug}` },
+    { name: product.name, path: `/product/${product.slug}` },
+  ]);
 
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "Product",
+    "@id": `${productUrl}#product`,
     name: product.name,
     description: product.description,
+    url: productUrl,
+    sku: product.slug,
+    image: images.map((image) => absoluteUrl(image.src)),
+    category: category.title,
+    material: product.metals.map((metal) => metalNames[metal]).join(", "),
     brand: { "@type": "Brand", name: site.name },
     offers: {
       "@type": "AggregateOffer",
-      priceCurrency: "ILS",
+      url: productUrl,
+      priceCurrency: site.currency,
       lowPrice: product.carats[0].price,
       highPrice: product.carats[product.carats.length - 1].price,
+      offerCount: product.carats.length,
       availability: "https://schema.org/InStock",
     },
+    additionalProperty: [
+      { "@type": "PropertyValue", name: "צבע היהלום", value: product.specs.color },
+      { "@type": "PropertyValue", name: "ניקיון היהלום", value: product.specs.clarity },
+      { "@type": "PropertyValue", name: "ליטוש", value: product.specs.cut },
+      { "@type": "PropertyValue", name: "תעודה", value: product.specs.cert },
+    ],
   };
 
   return (
@@ -88,6 +117,7 @@ export default async function ProductPage({ params }: Props) {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }} />
     </>
   );
 }

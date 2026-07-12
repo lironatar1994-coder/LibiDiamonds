@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
 import ProductCard from "@/components/ProductCard";
@@ -9,7 +10,23 @@ import {
   type CategorySlug,
   type Product,
 } from "@/data/products";
+import { guides } from "@/data/guides";
 import { site, waLink, defaultWaMessage, assetPath, formatPrice } from "@/lib/site";
+import { onlineStoreJsonLd, pageMetadata } from "@/lib/seo";
+
+const featuredJournalGuide = guides.find((guide) => guide.slug === "why-choose-a-lab-diamond")!;
+const secondaryJournalGuides = ["what-is-a-lab-diamond", "the-four-cs"].map(
+  (slug) => guides.find((guide) => guide.slug === slug)!,
+);
+
+export const metadata: Metadata = pageMetadata({
+  title: `${site.name} — תכשיטי יהלומי מעבדה וטבעות אירוסין`,
+  description:
+    "טבעות אירוסין ותכשיטי יהלומי מעבדה בזהב 14K ו־18K, עם תעודה גמולוגית, משלוח מבוטח וליווי אישי בבחירת האבן והמידה.",
+  path: "/",
+  image: site.socialImage,
+  imageAlt: "טבעת סוליטר עם יהלום מעבדה בזהב צהוב מבית LIBI DIAMONDS",
+});
 
 const faqs = [
   {
@@ -152,15 +169,15 @@ const diamondShapes = [
 
 export default function HomePage() {
   const bestsellers = products.filter((p) => p.bestseller).slice(0, 6);
-
-  const faqJsonLd = {
+  const websiteJsonLd = {
     "@context": "https://schema.org",
-    "@type": "FAQPage",
-    mainEntity: faqs.map((f) => ({
-      "@type": "Question",
-      name: f.q,
-      acceptedAnswer: { "@type": "Answer", text: f.a },
-    })),
+    "@type": "WebSite",
+    "@id": `${site.domain}/#website`,
+    url: site.domain,
+    name: site.name,
+    alternateName: site.nameHe,
+    inLanguage: site.language,
+    publisher: { "@id": `${site.domain}/#organization` },
   };
 
   return (
@@ -352,6 +369,67 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* ── LIBI Journal ───────────────────────────────── */}
+      <section className="section-gallery py-11 sm:py-14 lg:py-20">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="flex items-end justify-between gap-6 border-b border-line pb-5 sm:pb-6">
+            <h2 className="font-display text-[2rem] font-medium leading-none sm:text-4xl">לדעת מה בוחרים.</h2>
+            <Link
+              href="/journal"
+              className="shrink-0 border-b border-gold/55 pb-1 text-xs font-semibold tracking-[0.05em] text-ink-soft hover:border-gold hover:text-ink sm:text-sm"
+            >
+              לכל המדריכים
+            </Link>
+          </div>
+
+          <div className="mt-7 grid gap-8 lg:mt-9 lg:grid-cols-[minmax(0,1.45fr)_minmax(18rem,0.55fr)] lg:gap-10">
+            <Link href={`/journal/${featuredJournalGuide.slug}`} className="group block">
+              <article>
+                <div className="relative aspect-[3/2] overflow-hidden bg-[#f1efe9]">
+                  <Image
+                    src={assetPath(featuredJournalGuide.cover.src)}
+                    alt={featuredJournalGuide.cover.alt}
+                    fill
+                    sizes="(min-width: 1024px) 67vw, 100vw"
+                    className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.015]"
+                  />
+                </div>
+                <p className="mt-4 text-[0.68rem] font-semibold tracking-[0.08em] text-stone">
+                  {featuredJournalGuide.readingMinutes} דקות קריאה
+                </p>
+                <h3 className="mt-2 max-w-3xl font-display text-2xl font-medium leading-snug transition-colors group-hover:text-gold-deep sm:text-3xl">
+                  {featuredJournalGuide.title}
+                </h3>
+              </article>
+            </Link>
+
+            <div className="border-t border-line lg:border-t-0">
+              {secondaryJournalGuides.map((guide) => (
+                <Link key={guide.slug} href={`/journal/${guide.slug}`} className="group block border-b border-line py-5 first:pt-5 lg:first:pt-0">
+                  <article className="grid grid-cols-[7.25rem_minmax(0,1fr)] items-center gap-4 sm:grid-cols-[9rem_minmax(0,1fr)] lg:grid-cols-1 lg:items-start lg:gap-0">
+                    <div className="relative aspect-[4/3] overflow-hidden bg-[#f1efe9] lg:aspect-[3/2]">
+                      <Image
+                        src={assetPath(guide.cover.src)}
+                        alt={guide.cover.alt}
+                        fill
+                        sizes="(min-width: 1024px) 26vw, 144px"
+                        className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.02]"
+                      />
+                    </div>
+                    <div className="min-w-0 lg:mt-3">
+                      <p className="text-[0.65rem] font-semibold tracking-[0.07em] text-stone">{guide.readingMinutes} דקות קריאה</p>
+                      <h3 className="mt-1.5 font-display text-lg font-medium leading-snug transition-colors group-hover:text-gold-deep sm:text-xl">
+                        {guide.title}
+                      </h3>
+                    </div>
+                  </article>
+                </Link>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* ── FAQ ──────────────────────────────────────────── */}
       <section className="section-faq py-8 lg:py-14">
         <div className="mx-auto max-w-2xl px-4 sm:px-6">
@@ -374,42 +452,13 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="border-t border-line/60 py-10 lg:py-14">
-        <div className="mx-auto max-w-2xl px-4 sm:px-6">
-          <h2 className="font-display text-2xl font-medium sm:text-3xl">יהלומי מעבדה, בקצרה.</h2>
-          <p className="mt-4 max-w-xl text-sm leading-7 text-stone sm:text-base">
-            יהלום מעבדה הוא יהלום אמיתי שנוצר בתהליך מבוקר ולא במעמקי האדמה. לפני שבוחרים, כדאי להבין את מקור האבן, את תפקידה של התעודה הגמולוגית ואת ארבעת הנתונים שמגדירים את המראה שלה.
-          </p>
-          <div className="mt-5 flex flex-wrap gap-x-5 gap-y-3 text-sm font-semibold text-ink-soft">
-            <Link href="/journal/what-is-a-lab-diamond" className="border-b border-gold/55 pb-1 hover:border-gold hover:text-ink">
-              האם יהלום מעבדה הוא יהלום אמיתי?
-            </Link>
-            <Link href="/journal/cvd-vs-hpht" className="border-b border-gold/55 pb-1 hover:border-gold hover:text-ink">
-              CVD מול HPHT
-            </Link>
-            <Link href="/journal/the-four-cs" className="border-b border-gold/55 pb-1 hover:border-gold hover:text-ink">
-              4C בפשטות
-            </Link>
-          </div>
-        </div>
-      </section>
-
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(onlineStoreJsonLd()) }}
       />
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "JewelryStore",
-            name: site.name,
-            url: site.domain,
-            email: site.email,
-            description: site.tagline,
-          }),
-        }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteJsonLd) }}
       />
     </>
   );

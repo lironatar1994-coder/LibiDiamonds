@@ -1,14 +1,29 @@
+const configuredDomain = process.env.NEXT_PUBLIC_SITE_URL?.trim();
+
 export const site = {
   name: "LIBI DIAMONDS",
   nameHe: "ליבי דיאמונדס",
   tagline: "יהלומי מעבדה בעיצוב אלגנטי, מדויק ונצחי",
-  domain: "https://www.libidiamonds.co.il",
+  domain: (configuredDomain || "https://www.libidiamonds.co.il").replace(/\/+$/, ""),
+  locale: "he_IL",
+  language: "he-IL",
+  country: "IL",
+  currency: "ILS",
+  serviceArea: "ישראל",
+  logo: "/icon.svg",
+  socialImage: "/images/hero/v2/home-hero-desktop.webp",
   // TODO: replace with the real business WhatsApp number (international format, no +)
   whatsapp: "972500000000",
   phoneDisplay: "050-000-0000",
   email: "hello@libidiamonds.co.il",
   instagram: "https://www.instagram.com/libidiamonds",
 };
+
+export function absoluteUrl(path = ""): string {
+  if (/^https?:\/\//i.test(path)) return path;
+  if (!path) return site.domain;
+  return `${site.domain}${path.startsWith("/") ? path : `/${path}`}`;
+}
 
 export function waLink(message: string): string {
   return `https://wa.me/${site.whatsapp}?text=${encodeURIComponent(message)}`;
