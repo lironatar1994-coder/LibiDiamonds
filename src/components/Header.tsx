@@ -67,7 +67,7 @@ export default function Header() {
       {/* single-row maison header */}
       <header
         data-scrolled={scrolled}
-        className="site-header sticky top-0 z-50 border-b border-line bg-ivory/95 backdrop-blur-sm"
+        className="site-header sticky top-0 z-50 border-b border-line bg-white/90 backdrop-blur-sm"
       >
         <div className="mx-auto grid h-[60px] max-w-7xl grid-cols-[1fr_auto_1fr] items-center px-4 sm:h-auto sm:px-6 sm:py-3 lg:px-8 lg:py-4">
           {/* start (right in RTL): collections nav / mobile burger */}
@@ -142,7 +142,7 @@ export default function Header() {
           aria-label="ניווט ראשי"
           /* dvh rather than inset-0 so the bottom CTA stays clear of a
              collapsing mobile browser toolbar */
-          className="fixed inset-x-0 top-0 z-[60] flex h-[100dvh] flex-col bg-ivory lg:hidden"
+          className="fixed inset-x-0 top-0 z-[60] flex h-[100dvh] flex-col bg-white lg:hidden"
         >
           <div className="flex items-center justify-between border-b border-line px-4 py-3">
             <button

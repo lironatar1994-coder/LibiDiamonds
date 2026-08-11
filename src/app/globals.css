@@ -2,33 +2,40 @@
 
 @theme {
   /* ── Grounds ───────────────────────────────────────────
-     Four surfaces, and no others. Sections alternate between them;
-     anything that needs its own tint is a section that has not decided
-     what it is. The warm bias is deliberate — our product photography is
-     shot on warm backdrops (#eeeae4–#f8f4f0), so a cold ground would
-     leave those images floating as visible rectangles. */
-  --color-white: #ffffff; /* galleries — lets colourless stones read true */
-  --color-ivory: #faf8f3; /* the default page ground */
-  --color-cream: #f2ede3; /* emphasis bands */
-  --color-espresso: #272119; /* the single dark band */
+     White carries the page; warmth is a whisper, never the substance.
+     Measured against the houses this site is judged beside — Tiffany runs
+     #fff heavily with #fbf9f7 (warmth R−B +4) as its off-white and #f4f0ea
+     (+10) as a rare accent; De Beers and Messika are effectively achromatic.
+     An earlier version of this file argued for a warm ground because our
+     photography is shot warm. That was wrong: white makes warm photography
+     read as rich, while a warm ground makes the whole page read sepia. */
+  --color-white: #ffffff; /* the page ground */
+  --color-shell: #fbfaf7; /* +4 — the subtle alternate */
+  --color-linen: #f5f2ec; /* +9 — emphasis, used sparingly */
+  --color-espresso: #272119; /* buttons only — never a full-bleed slab */
 
-  /* sits behind photographs while they load, matched to the backdrop
-     baked into the photography itself */
-  --color-mist: #f1efe9;
+  /* sits behind photographs, a shade warmer than the page so each image
+     reads as a deliberate framed tile rather than an accidental rectangle.
+     If the catalogue is ever reshot on pure white, set this to #ffffff and
+     flatten .art-bg — no component changes needed. */
+  --color-mist: #f6f4f0;
 
-  --color-line: #e4ddcc;
+  /* the most repeated element on the site (60+ borders). At its old #e4ddcc
+     it was also the most chromatic thing we shipped, at +24 — warmer than
+     anything Tiffany uses anywhere. */
+  --color-line: #ebe8e3;
+
   --color-ink: #211e18;
   --color-ink-soft: #3a352c;
   --color-stone: #6e6758;
 
   /* ── Gold, split by job ────────────────────────────────
      `gold` decorates only — rules, dots, borders, swatches. It sits at
-     3.0:1 on ivory, which is below the floor for text and always will be.
-     `gold-deep` is the one that speaks: 5.07:1 on ivory, 4.61:1 on cream,
-     so it clears AA on both grounds. Never use `gold` for text. */
+     3.0:1 on white, which is below the floor for text and always will be.
+     `gold-deep` is the one that speaks: 5.38:1 on white, 4.81:1 on linen,
+     so it clears AA on every ground. Never use `gold` for text. */
   --color-gold: #a88d53;
   --color-gold-deep: #7d6835;
-  --color-champagne: #d8caa6;
 
   --font-display: var(--font-frank), "Frank Ruhl Libre", serif;
   --font-body: var(--font-assistant), "Assistant", sans-serif;
@@ -44,7 +51,7 @@ html {
 }
 
 body {
-  background-color: var(--color-ivory);
+  background-color: var(--color-white);
   color: var(--color-ink);
   font-family: var(--font-body);
   -webkit-font-smoothing: antialiased;
@@ -80,7 +87,7 @@ p {
 }
 
 ::selection {
-  background-color: rgba(216, 202, 166, 0.55);
+  background-color: rgba(168, 141, 83, 0.22);
   color: var(--color-espresso);
 }
 
@@ -91,26 +98,20 @@ p {
   outline-offset: 3px;
 }
 
-/* dark sections need the ring to read against espresso */
-.section-cta-signature :where(a, button):focus-visible {
-  outline-color: var(--color-champagne);
-}
-
-/* Neutral light inside a photo frame, so colourless stones read true even
-   though the page around them is warm. */
+/* A photo tile: a shade warmer than the page so each image reads as a
+   deliberate frame. Flatten this to solid white if the catalogue is reshot
+   on a white backdrop. */
 .art-bg {
   background: radial-gradient(
     120% 100% at 50% 0%,
     var(--color-white) 0%,
-    #f8f8f5 55%,
+    #fbfaf8 55%,
     var(--color-mist) 100%
   );
 }
 
 .hero-editorial {
-  background:
-    radial-gradient(90% 80% at 78% 42%, rgba(216, 202, 166, 0.22) 0%, rgba(250, 248, 243, 0) 64%),
-    var(--color-ivory);
+  background: var(--color-white);
 }
 
 /* Scrim over the stacked hero photograph. On a phone the frame is tall, so
@@ -120,10 +121,10 @@ p {
 .hero-scrim {
   background: linear-gradient(
     180deg,
-    rgba(250, 248, 243, 0.9) 0%,
-    rgba(250, 248, 243, 0.7) 34%,
-    rgba(250, 248, 243, 0.08) 62%,
-    rgba(250, 248, 243, 0.78) 100%
+    rgba(255, 255, 255, 0.9) 0%,
+    rgba(255, 255, 255, 0.7) 34%,
+    rgba(255, 255, 255, 0.08) 62%,
+    rgba(255, 255, 255, 0.78) 100%
   );
 }
 
@@ -131,17 +132,17 @@ p {
   .hero-scrim {
     background: linear-gradient(
       180deg,
-      rgba(250, 248, 243, 0.95) 0%,
-      rgba(250, 248, 243, 0.9) 40%,
-      rgba(250, 248, 243, 0.55) 62%,
-      rgba(250, 248, 243, 0.18) 82%,
-      rgba(250, 248, 243, 0.72) 100%
+      rgba(255, 255, 255, 0.95) 0%,
+      rgba(255, 255, 255, 0.9) 40%,
+      rgba(255, 255, 255, 0.55) 62%,
+      rgba(255, 255, 255, 0.18) 82%,
+      rgba(255, 255, 255, 0.72) 100%
     );
   }
 }
 
 /* The hero photograph carries a warm backdrop of its own, which would read as
-   a hard rectangle against the ivory. Feathering the inner edge dissolves the
+   a hard rectangle against the white. Feathering the inner edge dissolves the
    seam while leaving the ring fully opaque. */
 @media (min-width: 1024px) {
   .hero-media {
@@ -161,32 +162,26 @@ p {
 }
 
 /* ── Section grounds ───────────────────────────────────
-   Each of these resolves to one of the four surfaces. The page then
-   alternates white → cream → ivory rather than drifting through a dozen
-   near-identical beiges. A shared white wash off the top edge keeps the
-   warm bands from reading flat. */
+   Three light surfaces, and nothing else. The page alternates
+   white → shell → linen so white always dominates; linen appears twice on
+   the home page at most. A white wash off the top edge keeps the warm band
+   from reading flat. */
 .section-gallery {
   background: var(--color-white);
 }
 
-.section-ivory {
-  background: var(--color-ivory);
+.section-shell {
+  background: var(--color-shell);
 }
 
-.section-cream {
+.section-linen {
   background:
-    radial-gradient(80% 56% at 50% 0%, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0) 60%),
-    var(--color-cream);
-}
-
-.section-cta-signature {
-  background: var(--color-espresso);
+    radial-gradient(80% 56% at 50% 0%, rgba(255, 255, 255, 0.55) 0%, rgba(255, 255, 255, 0) 60%),
+    var(--color-linen);
 }
 
 .footer-warm {
-  background:
-    radial-gradient(42rem 16rem at 50% 0%, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0) 62%),
-    var(--color-cream);
+  background: var(--color-shell);
 }
 
 .product-card-frame {
@@ -202,7 +197,7 @@ p {
 }
 
 .editorial-product-feature {
-  background: var(--color-cream);
+  background: var(--color-linen);
 }
 
 .shape-stone-field {
@@ -317,9 +312,7 @@ p {
      buttons stay optically identical when they sit side by side. */
   .btn-primary,
   .btn-whatsapp,
-  .btn-outline,
-  .btn-inverse,
-  .btn-outline-inverse {
+  .btn-outline {
     display: inline-flex;
     min-height: 48px;
     align-items: center;
@@ -339,15 +332,13 @@ p {
 
   .btn-primary:active,
   .btn-whatsapp:active,
-  .btn-outline:active,
-  .btn-inverse:active,
-  .btn-outline-inverse:active {
+  .btn-outline:active {
     transform: translateY(1px);
   }
 
   .btn-primary {
     background-color: var(--color-espresso);
-    color: var(--color-ivory);
+    color: var(--color-white);
   }
 
   .btn-primary:hover {
@@ -358,7 +349,7 @@ p {
   .btn-whatsapp {
     gap: 0.45rem;
     border: 1px solid rgba(168, 141, 83, 0.7);
-    background-color: rgba(250, 248, 243, 0.62);
+    background-color: rgba(255, 255, 255, 0.62);
     color: var(--color-ink);
     padding-inline: 1.55rem;
     font-size: 0.92rem;
@@ -379,29 +370,7 @@ p {
 
   .btn-outline:hover {
     background-color: var(--color-ink);
-    color: var(--color-ivory);
-  }
-
-  .btn-inverse {
-    border: 1px solid rgba(250, 248, 243, 0.92);
-    background: var(--color-ivory);
-    color: var(--color-espresso);
-  }
-
-  .btn-inverse:hover {
-    border-color: var(--color-champagne);
-    background: #fff;
-    color: var(--color-gold-deep);
-  }
-
-  .btn-outline-inverse {
-    border: 1px solid rgba(216, 202, 166, 0.62);
-    color: var(--color-ivory);
-  }
-
-  .btn-outline-inverse:hover {
-    border-color: var(--color-champagne);
-    background: rgba(250, 248, 243, 0.08);
+    color: var(--color-white);
   }
 }
 

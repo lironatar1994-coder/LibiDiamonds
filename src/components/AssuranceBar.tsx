@@ -12,7 +12,7 @@ const assurances = [
  */
 export default function AssuranceBar() {
   return (
-    <div className="assurance-bar border-b border-line/70 bg-cream">
+    <div className="assurance-bar border-b border-line bg-white">
       <ul className="assurance-list mx-auto flex max-w-7xl items-center justify-center gap-x-6 px-4 py-2 sm:px-6 lg:px-8">
         {assurances.map((item, index) => (
           <li

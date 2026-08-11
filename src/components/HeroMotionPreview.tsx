@@ -95,7 +95,7 @@ export default function HeroMotionPreview() {
 
   return (
     <>
-      <div className="border-b border-line bg-ivory px-4 py-3">
+      <div className="border-b border-line bg-shell px-4 py-3">
         <div className="mx-auto flex max-w-7xl justify-center" role="group" aria-label="בחירת גרסת תנועה">
           <div className="inline-grid grid-cols-2 border border-line bg-white/55 p-1">
             {(["video", "cinemagraph"] as const).map((option) => (
@@ -105,7 +105,7 @@ export default function HeroMotionPreview() {
                 aria-pressed={mode === option}
                 onClick={() => setMode(option)}
                 className={`min-h-10 min-w-[8.25rem] px-5 text-sm transition-colors focus-visible:outline focus-visible:outline-1 focus-visible:outline-offset-2 focus-visible:outline-gold-deep ${
-                  mode === option ? "bg-espresso text-ivory" : "text-ink hover:text-gold-deep"
+                  mode === option ? "bg-espresso text-white" : "text-ink hover:text-gold-deep"
                 }`}
               >
                 {option === "video" ? "וידאו" : "Cinemagraph"}

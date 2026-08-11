@@ -18,7 +18,7 @@ export default function ProductCard({
 
   return (
     <Link href={`/product/${product.slug}`} className="group block">
-      <div className="art-bg product-card-frame relative aspect-square overflow-hidden bg-ivory">
+      <div className="art-bg product-card-frame relative aspect-square overflow-hidden bg-shell">
         {badge && (
           <span className="absolute right-3 top-3 z-10 border border-gold/30 bg-white/88 px-3 py-1 text-[0.66rem] font-semibold tracking-[0.1em] text-ink-soft backdrop-blur-sm">
             {badge}

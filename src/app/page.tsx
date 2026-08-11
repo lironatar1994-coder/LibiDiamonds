@@ -309,7 +309,7 @@ export default function HomePage() {
       </section>
 
       {/* ── Bestsellers ───────────────────────────────────── */}
-      <section className="section-gallery py-10 lg:py-18">
+      <section className="section-gallery py-14 lg:py-24">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <SectionHeading title="הבחירות של LIBI" />
           <EditorialBestsellers items={bestsellers} />
@@ -317,7 +317,7 @@ export default function HomePage() {
       </section>
 
       {/* ── Shop by setting style ────────────────────────── */}
-      <section className="section-cream py-11 sm:py-14 lg:py-18" aria-labelledby="ring-styles-title">
+      <section className="section-linen py-14 sm:py-16 lg:py-24" aria-labelledby="ring-styles-title">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="flex items-center gap-5 sm:gap-7">
             <h2
@@ -358,7 +358,7 @@ export default function HomePage() {
       </section>
 
       {/* ── Shop by diamond shape ────────────────────────── */}
-      <section className="section-ivory py-10 lg:py-18">
+      <section className="section-shell py-14 lg:py-24">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <SectionHeading title="בחרו את החיתוך" variant="centered" />
           <DiamondShapeSelector shapes={diamondShapes} />
@@ -367,7 +367,7 @@ export default function HomePage() {
 
       {/* ── Categories ───────────────────────────────────── */}
       <section className="section-gallery">
-        <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8 lg:py-18">
+        <div className="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8 lg:py-24">
           <SectionHeading title="הקולקציה" />
           <div className="mt-7 grid grid-cols-2 gap-x-4 gap-y-7 lg:mt-10 lg:grid-cols-5 lg:gap-6">
             {categories.map((cat) => {
@@ -396,7 +396,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="bg-cream" aria-labelledby="bespoke-inspiration-title">
+      <section className="bg-linen" aria-labelledby="bespoke-inspiration-title">
         <div className="mx-auto grid max-w-7xl lg:grid-cols-[1.08fr_0.92fr] lg:items-center">
           <div className="relative aspect-[4/5] overflow-hidden sm:aspect-[16/11] lg:aspect-[4/5]">
             <Image
@@ -437,11 +437,11 @@ export default function HomePage() {
       <CustomerVoices reviews={reviews} />
 
       {/* ── Assurance panel ──────────────────────────────── */}
-      {/* ivory, not cream: the testimonials above are hidden in production
-          until real reviews replace the demo ones, and two cream bands in a
-          row would merge into one long beige block */}
-      <section className="section-ivory border-y border-line" aria-labelledby="assurance-title">
-        <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 sm:py-14 lg:px-8 lg:py-16">
+      {/* shell, not linen: the testimonials above are hidden in production
+          until real reviews replace the demo ones, and two warm bands in a
+          row would merge into one block */}
+      <section className="section-shell border-y border-line" aria-labelledby="assurance-title">
+        <div className="mx-auto max-w-7xl px-4 py-14 sm:px-6 sm:py-16 lg:px-8 lg:py-20">
           <div className="max-w-2xl">
             <p className="eyebrow">קנייה בראש שקט</p>
             <h2
@@ -475,24 +475,27 @@ export default function HomePage() {
       </section>
 
       {/* ── Consultation CTA ─────────────────────────────── */}
-      <section className="section-cta-signature px-4 py-9 text-ivory sm:px-6 lg:px-8 lg:py-14">
-        <div className="mx-auto flex max-w-5xl flex-col items-center justify-between gap-5 text-center lg:flex-row lg:gap-8 lg:text-right">
-          <div className="hidden h-px flex-1 bg-champagne/35 lg:block" />
-          <h2 className="max-w-lg font-display text-2xl font-medium leading-tight sm:text-4xl">
+      {/* Light, not a dark slab. None of the houses this site is measured
+          against interrupts a white page with a near-black band; the dark
+          button carries the emphasis on its own. */}
+      <section className="section-gallery px-4 py-14 sm:px-6 lg:px-8 lg:py-20">
+        <div className="mx-auto flex max-w-5xl flex-col items-center justify-between gap-6 text-center lg:flex-row lg:gap-8 lg:text-right">
+          <div className="hidden h-px flex-1 bg-gold/30 lg:block" />
+          <h2 className="max-w-lg font-display text-[1.9rem] font-medium leading-tight text-ink sm:text-4xl">
             נבחר יחד את היהלום הנכון.
           </h2>
-          <span className="hidden h-2 w-2 rotate-45 border border-champagne/65 lg:block" aria-hidden />
+          <span className="hidden h-2 w-2 rotate-45 border border-gold/50 lg:block" aria-hidden />
           <div className="flex w-full flex-col items-center justify-center gap-3 sm:w-auto sm:flex-row">
             <a
               href={waLink("היי, אשמח לייעוץ אישי בבחירת תכשיט")}
               target="_blank"
               rel="noopener noreferrer"
-              className="btn-inverse w-full sm:w-auto"
+              className="btn-primary w-full sm:w-auto"
             >
               <WhatsAppIcon className="h-4 w-4" />
               ייעוץ אישי בוואטסאפ
             </a>
-            <Link href="/jewelry/rings" className="btn-outline-inverse hidden w-full sm:inline-flex sm:w-auto">
+            <Link href="/jewelry/rings" className="btn-outline hidden w-full sm:inline-flex sm:w-auto">
               טבעות יהלום
             </Link>
           </div>
@@ -500,7 +503,7 @@ export default function HomePage() {
       </section>
 
       {/* ── LIBI Journal ───────────────────────────────── */}
-      <section className="section-gallery py-11 sm:py-14 lg:py-20">
+      <section className="section-shell py-14 sm:py-16 lg:py-24">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="flex items-end justify-between gap-6 border-b border-line pb-5 sm:pb-6">
             <h2 className="font-display text-[2rem] font-medium leading-none sm:text-4xl">לדעת מה בוחרים.</h2>
@@ -561,7 +564,7 @@ export default function HomePage() {
       </section>
 
       {/* ── FAQ ──────────────────────────────────────────── */}
-      <section className="section-ivory py-12 sm:py-14 lg:py-20">
+      <section className="section-gallery py-14 sm:py-16 lg:py-24">
         <div className="mx-auto max-w-2xl px-4 sm:px-6">
           <SectionHeading title="פרטים שכדאי לדעת" variant="centered" />
           <div className="mt-8 border-t border-line sm:mt-10">

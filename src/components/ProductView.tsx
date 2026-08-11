@@ -126,8 +126,8 @@ export default function ProductView({ product }: { product: Product }) {
                   aria-pressed={metal === option}
                   className={`flex min-h-12 items-center justify-center gap-2 border px-2 py-2 text-[0.82rem] transition-colors sm:justify-start sm:gap-2.5 sm:px-3 sm:text-sm ${
                     metal === option
-                      ? "border-gold-deep bg-cream text-ink"
-                      : "border-line bg-ivory text-ink-soft hover:border-stone"
+                      ? "border-gold-deep bg-linen text-ink"
+                      : "border-line bg-shell text-ink-soft hover:border-stone"
                   }`}
                 >
                   <span
@@ -159,12 +159,12 @@ export default function ProductView({ product }: { product: Product }) {
                   aria-pressed={index === caratIdx}
                   className={`min-h-[82px] border px-3 py-3 text-right transition-colors sm:px-4 ${
                     index === caratIdx
-                      ? "border-ink bg-ink text-ivory"
-                      : "border-line bg-ivory text-ink hover:border-gold"
+                      ? "border-ink bg-ink text-white"
+                      : "border-line bg-shell text-ink hover:border-gold"
                   }`}
                 >
                   <span className="block font-display text-lg leading-tight">{option.label}</span>
-                  <span className={`mt-2 block text-sm font-semibold tracking-wide ${index === caratIdx ? "text-ivory" : "text-ink"}`}>
+                  <span className={`mt-2 block text-sm font-semibold tracking-wide ${index === caratIdx ? "text-white" : "text-ink"}`}>
                     {formatPrice(option.price)}
                   </span>
                 </button>
@@ -339,7 +339,7 @@ export default function ProductView({ product }: { product: Product }) {
       </section>
 
       {showStickyCta && (
-        <div className="animate-rise-in fixed inset-x-0 bottom-0 z-40 border-t border-line bg-ivory/95 px-4 py-3 shadow-[0_-8px_24px_rgba(33,30,24,0.08)] backdrop-blur lg:hidden">
+        <div className="animate-rise-in fixed inset-x-0 bottom-0 z-40 border-t border-line bg-shell/95 px-4 py-3 shadow-[0_-8px_24px_rgba(33,30,24,0.08)] backdrop-blur lg:hidden">
           <div className="mx-auto flex max-w-md items-center gap-3">
             <div className="min-w-0 flex-1">
               <p className="truncate text-xs text-stone">
@@ -351,7 +351,7 @@ export default function ProductView({ product }: { product: Product }) {
               href={waLink(message)}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex min-h-12 shrink-0 items-center justify-center gap-2 bg-ink px-4 py-3 text-sm text-ivory transition-colors hover:bg-gold-deep"
+              className="inline-flex min-h-12 shrink-0 items-center justify-center gap-2 bg-ink px-4 py-3 text-sm text-white transition-colors hover:bg-gold-deep"
             >
               <WhatsAppIcon className="h-4 w-4" />
               בדיקת זמינות

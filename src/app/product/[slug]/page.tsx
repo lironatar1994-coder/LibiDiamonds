@@ -99,7 +99,7 @@ export default async function ProductPage({ params }: Props) {
       <ProductView product={product} />
       </div>
 
-      <section className="mt-16 bg-cream py-11 lg:mt-24 lg:py-16">
+      <section className="mt-16 bg-linen py-11 lg:mt-24 lg:py-16">
         <div className="mx-auto max-w-[88rem] px-4 sm:px-6 lg:px-8">
           <div className="flex items-center gap-5 sm:gap-7">
             <h2 className="shrink-0 font-display text-3xl font-medium lg:text-4xl">עוד {category.name} מהקולקציה</h2>

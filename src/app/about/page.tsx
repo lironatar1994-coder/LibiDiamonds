@@ -32,7 +32,7 @@ const process = [
 export default function AboutPage() {
   return (
     <>
-      <section className="bg-cream">
+      <section className="bg-linen">
         <div className="mx-auto grid max-w-7xl items-center gap-10 px-4 py-12 sm:px-6 sm:py-16 lg:grid-cols-[0.86fr_1.14fr] lg:px-8 lg:py-20">
           <div className="max-w-xl">
             <h1 className="font-display text-4xl font-medium leading-[1.12] sm:text-5xl lg:text-6xl">
@@ -79,14 +79,15 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <section className="section-cta-signature px-4 py-10 text-center text-ivory sm:px-6 lg:py-14">
-        <h2 className="font-display text-3xl font-medium sm:text-4xl">מתחילים מהתכשיט שאתם מחפשים.</h2>
-        <div className="mt-7 flex flex-col items-center justify-center gap-3 sm:flex-row">
-          <a href={waLink(defaultWaMessage)} target="_blank" rel="noopener noreferrer" className="btn-inverse">
+      <section className="section-shell px-4 py-14 text-center sm:px-6 lg:py-20">
+        <h2 className="font-display text-3xl font-medium text-ink sm:text-4xl">מתחילים מהתכשיט שאתם מחפשים.</h2>
+        <span className="mx-auto mt-5 block h-px w-8 bg-gold/55" aria-hidden />
+        <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
+          <a href={waLink(defaultWaMessage)} target="_blank" rel="noopener noreferrer" className="btn-primary">
             <WhatsAppIcon className="h-4 w-4" />
             ייעוץ אישי בוואטסאפ
           </a>
-          <Link href="/jewelry/rings" className="btn-outline-inverse">לקולקציה</Link>
+          <Link href="/jewelry/rings" className="btn-outline">לקולקציה</Link>
         </div>
       </section>
     </>

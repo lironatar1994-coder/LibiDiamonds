@@ -35,7 +35,7 @@ export default function ContactPage() {
         </div>
 
         <div className="space-y-6">
-          <div className="border border-line bg-cream p-7 sm:p-8">
+          <div className="border border-line bg-linen p-7 sm:p-8">
             <h2 className="font-display text-xl">דרכים נוספות</h2>
             <span className="mt-3 block h-px w-8 bg-gold/55" aria-hidden />
             <ul className="mt-4 space-y-1 text-sm">

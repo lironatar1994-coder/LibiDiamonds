@@ -205,7 +205,7 @@ export default async function GuidePage({ params }: Props) {
         </section>
       )}
 
-      <aside className="mt-14 bg-cream p-8 text-center">
+      <aside className="mt-14 bg-linen p-8 text-center">
         <h2 className="font-display text-2xl">נשארו שאלות?</h2>
         <p className="mx-auto mt-3 max-w-md text-sm leading-relaxed text-stone">
           נשמח להסביר, להשוות אבנים אמיתיות עם תעודות, ולעזור לכם לבחור נכון —

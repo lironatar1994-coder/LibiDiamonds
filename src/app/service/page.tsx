@@ -85,7 +85,7 @@ export default function ServicePage() {
         ))}
       </div>
 
-      <div className="mt-14 border border-line bg-cream p-8 text-center sm:p-10">
+      <div className="mt-14 border border-line bg-linen p-8 text-center sm:p-10">
         <h2 className="font-display text-xl">שאלה שלא מופיעה כאן?</h2>
         <a
           href={waLink(defaultWaMessage)}

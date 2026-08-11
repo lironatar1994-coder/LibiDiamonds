@@ -117,8 +117,8 @@ export default function ProductGallery({
                 aria-pressed={selected === index}
                 className={`relative aspect-square w-24 overflow-hidden bg-mist transition-all duration-300 ${
                   selected === index
-                    ? "ring-1 ring-ink ring-offset-2 ring-offset-ivory"
-                    : "opacity-65 hover:opacity-100 hover:ring-1 hover:ring-gold/50 hover:ring-offset-2 hover:ring-offset-ivory"
+                    ? "ring-1 ring-ink ring-offset-2 ring-offset-white"
+                    : "opacity-65 hover:opacity-100 hover:ring-1 hover:ring-gold/50 hover:ring-offset-2 hover:ring-offset-white"
                 }`}
               >
                 <Image src={image.src} alt="" fill sizes="96px" className="object-cover" />
