@@ -12,9 +12,9 @@ export const site = {
   serviceArea: "ישראל",
   logo: "/icon.svg",
   socialImage: "/images/hero/v2/home-hero-desktop.webp",
-  // TODO: replace with the real business WhatsApp number (international format, no +)
-  whatsapp: "972500000000",
-  phoneDisplay: "050-000-0000",
+  // international format, no leading + — this is what wa.me expects
+  whatsapp: "972508611888",
+  phoneDisplay: "050-861-1888",
   email: "hello@libidiamonds.co.il",
   instagram: "https://www.instagram.com/libidiamonds",
 };
