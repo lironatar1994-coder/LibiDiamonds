@@ -220,32 +220,27 @@ export default function HomePage() {
     <>
       {/* ── Hero ─────────────────────────────────────────── */}
       <section className="hero-editorial relative isolate overflow-hidden">
-        <div className="absolute inset-0 lg:hidden">
-          <Image
-            src={assetPath("/images/hero/v2/home-hero-mobile.webp")}
-            alt="טבעת יהלום מעבדה בזהב צהוב על שיש בהיר"
-            fill
-            priority
-            unoptimized
-            sizes="100vw"
-            className="hero-settle object-cover object-[center_62%]"
-          />
-          <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(250,248,243,0.9)_0%,rgba(250,248,243,0.7)_34%,rgba(250,248,243,0.08)_62%,rgba(250,248,243,0.78)_100%)]" />
-        </div>
-
-        {/* desktop: the photograph bleeds to the viewport edge and to full
-            height, so it reads as an editorial half rather than a framed box */}
-        <div className="hero-figure absolute inset-y-0 left-0 hidden w-[52%] lg:block">
-          <div className="hero-ring-light" />
-          <Image
-            src={assetPath("/images/hero/v2/home-hero-desktop.webp")}
-            alt="טבעת יהלום מעבדה מרכזית בזהב צהוב"
-            fill
-            priority
-            unoptimized
-            sizes="52vw"
-            className="hero-settle object-cover object-[72%_center]"
-          />
+        {/* One media element for every breakpoint. A <picture> lets the
+            browser pick exactly one file — previously both heroes were
+            fetched on every device because `priority` preloads regardless of
+            whether the wrapper is display:none. CSS moves it from a full
+            bleed behind the copy to the left editorial half at lg. */}
+        <div className="hero-media absolute inset-0 lg:right-auto lg:w-[52%]">
+          <div className="hero-ring-light hidden lg:block" />
+          <picture>
+            <source
+              media="(min-width: 640px)"
+              srcSet={assetPath("/images/hero/v2/home-hero-desktop.webp")}
+            />
+            <img
+              src={assetPath("/images/hero/v2/home-hero-mobile.webp")}
+              alt="טבעת יהלום מעבדה בזהב צהוב על משטח שיש בהיר"
+              fetchPriority="high"
+              decoding="async"
+              className="hero-settle absolute inset-0 h-full w-full object-cover object-[center_62%] sm:object-[center_38%] lg:object-[72%_center]"
+            />
+          </picture>
+          <div className="hero-scrim absolute inset-0 lg:hidden" />
         </div>
 
         <div className="relative z-10 mx-auto grid min-h-[calc(74svh-60px)] max-w-7xl items-start px-4 py-4 sm:px-6 lg:min-h-[min(82vh,760px)] lg:grid-cols-[0.86fr_1.14fr] lg:items-center lg:gap-10 lg:px-8 lg:py-14">
@@ -263,10 +258,10 @@ export default function HomePage() {
               טבעות אירוסין ויהלומי מעבדה מוסמכים, בזהב 14K/18K.
             </p>
             <div
-              className="cascade mt-5 flex flex-col items-center gap-1 sm:mt-7 sm:gap-3 lg:mt-10 lg:flex-row lg:justify-start"
+              className="cascade mt-5 flex flex-col items-center gap-1 sm:mt-7 sm:gap-3 lg:mt-10 lg:items-start xl:flex-row xl:items-center xl:justify-start"
               style={{ animationDelay: "220ms" }}
             >
-              <Link href="/jewelry/rings" className="btn-primary w-full max-w-xs lg:w-auto lg:max-w-none lg:px-14">
+              <Link href="/jewelry/rings" className="btn-primary w-full max-w-xs whitespace-nowrap lg:w-auto lg:max-w-none lg:px-14">
                 גלו טבעות אירוסין
               </Link>
               {/* on phones the consultation link stays light so it supports the
@@ -284,7 +279,7 @@ export default function HomePage() {
                 href={waLink(defaultWaMessage)}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="btn-whatsapp hero-desktop-inline"
+                className="btn-whatsapp hero-desktop-inline whitespace-nowrap"
               >
                 <WhatsAppIcon className="h-4 w-4" />
                 ייעוץ אישי בוואטסאפ

@@ -19,7 +19,7 @@ export default function AssuranceBar() {
             key={item}
             className="flex items-center gap-x-6 whitespace-nowrap text-[0.66rem] font-semibold tracking-[0.14em] text-ink-soft"
           >
-            {index > 0 && <span className="hidden h-1 w-1 rotate-45 bg-gold/60 sm:block" aria-hidden />}
+            {index > 0 && <span className="hidden h-1 w-1 rotate-45 bg-gold/60 md:block" aria-hidden />}
             {item}
           </li>
         ))}

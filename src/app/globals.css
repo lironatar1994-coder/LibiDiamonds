@@ -113,9 +113,41 @@ p {
     var(--color-ivory);
 }
 
-.hero-figure {
-  -webkit-mask-image: linear-gradient(to right, #000 72%, transparent 100%);
-  mask-image: linear-gradient(to right, #000 72%, transparent 100%);
+/* Scrim over the stacked hero photograph. On a phone the frame is tall, so
+   the wash can clear early and leave the ring in the open. On a wide, short
+   viewport the copy sits over the brightest part of a landscape frame, so
+   the wash has to hold longer before it lets go. */
+.hero-scrim {
+  background: linear-gradient(
+    180deg,
+    rgba(250, 248, 243, 0.9) 0%,
+    rgba(250, 248, 243, 0.7) 34%,
+    rgba(250, 248, 243, 0.08) 62%,
+    rgba(250, 248, 243, 0.78) 100%
+  );
+}
+
+@media (min-width: 640px) {
+  .hero-scrim {
+    background: linear-gradient(
+      180deg,
+      rgba(250, 248, 243, 0.95) 0%,
+      rgba(250, 248, 243, 0.9) 40%,
+      rgba(250, 248, 243, 0.55) 62%,
+      rgba(250, 248, 243, 0.18) 82%,
+      rgba(250, 248, 243, 0.72) 100%
+    );
+  }
+}
+
+/* The hero photograph carries a warm backdrop of its own, which would read as
+   a hard rectangle against the ivory. Feathering the inner edge dissolves the
+   seam while leaving the ring fully opaque. */
+@media (min-width: 1024px) {
+  .hero-media {
+    -webkit-mask-image: linear-gradient(to right, #000 72%, transparent 100%);
+    mask-image: linear-gradient(to right, #000 72%, transparent 100%);
+  }
 }
 
 .hero-ring-light {
@@ -531,7 +563,7 @@ p {
 /* ── Assurance bar ────────────────────────────────────── */
 /* Phones cannot fit four assurances on one line, so they cross-fade in
    place. Every item stays in the DOM, so assistive tech reads all four. */
-@media (max-width: 639px) {
+@media (max-width: 767px) {
   .assurance-list {
     position: relative;
     height: 1.05rem;
@@ -579,7 +611,7 @@ p {
 
 /* Without motion the cycle would leave every item at opacity 0, so pin the
    first one open and drop the rest. */
-@media (prefers-reduced-motion: reduce) and (max-width: 639px) {
+@media (prefers-reduced-motion: reduce) and (max-width: 767px) {
   .assurance-list li {
     animation: none !important;
   }
