@@ -15,7 +15,7 @@ const collectionNav = [
 ];
 
 const brandNav = [
-  { href: "/journal", label: "Journal" },
+  { href: "/journal", label: "מדריכים" },
   { href: "/about", label: "אודות" },
   { href: "/contact", label: "צור קשר" },
 ];

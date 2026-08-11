@@ -51,7 +51,7 @@ export default async function GuidePage({ params }: Props) {
   const articleUrl = absoluteUrl(`/journal/${guide.slug}`);
   const breadcrumb = breadcrumbJsonLd([
     { name: "ראשי", path: "/" },
-    { name: "LIBI Journal", path: "/journal" },
+    { name: "מדריכים", path: "/journal" },
     { name: guide.title, path: `/journal/${guide.slug}` },
   ]);
   const updatedLabel = guide.updated
@@ -86,7 +86,7 @@ export default async function GuidePage({ params }: Props) {
       <nav className="breadcrumb -mt-2 text-xs text-stone" aria-label="פירורי לחם">
         <Link href="/" className="hover:text-gold">ראשי</Link>
         <span className="mx-2">/</span>
-        <Link href="/journal" className="hover:text-gold">LIBI Journal</Link>
+        <Link href="/journal" className="hover:text-gold">מדריכים</Link>
       </nav>
 
       <article>

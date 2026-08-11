@@ -9,6 +9,7 @@ import {
   categories,
   products,
   productImages,
+  type ArtType,
   type CategorySlug,
   type Product,
 } from "@/data/products";
@@ -170,8 +171,40 @@ const diamondShapes = [
   },
 ] as const;
 
+/* The four classic engagement settings, in ascending price. Each maps to a
+   real ring in the catalogue, so the row shops as well as it teaches. */
+const ringStyleNotes: Record<string, { label: string; note: string }> = {
+  solitaire: { label: "סוליטר", note: "אבן אחת, בלי הסחות דעת" },
+  pave: { label: "פאווה", note: "יהלומים משובצים לאורך הזרוע" },
+  halo: { label: "היילו", note: "מעטפת אבנים סביב המרכז" },
+  "three-stone": { label: "שלוש אבנים", note: "עבר, הווה ועתיד" },
+};
+
+const ringStyleOrder: ArtType[] = ["solitaire", "pave", "halo", "three-stone"];
+
+const assurancePanels = [
+  {
+    title: "ליווי אישי, לא טופס",
+    text: "בוחרים יחד את האבן, גוון הזהב והמידה — בשיחה אחת בוואטסאפ. בלי לחץ, בלי התחייבות, ובקצב שלכם.",
+  },
+  {
+    title: "תעודה לכל יהלום",
+    text: "כל אבן מרכזית מגיעה עם תעודת IGI או GIA שמתעדת קראט, צבע, ניקיון וליטוש — וגם את היותה יהלום מעבדה.",
+  },
+  {
+    title: "משלוח, אחריות והתאמות",
+    text: "משלוח מבוטח עד הבית ללא עלות, אחריות יצרן מלאה על השיבוץ והמתכת, והתאמת מידה ראשונה — עלינו.",
+  },
+];
+
 export default function HomePage() {
   const bestsellers = products.filter((p) => p.bestseller).slice(0, 6);
+  const ringStyles = ringStyleOrder
+    .map((art) => {
+      const product = products.find((item) => item.category === "rings" && item.art === art);
+      return product ? { ...ringStyleNotes[art], product } : null;
+    })
+    .filter((entry) => entry !== null);
   const websiteJsonLd = {
     "@context": "https://schema.org",
     "@type": "WebSite",
@@ -218,23 +251,23 @@ export default function HomePage() {
         <div className="relative z-10 mx-auto grid min-h-[calc(74svh-60px)] max-w-7xl items-start px-4 py-4 sm:px-6 lg:min-h-[min(82vh,760px)] lg:grid-cols-[0.86fr_1.14fr] lg:items-center lg:gap-10 lg:px-8 lg:py-14">
           <div className="pt-3 text-center sm:pt-10 lg:order-first lg:max-w-lg lg:pt-0 lg:text-right">
             <h1
-              className="cascade mx-auto max-w-[8ch] font-display text-[2.75rem] font-light leading-[1.04] text-ink sm:text-6xl lg:mx-0 xl:text-7xl"
+              className="cascade mx-auto max-w-[10ch] font-display text-[2.6rem] font-light leading-[1.06] text-ink sm:text-6xl lg:mx-0 xl:text-7xl"
               style={{ animationDelay: "90ms" }}
             >
-              נוכחות אמיתית.
+              מהרגע הזה, והלאה.
             </h1>
             <p
               className="cascade mx-auto mt-3.5 max-w-[26rem] text-[0.82rem] leading-6 tracking-[0.06em] text-stone sm:text-base sm:leading-7 sm:tracking-[0.08em] lg:mx-0 lg:mt-5"
               style={{ animationDelay: "150ms" }}
             >
-              יהלומי מעבדה מוסמכים בזהב 14K/18K.
+              טבעות אירוסין ויהלומי מעבדה מוסמכים, בזהב 14K/18K.
             </p>
             <div
               className="cascade mt-5 flex flex-col items-center gap-1 sm:mt-7 sm:gap-3 lg:mt-10 lg:flex-row lg:justify-start"
               style={{ animationDelay: "220ms" }}
             >
               <Link href="/jewelry/rings" className="btn-primary w-full max-w-xs lg:w-auto lg:max-w-none lg:px-14">
-                גלו טבעות יהלום
+                גלו טבעות אירוסין
               </Link>
               {/* on phones the consultation link stays light so it supports the
                   primary CTA instead of competing with it */}
@@ -257,12 +290,6 @@ export default function HomePage() {
                 ייעוץ אישי בוואטסאפ
               </a>
             </div>
-            <p
-              className="cascade mx-auto mt-4 text-[0.62rem] font-semibold tracking-[0.14em] text-stone sm:text-xs sm:tracking-[0.12em] lg:mx-0 lg:mt-5"
-              style={{ animationDelay: "280ms" }}
-            >
-              IGI/GIA · אחריות מלאה · משלוח מבוטח
-            </p>
           </div>
 
         </div>
@@ -291,6 +318,47 @@ export default function HomePage() {
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <SectionHeading title="הבחירות של LIBI" />
           <EditorialBestsellers items={bestsellers} />
+        </div>
+      </section>
+
+      {/* ── Shop by setting style ────────────────────────── */}
+      <section className="section-champagne py-11 sm:py-14 lg:py-18" aria-labelledby="ring-styles-title">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="flex items-center gap-5 sm:gap-7">
+            <h2
+              id="ring-styles-title"
+              className="shrink-0 font-display text-[2rem] font-medium leading-none sm:text-4xl"
+            >
+              לפי סגנון
+            </h2>
+            <span className="h-px flex-1 bg-gradient-to-l from-gold/55 to-transparent" aria-hidden />
+          </div>
+          <p className="mt-4 max-w-xl text-sm leading-7 text-stone sm:text-base">
+            ארבעה מבנים קלאסיים לטבעת אירוסין — וההבדל ביניהם, בשורה אחת.
+          </p>
+
+          <div className="mt-7 grid grid-cols-2 gap-x-4 gap-y-8 sm:mt-9 lg:grid-cols-4 lg:gap-6">
+            {ringStyles.map(({ label, note, product }) => (
+              <Link key={product.slug} href={`/product/${product.slug}`} className="group block">
+                <div className="art-bg relative aspect-square overflow-hidden">
+                  <Image
+                    src={productImages(product)[0].src}
+                    alt={`טבעת ${label} עם יהלום מעבדה`}
+                    fill
+                    sizes="(min-width: 1024px) 22vw, 50vw"
+                    className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.03]"
+                  />
+                </div>
+                <h3 className="mt-4 font-display text-xl leading-snug transition-colors group-hover:text-gold-deep sm:text-2xl">
+                  {label}
+                </h3>
+                <p className="mt-1 text-xs leading-5 text-stone sm:text-sm">{note}</p>
+                <p className="mt-2 text-xs font-semibold tracking-[0.06em] text-ink-soft">
+                  החל מ־{formatPrice(product.priceFrom)}
+                </p>
+              </Link>
+            ))}
+          </div>
         </div>
       </section>
 
@@ -373,21 +441,39 @@ export default function HomePage() {
 
       <CustomerVoices reviews={reviews} />
 
-      {/* ── Trust strip ──────────────────────────────────── */}
-      <section className="section-proof border-y border-line">
-        {/* a deliberate 2×2 on phones — the four items do not fit one line,
-            and wrapping them left a lone item stranded on the second row */}
-        <ul className="mx-auto grid max-w-3xl grid-cols-2 gap-x-4 gap-y-3 px-5 py-5 text-center sm:flex sm:flex-wrap sm:items-center sm:justify-center sm:gap-x-7 sm:px-8 lg:py-7">
-          {["יהלומים מוסמכים", "זהב 14K/18K", "משלוח מבוטח", "אחריות מלאה"].map((item, index) => (
-            <li
-              key={item}
-              className="flex items-center justify-center gap-x-4 text-[0.72rem] font-semibold tracking-[0.12em] text-ink-soft sm:gap-x-7 sm:text-[0.82rem]"
+      {/* ── Assurance panel ──────────────────────────────── */}
+      <section className="section-proof border-y border-line" aria-labelledby="assurance-title">
+        <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 sm:py-14 lg:px-8 lg:py-16">
+          <div className="max-w-2xl">
+            <p className="eyebrow">קנייה בראש שקט</p>
+            <h2
+              id="assurance-title"
+              className="mt-3 font-display text-[1.9rem] font-medium leading-tight sm:text-4xl"
             >
-              {index > 0 && <span className="hidden h-1 w-1 rotate-45 bg-gold/65 sm:block" aria-hidden />}
-              {item}
-            </li>
-          ))}
-        </ul>
+              מה שמסביב לתכשיט, סגור מראש.
+            </h2>
+            <p className="mt-4 text-sm leading-7 text-stone sm:text-base">
+              ליווי אישי, תעודה לכל אבן ותנאים ברורים — כדי שההתלבטות תישאר על התכשיט עצמו.
+            </p>
+          </div>
+
+          <div className="mt-9 grid border-t border-line sm:grid-cols-3 lg:mt-11">
+            {assurancePanels.map((panel, index) => (
+              <article
+                key={panel.title}
+                className="border-b border-line py-7 sm:border-b-0 sm:border-l sm:px-7 sm:first:pr-0 sm:last:border-l-0 lg:px-10"
+              >
+                <span className="font-display text-sm text-gold-deep" aria-hidden>
+                  {String(index + 1).padStart(2, "0")}
+                </span>
+                <h3 className="mt-3 font-display text-xl font-medium leading-snug sm:text-2xl">
+                  {panel.title}
+                </h3>
+                <p className="mt-3 text-sm leading-7 text-stone">{panel.text}</p>
+              </article>
+            ))}
+          </div>
+        </div>
       </section>
 
       {/* ── Consultation CTA ─────────────────────────────── */}

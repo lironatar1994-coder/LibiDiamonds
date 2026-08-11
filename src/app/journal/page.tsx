@@ -18,12 +18,12 @@ export default function JournalPage() {
   const [featuredGuide, ...moreGuides] = guides;
   const breadcrumb = breadcrumbJsonLd([
     { name: "ראשי", path: "/" },
-    { name: "LIBI Journal", path: "/journal" },
+    { name: "מדריכים", path: "/journal" },
   ]);
   const journalJsonLd = {
     "@context": "https://schema.org",
     "@type": "CollectionPage",
-    name: "LIBI Journal",
+    name: "מדריכים של LIBI DIAMONDS",
     description: metadata.description,
     url: absoluteUrl("/journal"),
     inLanguage: site.language,

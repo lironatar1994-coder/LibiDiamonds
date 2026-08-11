@@ -122,6 +122,13 @@ p {
   pointer-events: none;
 }
 
+/* warm band that separates the two white gallery sections */
+.section-champagne {
+  background:
+    radial-gradient(80% 56% at 50% 0%, rgba(255, 255, 255, 0.52) 0%, rgba(255, 255, 255, 0) 58%),
+    linear-gradient(180deg, #f7f2e8 0%, #f2eadb 100%);
+}
+
 .section-diamond-light {
   background:
     radial-gradient(62% 48% at 50% 0%, rgba(255, 255, 255, 0.82) 0%, rgba(255, 255, 255, 0) 68%),
@@ -519,6 +526,71 @@ p {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
+  }
+}
+
+/* ── Assurance bar ────────────────────────────────────── */
+/* Phones cannot fit four assurances on one line, so they cross-fade in
+   place. Every item stays in the DOM, so assistive tech reads all four. */
+@media (max-width: 639px) {
+  .assurance-list {
+    position: relative;
+    height: 1.05rem;
+    display: block;
+  }
+
+  .assurance-list li {
+    position: absolute;
+    inset-inline: 0;
+    top: 0;
+    justify-content: center;
+    opacity: 0;
+    animation: assurance-cycle 14s linear infinite;
+  }
+
+  .assurance-list li:nth-child(2) {
+    animation-delay: 3.5s;
+  }
+
+  .assurance-list li:nth-child(3) {
+    animation-delay: 7s;
+  }
+
+  .assurance-list li:nth-child(4) {
+    animation-delay: 10.5s;
+  }
+}
+
+@keyframes assurance-cycle {
+  0% {
+    opacity: 0;
+    transform: translateY(3px);
+  }
+  3%,
+  22% {
+    opacity: 1;
+    transform: none;
+  }
+  25%,
+  100% {
+    opacity: 0;
+    transform: translateY(-3px);
+  }
+}
+
+/* Without motion the cycle would leave every item at opacity 0, so pin the
+   first one open and drop the rest. */
+@media (prefers-reduced-motion: reduce) and (max-width: 639px) {
+  .assurance-list li {
+    animation: none !important;
+  }
+
+  .assurance-list li:first-child {
+    opacity: 1;
+  }
+
+  .assurance-list li:not(:first-child) {
+    display: none;
   }
 }
 

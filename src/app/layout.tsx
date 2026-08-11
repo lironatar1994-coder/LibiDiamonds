@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Frank_Ruhl_Libre, Assistant } from "next/font/google";
+import AssuranceBar from "@/components/AssuranceBar";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { absoluteUrl, site } from "@/lib/site";
@@ -75,6 +76,7 @@ export default function RootLayout({
   return (
     <html lang="he" dir="rtl" className={`${frank.variable} ${assistant.variable}`}>
       <body>
+        <AssuranceBar />
         <Header />
         <main>{children}</main>
         <Footer />
