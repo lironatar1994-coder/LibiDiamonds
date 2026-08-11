@@ -322,7 +322,7 @@ export default function HomePage() {
       </section>
 
       {/* ── Shop by setting style ────────────────────────── */}
-      <section className="section-champagne py-11 sm:py-14 lg:py-18" aria-labelledby="ring-styles-title">
+      <section className="section-cream py-11 sm:py-14 lg:py-18" aria-labelledby="ring-styles-title">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="flex items-center gap-5 sm:gap-7">
             <h2
@@ -363,7 +363,7 @@ export default function HomePage() {
       </section>
 
       {/* ── Shop by diamond shape ────────────────────────── */}
-      <section className="section-diamond-light py-10 lg:py-18">
+      <section className="section-ivory py-10 lg:py-18">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <SectionHeading title="בחרו את החיתוך" variant="centered" />
           <DiamondShapeSelector shapes={diamondShapes} />
@@ -382,7 +382,7 @@ export default function HomePage() {
                 href={`/jewelry/${cat.slug}`}
                 className={`group block ${cat.slug === "rings" ? "lg:col-span-2" : "lg:col-span-1"}`}
               >
-                <div className={`art-bg-dark relative overflow-hidden ${cat.slug === "rings" ? "aspect-[4/5] lg:aspect-[8/5]" : "aspect-[4/5]"}`}>
+                <div className={`art-bg relative overflow-hidden ${cat.slug === "rings" ? "aspect-[4/5] lg:aspect-[8/5]" : "aspect-[4/5]"}`}>
                   <Image
                     src={categoryImages[cat.slug]}
                     alt={cat.name}
@@ -401,7 +401,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="bg-[#eee8dc]" aria-labelledby="bespoke-inspiration-title">
+      <section className="bg-cream" aria-labelledby="bespoke-inspiration-title">
         <div className="mx-auto grid max-w-7xl lg:grid-cols-[1.08fr_0.92fr] lg:items-center">
           <div className="relative aspect-[4/5] overflow-hidden sm:aspect-[16/11] lg:aspect-[4/5]">
             <Image
@@ -442,7 +442,7 @@ export default function HomePage() {
       <CustomerVoices reviews={reviews} />
 
       {/* ── Assurance panel ──────────────────────────────── */}
-      <section className="section-proof border-y border-line" aria-labelledby="assurance-title">
+      <section className="section-cream border-y border-line" aria-labelledby="assurance-title">
         <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 sm:py-14 lg:px-8 lg:py-16">
           <div className="max-w-2xl">
             <p className="eyebrow">קנייה בראש שקט</p>
@@ -517,7 +517,7 @@ export default function HomePage() {
           <div className="mt-7 grid gap-8 lg:mt-9 lg:grid-cols-[minmax(0,1.45fr)_minmax(18rem,0.55fr)] lg:gap-10">
             <Link href={`/journal/${featuredJournalGuide.slug}`} className="group block">
               <article>
-                <div className="relative aspect-[3/2] overflow-hidden bg-[#f1efe9]">
+                <div className="relative aspect-[3/2] overflow-hidden bg-mist">
                   <Image
                     src={assetPath(featuredJournalGuide.cover.src)}
                     alt={featuredJournalGuide.cover.alt}
@@ -539,7 +539,7 @@ export default function HomePage() {
               {secondaryJournalGuides.map((guide) => (
                 <Link key={guide.slug} href={`/journal/${guide.slug}`} className="group block border-b border-line py-5 first:pt-5 lg:first:pt-0">
                   <article className="grid grid-cols-[7.25rem_minmax(0,1fr)] items-center gap-4 sm:grid-cols-[9rem_minmax(0,1fr)] lg:grid-cols-1 lg:items-start lg:gap-0">
-                    <div className="relative aspect-[4/3] overflow-hidden bg-[#f1efe9] lg:aspect-[3/2]">
+                    <div className="relative aspect-[4/3] overflow-hidden bg-mist lg:aspect-[3/2]">
                       <Image
                         src={assetPath(guide.cover.src)}
                         alt={guide.cover.alt}
@@ -563,7 +563,7 @@ export default function HomePage() {
       </section>
 
       {/* ── FAQ ──────────────────────────────────────────── */}
-      <section className="section-faq py-12 sm:py-14 lg:py-20">
+      <section className="section-ivory py-12 sm:py-14 lg:py-20">
         <div className="mx-auto max-w-2xl px-4 sm:px-6">
           <SectionHeading title="פרטים שכדאי לדעת" variant="centered" />
           <div className="mt-8 border-t border-line sm:mt-10">
@@ -571,7 +571,7 @@ export default function HomePage() {
               <details key={f.q} className="faq-item border-b border-line">
                 <summary className="flex items-baseline justify-between gap-5 py-4 sm:py-5">
                   <span className="text-[0.95rem] font-semibold leading-7 text-ink">{f.q}</span>
-                  <span className="faq-icon shrink-0 text-lg leading-none text-gold" aria-hidden>
+                  <span className="faq-icon shrink-0 text-lg leading-none text-gold-deep" aria-hidden>
                     +
                   </span>
                 </summary>

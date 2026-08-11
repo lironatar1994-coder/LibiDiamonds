@@ -32,7 +32,7 @@ export default function Footer() {
               target="_blank"
               rel="noopener noreferrer"
               aria-label="אינסטגרם"
-              className="flex h-11 w-11 items-center justify-center text-stone transition-colors hover:text-gold"
+              className="flex h-11 w-11 items-center justify-center text-stone transition-colors hover:text-gold-deep"
             >
               <InstagramIcon className="h-5 w-5" />
             </a>
@@ -41,7 +41,7 @@ export default function Footer() {
               target="_blank"
               rel="noopener noreferrer"
               aria-label="וואטסאפ"
-              className="flex h-11 w-11 items-center justify-center text-stone transition-colors hover:text-gold"
+              className="flex h-11 w-11 items-center justify-center text-stone transition-colors hover:text-gold-deep"
             >
               <WhatsAppIcon className="h-5 w-5" />
             </a>
@@ -54,7 +54,7 @@ export default function Footer() {
             <ul className="mt-2 text-sm text-stone">
               {collectionLinks.map((link) => (
                 <li key={link.href}>
-                  <Link className="inline-flex min-h-10 items-center transition-colors hover:text-gold" href={link.href}>
+                  <Link className="inline-flex min-h-10 items-center transition-colors hover:text-gold-deep" href={link.href}>
                     {link.label}
                   </Link>
                 </li>
@@ -67,7 +67,7 @@ export default function Footer() {
             <ul className="mt-2 text-sm text-stone">
               {informationLinks.map((link) => (
                 <li key={link.href}>
-                  <Link className="inline-flex min-h-10 items-center transition-colors hover:text-gold" href={link.href}>
+                  <Link className="inline-flex min-h-10 items-center transition-colors hover:text-gold-deep" href={link.href}>
                     {link.label}
                   </Link>
                 </li>
@@ -81,13 +81,13 @@ export default function Footer() {
             </h3>
             <ul className="mt-2 text-sm text-ink-soft">
               <li>
-                <a className="inline-flex min-h-10 items-center gap-2 transition-colors hover:text-gold" href={waLink(defaultWaMessage)} target="_blank" rel="noopener noreferrer">
+                <a className="inline-flex min-h-10 items-center gap-2 transition-colors hover:text-gold-deep" href={waLink(defaultWaMessage)} target="_blank" rel="noopener noreferrer">
                   <WhatsAppIcon className="h-4 w-4" />
                   <span>וואטסאפ: {site.phoneDisplay}</span>
                 </a>
               </li>
               <li>
-                <a className="inline-flex min-h-10 items-center transition-colors hover:text-gold" href={`mailto:${site.email}`}>
+                <a className="inline-flex min-h-10 items-center transition-colors hover:text-gold-deep" href={`mailto:${site.email}`}>
                   {site.email}
                 </a>
               </li>

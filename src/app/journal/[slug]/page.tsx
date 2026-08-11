@@ -84,9 +84,9 @@ export default async function GuidePage({ params }: Props) {
   return (
     <div className="mx-auto max-w-3xl px-4 py-14 sm:px-6">
       <nav className="breadcrumb -mt-2 text-xs text-stone" aria-label="פירורי לחם">
-        <Link href="/" className="hover:text-gold">ראשי</Link>
+        <Link href="/" className="hover:text-gold-deep">ראשי</Link>
         <span className="mx-2">/</span>
-        <Link href="/journal" className="hover:text-gold">מדריכים</Link>
+        <Link href="/journal" className="hover:text-gold-deep">מדריכים</Link>
       </nav>
 
       <article>
@@ -100,7 +100,7 @@ export default async function GuidePage({ params }: Props) {
           </h1>
         </header>
 
-        <div className="relative mt-8 aspect-[3/2] overflow-hidden bg-[#f1efe9] sm:mt-10">
+        <div className="relative mt-8 aspect-[3/2] overflow-hidden bg-mist sm:mt-10">
           <Image
             src={assetPath(guide.cover.src)}
             alt={guide.cover.alt}
@@ -228,7 +228,7 @@ export default async function GuidePage({ params }: Props) {
           <div className="mt-6 grid gap-8 sm:grid-cols-2">
             {more.map((g) => (
               <Link key={g.slug} href={`/journal/${g.slug}`} className="group block">
-                <div className="relative mb-4 aspect-[3/2] overflow-hidden bg-[#f1efe9]">
+                <div className="relative mb-4 aspect-[3/2] overflow-hidden bg-mist">
                   <Image
                     src={assetPath(g.cover.src)}
                     alt={g.cover.alt}

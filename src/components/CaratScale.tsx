@@ -19,7 +19,7 @@ export default function CaratScale({
   const largest = Math.max(...sized.map((option) => option.stoneMm!));
 
   return (
-    <figure className="mt-5 border border-line bg-[#fbfaf7] px-4 py-5 sm:px-5">
+    <figure className="mt-5 border border-line bg-white px-4 py-5 sm:px-5">
       <figcaption className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
         <span className="text-xs font-semibold tracking-[0.1em] text-ink-soft">
           גודל האבן, בקנה מידה

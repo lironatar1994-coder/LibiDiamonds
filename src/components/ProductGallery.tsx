@@ -93,7 +93,7 @@ export default function ProductGallery({
 
       {/* ── lg and up: main image + thumbnails ─────────────── */}
       <div className="hidden lg:block">
-        <div className="art-bg relative aspect-square overflow-hidden bg-[#f7f6f1]">
+        <div className="art-bg relative aspect-square overflow-hidden bg-mist">
           <Image
             key={images[selected].src}
             src={images[selected].src}
@@ -115,7 +115,7 @@ export default function ProductGallery({
                 onClick={() => setSelected(index)}
                 aria-label={`הצגת תמונה ${index + 1} של ${productName}`}
                 aria-pressed={selected === index}
-                className={`relative aspect-square w-24 overflow-hidden bg-[#f7f6f1] transition-all duration-300 ${
+                className={`relative aspect-square w-24 overflow-hidden bg-mist transition-all duration-300 ${
                   selected === index
                     ? "ring-1 ring-ink ring-offset-2 ring-offset-ivory"
                     : "opacity-65 hover:opacity-100 hover:ring-1 hover:ring-gold/50 hover:ring-offset-2 hover:ring-offset-ivory"

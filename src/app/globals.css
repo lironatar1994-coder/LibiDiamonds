@@ -1,16 +1,33 @@
 @import "tailwindcss";
 
 @theme {
-  --color-ivory: #faf8f3;
-  --color-cream: #f2ede3;
-  --color-sand: #e9e1d0;
+  /* ── Grounds ───────────────────────────────────────────
+     Four surfaces, and no others. Sections alternate between them;
+     anything that needs its own tint is a section that has not decided
+     what it is. The warm bias is deliberate — our product photography is
+     shot on warm backdrops (#eeeae4–#f8f4f0), so a cold ground would
+     leave those images floating as visible rectangles. */
+  --color-white: #ffffff; /* galleries — lets colourless stones read true */
+  --color-ivory: #faf8f3; /* the default page ground */
+  --color-cream: #f2ede3; /* emphasis bands */
+  --color-espresso: #272119; /* the single dark band */
+
+  /* sits behind photographs while they load, matched to the backdrop
+     baked into the photography itself */
+  --color-mist: #f1efe9;
+
   --color-line: #e4ddcc;
   --color-ink: #211e18;
   --color-ink-soft: #3a352c;
   --color-stone: #6e6758;
+
+  /* ── Gold, split by job ────────────────────────────────
+     `gold` decorates only — rules, dots, borders, swatches. It sits at
+     3.0:1 on ivory, which is below the floor for text and always will be.
+     `gold-deep` is the one that speaks: 5.07:1 on ivory, 4.61:1 on cream,
+     so it clears AA on both grounds. Never use `gold` for text. */
   --color-gold: #a88d53;
-  --color-gold-deep: #86713f;
-  --color-espresso: #2a2319;
+  --color-gold-deep: #7d6835;
   --color-champagne: #d8caa6;
 
   --font-display: var(--font-frank), "Frank Ruhl Libre", serif;
@@ -79,34 +96,23 @@ p {
   outline-color: var(--color-champagne);
 }
 
-/* Neutral gallery light keeps colorless stones crisp. */
+/* Neutral light inside a photo frame, so colourless stones read true even
+   though the page around them is warm. */
 .art-bg {
   background: radial-gradient(
     120% 100% at 50% 0%,
-    #ffffff 0%,
+    var(--color-white) 0%,
     #f8f8f5 55%,
-    #efeee9 100%
-  );
-}
-
-.art-bg-dark {
-  background: radial-gradient(
-    120% 100% at 50% 0%,
-    #faf9f5 0%,
-    #f0eee7 60%,
-    #e4e1d8 100%
+    var(--color-mist) 100%
   );
 }
 
 .hero-editorial {
   background:
     radial-gradient(90% 80% at 78% 42%, rgba(216, 202, 166, 0.22) 0%, rgba(250, 248, 243, 0) 64%),
-    #faf8f3;
+    var(--color-ivory);
 }
 
-/* The hero photograph carries its own warm background, which would otherwise
-   read as a hard rectangle sitting on the ivory. Feathering the outer edge
-   dissolves the seam while leaving the ring itself fully opaque. */
 .hero-figure {
   -webkit-mask-image: linear-gradient(to right, #000 72%, transparent 100%);
   mask-image: linear-gradient(to right, #000 72%, transparent 100%);
@@ -122,40 +128,33 @@ p {
   pointer-events: none;
 }
 
-/* warm band that separates the two white gallery sections */
-.section-champagne {
-  background:
-    radial-gradient(80% 56% at 50% 0%, rgba(255, 255, 255, 0.52) 0%, rgba(255, 255, 255, 0) 58%),
-    linear-gradient(180deg, #f7f2e8 0%, #f2eadb 100%);
-}
-
-.section-diamond-light {
-  background:
-    radial-gradient(62% 48% at 50% 0%, rgba(255, 255, 255, 0.82) 0%, rgba(255, 255, 255, 0) 68%),
-    #eef2f2;
-}
-
+/* ── Section grounds ───────────────────────────────────
+   Each of these resolves to one of the four surfaces. The page then
+   alternates white → cream → ivory rather than drifting through a dozen
+   near-identical beiges. A shared white wash off the top edge keeps the
+   warm bands from reading flat. */
 .section-gallery {
-  background:
-    linear-gradient(180deg, #fff 0%, #fcfcfa 100%);
+  background: var(--color-white);
 }
 
-.section-proof {
-  background: #f5f3ed;
+.section-ivory {
+  background: var(--color-ivory);
+}
+
+.section-cream {
+  background:
+    radial-gradient(80% 56% at 50% 0%, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0) 60%),
+    var(--color-cream);
 }
 
 .section-cta-signature {
-  background: #272119;
+  background: var(--color-espresso);
 }
 
 .footer-warm {
   background:
-    radial-gradient(42rem 16rem at 50% 0%, rgba(255, 255, 255, 0.34) 0%, rgba(255, 255, 255, 0) 62%),
-    linear-gradient(180deg, #f0ede6 0%, #e7e2d8 100%);
-}
-
-.section-faq {
-  background: #f8f7f3;
+    radial-gradient(42rem 16rem at 50% 0%, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0) 62%),
+    var(--color-cream);
 }
 
 .product-card-frame {
@@ -171,7 +170,7 @@ p {
 }
 
 .editorial-product-feature {
-  background: #f3f0e9;
+  background: var(--color-cream);
 }
 
 .shape-stone-field {

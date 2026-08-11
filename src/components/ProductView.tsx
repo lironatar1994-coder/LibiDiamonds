@@ -126,7 +126,7 @@ export default function ProductView({ product }: { product: Product }) {
                   aria-pressed={metal === option}
                   className={`flex min-h-12 items-center justify-center gap-2 border px-2 py-2 text-[0.82rem] transition-colors sm:justify-start sm:gap-2.5 sm:px-3 sm:text-sm ${
                     metal === option
-                      ? "border-gold-deep bg-[#f1ecdf] text-ink"
+                      ? "border-gold-deep bg-cream text-ink"
                       : "border-line bg-ivory text-ink-soft hover:border-stone"
                   }`}
                 >
@@ -176,7 +176,7 @@ export default function ProductView({ product }: { product: Product }) {
 
           <div className="mt-8 border-t border-line pt-6 lg:mt-9">
             {/* what the enquiry will actually say, before it is sent */}
-            <dl className="mb-5 border border-line bg-[#fbfaf7] px-4 py-4 text-sm sm:px-5">
+            <dl className="mb-5 border border-line bg-white px-4 py-4 text-sm sm:px-5">
               <div className="flex items-baseline justify-between gap-4 border-b border-line/70 pb-2.5">
                 <dt className="text-xs font-semibold tracking-[0.1em] text-stone">הבחירה שלכם</dt>
                 <dd className="text-xs text-stone">{product.subtitle}</dd>
@@ -262,7 +262,7 @@ export default function ProductView({ product }: { product: Product }) {
             </h2>
             <div className="mt-5 grid gap-5 sm:grid-cols-2">
               <figure>
-                <div className="relative aspect-[4/3] overflow-hidden bg-[#f7f6f1]">
+                <div className="relative aspect-[4/3] overflow-hidden bg-mist">
                   <Image
                     src={assetPath("/images/trust/v1/libi-packaging-mockup.webp")}
                     alt="הדמיה של אריזת LIBI DIAMONDS בגוון שנהב"
@@ -278,7 +278,7 @@ export default function ProductView({ product }: { product: Product }) {
               </figure>
 
               <figure>
-                <div className="relative aspect-[4/3] overflow-hidden bg-[#f7f6f1]">
+                <div className="relative aspect-[4/3] overflow-hidden bg-mist">
                   <Image
                     src={assetPath("/images/trust/v1/certificate-sample-mockup.webp")}
                     alt="דוגמה כללית למבנה של תעודה גמולוגית"
@@ -300,7 +300,7 @@ export default function ProductView({ product }: { product: Product }) {
               <details key={item.title} className="faq-item border-t border-line">
                 <summary className="flex items-center justify-between gap-4 py-4">
                   <span className="text-sm font-semibold">{item.title}</span>
-                  <span className="faq-icon text-lg text-gold" aria-hidden>
+                  <span className="faq-icon text-lg text-gold-deep" aria-hidden>
                     +
                   </span>
                 </summary>
