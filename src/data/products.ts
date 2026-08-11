@@ -19,6 +19,13 @@ export type ArtType =
 export interface CaratOption {
   label: string;
   price: number;
+  /**
+   * Approximate face-up diameter of the centre stone, in millimetres.
+   * Only set this where the option is a single stone of a known shape —
+   * a "סה״כ" (total weight) option spread over many stones has no single
+   * diameter, so it is left undefined and no size guide is drawn.
+   */
+  stoneMm?: number;
 }
 
 export interface ProductGalleryImage {
@@ -77,6 +84,15 @@ export interface Category {
   art: ArtType;
 }
 
+export const shapeNames: Record<DiamondShape, string> = {
+  round: "עגול",
+  oval: "אובל",
+  emerald: "אמרלד",
+  cushion: "קושן",
+  pear: "טיפה",
+  princess: "פרינסס",
+};
+
 export const metalNames: Record<Metal, string> = {
   yellow: "זהב צהוב",
   white: "זהב לבן",
@@ -128,10 +144,10 @@ export const products: Product[] = [
     art: "solitaire",
     priceFrom: 4900,
     carats: [
-      { label: "0.70 קראט", price: 4900 },
-      { label: "1.00 קראט", price: 6400 },
-      { label: "1.50 קראט", price: 8900 },
-      { label: "2.00 קראט", price: 11900 },
+      { label: "0.70 קראט", price: 4900, stoneMm: 5.75 },
+      { label: "1.00 קראט", price: 6400, stoneMm: 6.5 },
+      { label: "1.50 קראט", price: 8900, stoneMm: 7.4 },
+      { label: "2.00 קראט", price: 11900, stoneMm: 8.2 },
     ],
     metals: ["yellow", "white", "rose"],
     specs: { color: "E–F", clarity: "VS1", cut: "Excellent", cert: "IGI" },
@@ -154,9 +170,9 @@ export const products: Product[] = [
     art: "halo",
     priceFrom: 6400,
     carats: [
-      { label: "0.70 קראט מרכזי", price: 6400 },
-      { label: "1.00 קראט מרכזי", price: 7900 },
-      { label: "1.50 קראט מרכזי", price: 10400 },
+      { label: "0.70 קראט מרכזי", price: 6400, stoneMm: 5.75 },
+      { label: "1.00 קראט מרכזי", price: 7900, stoneMm: 6.5 },
+      { label: "1.50 קראט מרכזי", price: 10400, stoneMm: 7.4 },
     ],
     metals: ["yellow", "white", "rose"],
     specs: { color: "E–F", clarity: "VS1", cut: "Excellent", cert: "IGI" },
@@ -198,9 +214,9 @@ export const products: Product[] = [
     art: "pave",
     priceFrom: 5600,
     carats: [
-      { label: "0.70 קראט מרכזי", price: 5600 },
-      { label: "1.00 קראט מרכזי", price: 7200 },
-      { label: "1.50 קראט מרכזי", price: 9800 },
+      { label: "0.70 קראט מרכזי", price: 5600, stoneMm: 5.75 },
+      { label: "1.00 קראט מרכזי", price: 7200, stoneMm: 6.5 },
+      { label: "1.50 קראט מרכזי", price: 9800, stoneMm: 7.4 },
     ],
     metals: ["yellow", "white", "rose"],
     specs: { color: "E–F", clarity: "VS1", cut: "Excellent", cert: "IGI" },
