@@ -437,7 +437,10 @@ export default function HomePage() {
       <CustomerVoices reviews={reviews} />
 
       {/* ── Assurance panel ──────────────────────────────── */}
-      <section className="section-cream border-y border-line" aria-labelledby="assurance-title">
+      {/* ivory, not cream: the testimonials above are hidden in production
+          until real reviews replace the demo ones, and two cream bands in a
+          row would merge into one long beige block */}
+      <section className="section-ivory border-y border-line" aria-labelledby="assurance-title">
         <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 sm:py-14 lg:px-8 lg:py-16">
           <div className="max-w-2xl">
             <p className="eyebrow">קנייה בראש שקט</p>
