@@ -18,24 +18,31 @@ export default function CustomerVoices({ reviews }: { reviews: Review[] }) {
           </h2>
           <span className="h-px flex-1 bg-gradient-to-l from-gold/55 to-transparent" aria-hidden />
         </div>
-        <div className="mt-7 grid border-t border-line sm:grid-cols-3 lg:mt-9">
-          {reviews.map((review) => (
-            <figure
-              key={`${review.name}-${review.product}`}
-              className="flex flex-col border-b border-line py-7 sm:border-b-0 sm:border-l sm:px-7 sm:first:pr-0 sm:last:border-l-0 lg:px-10"
-            >
-              <span className="mb-5 block h-px w-8 bg-gold/45" aria-hidden />
-              <blockquote className="flex-1 font-display text-xl leading-relaxed text-ink sm:text-[1.35rem]">
-                ״{review.quote}״
-              </blockquote>
-              <figcaption className="mt-6 border-t border-line/70 pt-4 text-xs leading-6 text-stone">
-                <span className="font-semibold tracking-[0.04em] text-ink-soft">
-                  {review.name}, {review.location}
-                </span>
-                <span className="block">{review.product}</span>
-              </figcaption>
-            </figure>
-          ))}
+        {/* On phones this is a snap rail — stacking three full quotes cost
+            about a screen and a half of scrolling. From sm up it is the
+            three-column editorial grid. */}
+        <div className="mt-7 border-t border-line lg:mt-9">
+          <ul className="no-scrollbar -mx-4 flex snap-x snap-mandatory scroll-px-4 overflow-x-auto px-4 sm:mx-0 sm:grid sm:grid-cols-3 sm:overflow-visible sm:px-0">
+            {reviews.map((review) => (
+              <li
+                key={`${review.name}-${review.product}`}
+                className="w-[84%] shrink-0 snap-start sm:w-auto"
+              >
+                <figure className="flex h-full flex-col border-l border-line py-7 ps-0 pe-5 last:border-l-0 sm:px-7 sm:first:pr-0 lg:px-10">
+                  <span className="mb-5 block h-px w-8 bg-gold/45" aria-hidden />
+                  <blockquote className="flex-1 font-display text-lg leading-relaxed text-ink sm:text-[1.35rem]">
+                    ״{review.quote}״
+                  </blockquote>
+                  <figcaption className="mt-6 border-t border-line/70 pt-4 text-xs leading-6 text-stone">
+                    <span className="font-semibold tracking-[0.04em] text-ink-soft">
+                      {review.name}, {review.location}
+                    </span>
+                    <span className="block">{review.product}</span>
+                  </figcaption>
+                </figure>
+              </li>
+            ))}
+          </ul>
         </div>
       </div>
     </section>

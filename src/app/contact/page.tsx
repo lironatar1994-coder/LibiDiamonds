@@ -38,13 +38,13 @@ export default function ContactPage() {
           <div className="border border-line bg-cream p-7 sm:p-8">
             <h2 className="font-display text-xl">דרכים נוספות</h2>
             <span className="mt-3 block h-px w-8 bg-gold/55" aria-hidden />
-            <ul className="mt-5 space-y-4 text-sm">
+            <ul className="mt-4 space-y-1 text-sm">
               <li>
                 <a
                   href={waLink(defaultWaMessage)}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-3 text-ink-soft transition-colors hover:text-gold"
+                  className="flex min-h-11 items-center gap-3 text-ink-soft transition-colors hover:text-gold"
                 >
                   <WhatsAppIcon className="h-5 w-5 text-gold" />
                   וואטסאפ: {site.phoneDisplay}
@@ -53,7 +53,7 @@ export default function ContactPage() {
               <li>
                 <a
                   href={`mailto:${site.email}`}
-                  className="flex items-center gap-3 text-ink-soft transition-colors hover:text-gold"
+                  className="flex min-h-11 items-center gap-3 text-ink-soft transition-colors hover:text-gold"
                 >
                   <span className="text-gold">@</span>
                   {site.email}
@@ -64,7 +64,7 @@ export default function ContactPage() {
                   href={site.instagram}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-3 text-ink-soft transition-colors hover:text-gold"
+                  className="flex min-h-11 items-center gap-3 text-ink-soft transition-colors hover:text-gold"
                 >
                   <InstagramIcon className="h-5 w-5 text-gold" />
                   libidiamonds@

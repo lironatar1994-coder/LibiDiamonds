@@ -140,7 +140,9 @@ export default function Header() {
           role="dialog"
           aria-modal="true"
           aria-label="ניווט ראשי"
-          className="fixed inset-0 z-[60] flex flex-col bg-ivory lg:hidden"
+          /* dvh rather than inset-0 so the bottom CTA stays clear of a
+             collapsing mobile browser toolbar */
+          className="fixed inset-x-0 top-0 z-[60] flex h-[100dvh] flex-col bg-ivory lg:hidden"
         >
           <div className="flex items-center justify-between border-b border-line px-4 py-3">
             <button

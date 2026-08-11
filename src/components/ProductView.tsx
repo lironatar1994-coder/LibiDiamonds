@@ -137,7 +137,8 @@ export default function ProductView({ product }: { product: Product }) {
               <p className="text-sm font-semibold">גוון הזהב</p>
               <p className="text-xs text-stone">{metalNames[metal]}</p>
             </div>
-            <div className="mt-3 grid grid-cols-2 gap-2.5 sm:grid-cols-3">
+            {/* three-up on phones too — two-up stranded the third swatch */}
+            <div className="mt-3 grid grid-cols-3 gap-2 sm:gap-2.5">
               {product.metals.map((option) => (
                 <button
                   key={option}
@@ -145,14 +146,14 @@ export default function ProductView({ product }: { product: Product }) {
                   onClick={() => setMetal(option)}
                   aria-label={metalNames[option]}
                   aria-pressed={metal === option}
-                  className={`flex min-h-12 items-center gap-2.5 border px-3 py-2 text-sm transition-colors ${
+                  className={`flex min-h-12 items-center justify-center gap-2 border px-2 py-2 text-[0.82rem] transition-colors sm:justify-start sm:gap-2.5 sm:px-3 sm:text-sm ${
                     metal === option
                       ? "border-gold-deep bg-[#f1ecdf] text-ink"
                       : "border-line bg-ivory text-ink-soft hover:border-stone"
                   }`}
                 >
                   <span
-                    className="h-4 w-4 shrink-0 rounded-full border border-black/10 shadow-inner"
+                    className="h-3.5 w-3.5 shrink-0 rounded-full border border-black/10 shadow-inner sm:h-4 sm:w-4"
                     style={{ backgroundColor: METAL_SWATCH[option] }}
                     aria-hidden
                   />

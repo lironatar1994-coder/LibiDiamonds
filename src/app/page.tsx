@@ -113,7 +113,7 @@ function EditorialBestsellers({ items }: { items: Product[] }) {
         </div>
       </Link>
 
-      <div className="mt-8 grid grid-cols-2 gap-x-3 gap-y-8 sm:gap-x-5 lg:mt-10 lg:grid-cols-5 lg:gap-x-5 lg:gap-y-0">
+      <div className="mt-8 grid grid-cols-2 gap-x-4 gap-y-8 sm:gap-x-5 lg:mt-10 lg:grid-cols-5 lg:gap-x-5 lg:gap-y-0">
         {secondary.map((product, index) => (
           <div key={product.slug} className={index > 3 ? "hidden lg:block" : "block"}>
             <ProductCard product={product} variant="compact" />
@@ -224,18 +224,29 @@ export default function HomePage() {
               נוכחות אמיתית.
             </h1>
             <p
-              className="cascade mx-auto mt-5 hidden max-w-[26rem] text-sm leading-7 tracking-[0.08em] text-stone sm:text-base lg:mx-0 lg:block"
+              className="cascade mx-auto mt-3.5 max-w-[26rem] text-[0.82rem] leading-6 tracking-[0.06em] text-stone sm:text-base sm:leading-7 sm:tracking-[0.08em] lg:mx-0 lg:mt-5"
               style={{ animationDelay: "150ms" }}
             >
               יהלומי מעבדה מוסמכים בזהב 14K/18K.
             </p>
             <div
-              className="cascade mt-5 flex flex-col items-center gap-3 sm:mt-7 lg:mt-10 lg:flex-row lg:justify-start"
+              className="cascade mt-5 flex flex-col items-center gap-1 sm:mt-7 sm:gap-3 lg:mt-10 lg:flex-row lg:justify-start"
               style={{ animationDelay: "220ms" }}
             >
-              <Link href="/jewelry/rings" className="btn-primary px-14">
+              <Link href="/jewelry/rings" className="btn-primary w-full max-w-xs lg:w-auto lg:max-w-none lg:px-14">
                 גלו טבעות יהלום
               </Link>
+              {/* on phones the consultation link stays light so it supports the
+                  primary CTA instead of competing with it */}
+              <a
+                href={waLink(defaultWaMessage)}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex min-h-11 items-center gap-2 text-[0.82rem] font-semibold tracking-[0.06em] text-ink-soft lg:hidden"
+              >
+                <WhatsAppIcon className="h-4 w-4 text-gold-deep" />
+                <span className="border-b border-gold/55 pb-0.5">ייעוץ אישי בוואטסאפ</span>
+              </a>
               <a
                 href={waLink(defaultWaMessage)}
                 target="_blank"
@@ -247,7 +258,7 @@ export default function HomePage() {
               </a>
             </div>
             <p
-              className="cascade mx-auto mt-5 hidden text-xs tracking-[0.12em] text-stone lg:mx-0 lg:block"
+              className="cascade mx-auto mt-4 text-[0.62rem] font-semibold tracking-[0.14em] text-stone sm:text-xs sm:tracking-[0.12em] lg:mx-0 lg:mt-5"
               style={{ animationDelay: "280ms" }}
             >
               IGI/GIA · אחריות מלאה · משלוח מבוטח
@@ -295,7 +306,7 @@ export default function HomePage() {
       <section className="section-gallery">
         <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8 lg:py-18">
           <SectionHeading title="הקולקציה" />
-          <div className="mt-7 grid grid-cols-2 gap-x-3 gap-y-6 lg:mt-10 lg:grid-cols-5 lg:gap-6">
+          <div className="mt-7 grid grid-cols-2 gap-x-4 gap-y-7 lg:mt-10 lg:grid-cols-5 lg:gap-6">
             {categories.map((cat) => {
               return (
               <Link
@@ -364,14 +375,14 @@ export default function HomePage() {
 
       {/* ── Trust strip ──────────────────────────────────── */}
       <section className="section-proof border-y border-line">
-        <ul className="mx-auto flex max-w-3xl flex-wrap items-center justify-center gap-x-4 gap-y-2 px-5 py-5 text-center sm:gap-x-7 sm:px-8 lg:py-7">
+        {/* a deliberate 2×2 on phones — the four items do not fit one line,
+            and wrapping them left a lone item stranded on the second row */}
+        <ul className="mx-auto grid max-w-3xl grid-cols-2 gap-x-4 gap-y-3 px-5 py-5 text-center sm:flex sm:flex-wrap sm:items-center sm:justify-center sm:gap-x-7 sm:px-8 lg:py-7">
           {["יהלומים מוסמכים", "זהב 14K/18K", "משלוח מבוטח", "אחריות מלאה"].map((item, index) => (
             <li
               key={item}
-              className="flex items-center gap-x-4 text-[0.72rem] font-semibold tracking-[0.12em] text-ink-soft sm:gap-x-7 sm:text-[0.82rem]"
+              className="flex items-center justify-center gap-x-4 text-[0.72rem] font-semibold tracking-[0.12em] text-ink-soft sm:gap-x-7 sm:text-[0.82rem]"
             >
-              {/* separators only once the strip fits on one line, so none can
-                  dangle at the start of a wrapped row */}
               {index > 0 && <span className="hidden h-1 w-1 rotate-45 bg-gold/65 sm:block" aria-hidden />}
               {item}
             </li>

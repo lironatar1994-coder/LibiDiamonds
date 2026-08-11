@@ -271,65 +271,103 @@ p {
   font-weight: 600;
 }
 
-/* Shared button geometry — every variant sits on the same baseline, so
-   buttons stay optically identical when they sit side by side. */
-.btn-primary,
-.btn-whatsapp,
-.btn-outline,
-.btn-inverse,
-.btn-outline-inverse {
-  display: inline-flex;
-  min-height: 48px;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-  padding: 0.9rem 2.2rem;
-  font-size: 0.95rem;
-  letter-spacing: 0.06em;
-  text-align: center;
-  transition:
-    background-color 0.25s ease,
-    border-color 0.25s ease,
-    color 0.25s ease,
-    box-shadow 0.25s ease,
-    transform 0.18s var(--ease-quiet);
+/* The button system lives in the components layer so Tailwind utilities on
+   the same element always win — `hidden`, `w-full` and `px-*` have to be able
+   to override the shared geometry below. */
+@layer components {
+  /* Shared button geometry — every variant sits on the same baseline, so
+     buttons stay optically identical when they sit side by side. */
+  .btn-primary,
+  .btn-whatsapp,
+  .btn-outline,
+  .btn-inverse,
+  .btn-outline-inverse {
+    display: inline-flex;
+    min-height: 48px;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.9rem 2.2rem;
+    font-size: 0.95rem;
+    letter-spacing: 0.06em;
+    text-align: center;
+    transition:
+      background-color 0.25s ease,
+      border-color 0.25s ease,
+      color 0.25s ease,
+      box-shadow 0.25s ease,
+      transform 0.18s var(--ease-quiet);
+  }
+
+  .btn-primary:active,
+  .btn-whatsapp:active,
+  .btn-outline:active,
+  .btn-inverse:active,
+  .btn-outline-inverse:active {
+    transform: translateY(1px);
+  }
+
+  .btn-primary {
+    background-color: var(--color-espresso);
+    color: var(--color-ivory);
+  }
+
+  .btn-primary:hover {
+    background-color: var(--color-gold-deep);
+    box-shadow: 0 10px 24px rgba(134, 113, 63, 0.22);
+  }
+
+  .btn-whatsapp {
+    gap: 0.45rem;
+    border: 1px solid rgba(168, 141, 83, 0.7);
+    background-color: rgba(250, 248, 243, 0.62);
+    color: var(--color-ink);
+    padding-inline: 1.55rem;
+    font-size: 0.92rem;
+    letter-spacing: 0.045em;
+    backdrop-filter: blur(10px);
+  }
+
+  .btn-whatsapp:hover {
+    border-color: var(--color-gold-deep);
+    background-color: rgba(255, 255, 255, 0.82);
+    color: var(--color-gold-deep);
+  }
+
+  .btn-outline {
+    border: 1px solid var(--color-ink);
+    color: var(--color-ink);
+  }
+
+  .btn-outline:hover {
+    background-color: var(--color-ink);
+    color: var(--color-ivory);
+  }
+
+  .btn-inverse {
+    border: 1px solid rgba(250, 248, 243, 0.92);
+    background: var(--color-ivory);
+    color: var(--color-espresso);
+  }
+
+  .btn-inverse:hover {
+    border-color: var(--color-champagne);
+    background: #fff;
+    color: var(--color-gold-deep);
+  }
+
+  .btn-outline-inverse {
+    border: 1px solid rgba(216, 202, 166, 0.62);
+    color: var(--color-ivory);
+  }
+
+  .btn-outline-inverse:hover {
+    border-color: var(--color-champagne);
+    background: rgba(250, 248, 243, 0.08);
+  }
 }
 
-.btn-primary:active,
-.btn-whatsapp:active,
-.btn-outline:active,
-.btn-inverse:active,
-.btn-outline-inverse:active {
-  transform: translateY(1px);
-}
-
-.btn-primary {
-  background-color: var(--color-espresso);
-  color: var(--color-ivory);
-}
-
-.btn-primary:hover {
-  background-color: var(--color-gold-deep);
-  box-shadow: 0 10px 24px rgba(134, 113, 63, 0.22);
-}
-
-.btn-whatsapp {
-  gap: 0.45rem;
-  border: 1px solid rgba(168, 141, 83, 0.7);
-  background-color: rgba(250, 248, 243, 0.62);
-  color: var(--color-ink);
-  padding-inline: 1.55rem;
-  font-size: 0.92rem;
-  letter-spacing: 0.045em;
-  backdrop-filter: blur(10px);
-}
-
-.btn-whatsapp:hover {
-  border-color: var(--color-gold-deep);
-  background-color: rgba(255, 255, 255, 0.82);
-  color: var(--color-gold-deep);
-}
-
+/* Unlayered on purpose: this has to beat the button geometry above. */
 .hero-desktop-inline {
   display: none;
 }
@@ -338,38 +376,6 @@ p {
   .hero-desktop-inline {
     display: inline-flex;
   }
-}
-
-.btn-outline {
-  border: 1px solid var(--color-ink);
-  color: var(--color-ink);
-}
-
-.btn-outline:hover {
-  background-color: var(--color-ink);
-  color: var(--color-ivory);
-}
-
-.btn-inverse {
-  border: 1px solid rgba(250, 248, 243, 0.92);
-  background: var(--color-ivory);
-  color: var(--color-espresso);
-}
-
-.btn-inverse:hover {
-  border-color: var(--color-champagne);
-  background: #fff;
-  color: var(--color-gold-deep);
-}
-
-.btn-outline-inverse {
-  border: 1px solid rgba(216, 202, 166, 0.62);
-  color: var(--color-ivory);
-}
-
-.btn-outline-inverse:hover {
-  border-color: var(--color-champagne);
-  background: rgba(250, 248, 243, 0.08);
 }
 
 @keyframes fade-up {
@@ -516,11 +522,23 @@ p {
   }
 }
 
+/* Mobile snap rails carry their own peek affordance, so the bar is noise. */
+.no-scrollbar {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
 /* Breadcrumb links stay visually small but keep a thumb-sized hit area. */
 .breadcrumb a {
   display: inline-flex;
   min-height: 2.25rem;
+  min-width: 2.25rem;
   align-items: center;
+  justify-content: center;
   transition: color 0.25s ease;
 }
 
