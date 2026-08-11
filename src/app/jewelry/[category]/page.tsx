@@ -67,7 +67,7 @@ export default async function CategoryPage({ params }: Props) {
 
   return (
     <div className="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8">
-      <nav className="text-xs text-stone" aria-label="פירורי לחם">
+      <nav className="breadcrumb -mt-2 text-xs text-stone" aria-label="פירורי לחם">
         <Link href="/" className="hover:text-gold">
           ראשי
         </Link>
@@ -75,12 +75,20 @@ export default async function CategoryPage({ params }: Props) {
         <span>{cat.name}</span>
       </nav>
 
-      <header className="mt-8 max-w-2xl">
-        <h1 className="font-display text-4xl font-medium">{cat.title}</h1>
-        <p className="mt-4 leading-relaxed text-stone">{cat.description}</p>
+      <header className="mt-5 max-w-2xl">
+        <h1 className="font-display text-4xl font-medium leading-tight sm:text-5xl">{cat.title}</h1>
+        <p className="mt-5 leading-8 text-stone">{cat.description}</p>
       </header>
 
-      <div className="mt-12 grid grid-cols-2 gap-x-4 gap-y-10 lg:grid-cols-3 lg:gap-x-6">
+      <div className="mt-10 flex items-center gap-5 border-t border-line pt-5 sm:mt-12">
+        <p className="text-[0.7rem] font-semibold tracking-[0.14em] text-stone">
+          {items.length} דגמים
+        </p>
+        <span className="h-px flex-1 bg-gradient-to-l from-line to-transparent" aria-hidden />
+      </div>
+
+      {/* four-up at xl so a full category resolves to a single clean row */}
+      <div className="mt-8 grid grid-cols-2 gap-x-4 gap-y-10 lg:grid-cols-3 lg:gap-x-6 xl:grid-cols-4">
         {items.map((p) => (
           <ProductCard key={p.slug} product={p} />
         ))}
@@ -93,7 +101,7 @@ export default async function CategoryPage({ params }: Props) {
             <Link
               key={c.slug}
               href={`/jewelry/${c.slug}`}
-              className="border border-line px-5 py-2.5 text-sm transition-colors hover:border-gold hover:text-gold-deep"
+              className="inline-flex min-h-11 items-center border border-line px-5 text-sm transition-colors hover:border-gold hover:text-gold-deep"
             >
               {c.name}
             </Link>

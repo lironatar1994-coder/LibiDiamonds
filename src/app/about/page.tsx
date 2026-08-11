@@ -62,7 +62,12 @@ export default function AboutPage() {
       </section>
 
       <section className="mx-auto max-w-7xl px-4 py-14 sm:px-6 sm:py-18 lg:px-8 lg:py-20">
-        <h2 className="font-display text-3xl font-medium sm:text-4xl">כך הבחירה נסגרת.</h2>
+        <div className="flex items-center gap-5 sm:gap-7">
+          <h2 className="shrink-0 font-display text-3xl font-medium leading-none sm:text-4xl">
+            כך הבחירה נסגרת.
+          </h2>
+          <span className="h-px flex-1 bg-gradient-to-l from-gold/55 to-transparent" aria-hidden />
+        </div>
         <div className="mt-8 grid border-t border-line sm:grid-cols-3 lg:mt-10">
           {process.map((item, index) => (
             <article key={item.title} className="border-b border-line py-7 sm:border-b-0 sm:border-l sm:px-7 sm:first:pr-0 sm:last:border-l-0 lg:px-10">

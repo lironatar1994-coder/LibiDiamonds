@@ -94,10 +94,10 @@ export default function ProductView({ product }: { product: Product }) {
                   onClick={() => setSelectedImage(index)}
                   aria-label={`הצגת תמונה ${index + 1} של ${product.name}`}
                   aria-pressed={selectedImage === index}
-                  className={`relative aspect-square w-20 overflow-hidden bg-[#f7f6f1] transition-all sm:w-24 ${
+                  className={`relative aspect-square w-20 overflow-hidden bg-[#f7f6f1] transition-all duration-300 sm:w-24 ${
                     selectedImage === index
                       ? "ring-1 ring-ink ring-offset-2 ring-offset-ivory"
-                      : "opacity-70 hover:opacity-100"
+                      : "opacity-65 hover:opacity-100 hover:ring-1 hover:ring-gold/50 hover:ring-offset-2 hover:ring-offset-ivory"
                   }`}
                 >
                   <Image src={image.src} alt="" fill sizes="96px" className="object-cover" />
@@ -211,7 +211,7 @@ export default function ProductView({ product }: { product: Product }) {
             <p className="mt-7 max-w-xl text-sm leading-7 text-stone sm:text-[0.98rem]">{product.description}</p>
             <Link
               href="/journal/why-choose-a-lab-diamond"
-              className="mt-5 inline-block border-b border-gold/55 pb-1 text-xs font-semibold tracking-[0.06em] text-ink-soft hover:border-gold hover:text-ink"
+              className="mt-5 inline-flex min-h-9 items-center border-b border-gold/55 pb-1 text-xs font-semibold tracking-[0.06em] text-ink-soft transition-colors hover:border-gold hover:text-ink"
             >
               למה לבחור יהלום מעבדה?
             </Link>
@@ -300,7 +300,7 @@ export default function ProductView({ product }: { product: Product }) {
       </section>
 
       {showStickyCta && (
-        <div className="fixed inset-x-0 bottom-0 z-40 border-t border-line bg-ivory/95 px-4 py-3 shadow-[0_-8px_24px_rgba(33,30,24,0.08)] backdrop-blur lg:hidden">
+        <div className="animate-rise-in fixed inset-x-0 bottom-0 z-40 border-t border-line bg-ivory/95 px-4 py-3 shadow-[0_-8px_24px_rgba(33,30,24,0.08)] backdrop-blur lg:hidden">
           <div className="mx-auto flex max-w-md items-center gap-3">
             <div className="min-w-0 flex-1">
               <p className="truncate text-xs text-stone">{product.name}</p>
@@ -310,7 +310,7 @@ export default function ProductView({ product }: { product: Product }) {
               href={waLink(message)}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex shrink-0 items-center justify-center gap-2 bg-ink px-4 py-3 text-sm text-ivory"
+              className="inline-flex min-h-12 shrink-0 items-center justify-center gap-2 bg-ink px-4 py-3 text-sm text-ivory transition-colors hover:bg-gold-deep"
             >
               <WhatsAppIcon className="h-4 w-4" />
               בדיקת זמינות

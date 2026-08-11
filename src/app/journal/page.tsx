@@ -69,7 +69,8 @@ export default function JournalPage() {
         </article>
       </Link>
 
-      <div className="mt-12 grid gap-x-6 gap-y-10 border-t border-line pt-9 md:grid-cols-3 lg:mt-16 lg:pt-11">
+      {/* two-up, then four-up — never a lone card orphaned on its own row */}
+      <div className="mt-12 grid gap-x-6 gap-y-10 border-t border-line pt-9 sm:grid-cols-2 lg:mt-16 lg:pt-11 xl:grid-cols-4">
         {moreGuides.map((guide) => (
           <Link key={guide.slug} href={`/journal/${guide.slug}`} className="group block">
             <article>
@@ -83,7 +84,7 @@ export default function JournalPage() {
                 />
               </div>
               <p className="mt-4 text-xs font-semibold tracking-[0.07em] text-stone">{guide.readingMinutes} דקות קריאה</p>
-              <h2 className="mt-2 font-display text-2xl font-medium leading-snug transition-colors group-hover:text-gold-deep">
+              <h2 className="mt-2 font-display text-xl font-medium leading-snug transition-colors group-hover:text-gold-deep sm:text-2xl xl:text-xl">
                 {guide.title}
               </h2>
             </article>

@@ -21,19 +21,20 @@ export default function ContactForm() {
     .filter(Boolean)
     .join("\n");
 
-  const inputCls =
-    "w-full border border-line bg-ivory px-4 py-3 text-sm outline-none transition-colors focus:border-gold";
+  const inputCls = "field";
+  const labelCls =
+    "mb-2 block text-[0.7rem] font-semibold tracking-[0.12em] text-ink-soft";
 
   return (
     <form
-      className="space-y-5"
+      className="space-y-6"
       onSubmit={(e) => {
         e.preventDefault();
         window.open(waLink(message), "_blank", "noopener,noreferrer");
       }}
     >
       <div>
-        <label htmlFor="name" className="mb-1.5 block text-sm font-semibold">
+        <label htmlFor="name" className={labelCls}>
           שם
         </label>
         <input
@@ -47,7 +48,7 @@ export default function ContactForm() {
       </div>
 
       <div>
-        <label htmlFor="interest" className="mb-1.5 block text-sm font-semibold">
+        <label htmlFor="interest" className={labelCls}>
           מה מחפשים?
         </label>
         <select
@@ -65,8 +66,8 @@ export default function ContactForm() {
       </div>
 
       <div>
-        <label htmlFor="budget" className="mb-1.5 block text-sm font-semibold">
-          תקציב משוער <span className="font-normal text-stone">(לא חובה)</span>
+        <label htmlFor="budget" className={labelCls}>
+          תקציב משוער <span className="font-normal tracking-[0.08em] text-stone">(לא חובה)</span>
         </label>
         <input
           id="budget"
@@ -79,8 +80,8 @@ export default function ContactForm() {
       </div>
 
       <div>
-        <label htmlFor="notes" className="mb-1.5 block text-sm font-semibold">
-          מה עוד כדאי שנדע? <span className="font-normal text-stone">(לא חובה)</span>
+        <label htmlFor="notes" className={labelCls}>
+          מה עוד כדאי שנדע? <span className="font-normal tracking-[0.08em] text-stone">(לא חובה)</span>
         </label>
         <textarea
           id="notes"

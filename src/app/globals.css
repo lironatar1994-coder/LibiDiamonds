@@ -15,6 +15,15 @@
 
   --font-display: var(--font-frank), "Frank Ruhl Libre", serif;
   --font-body: var(--font-assistant), "Assistant", sans-serif;
+
+  /* one easing for every considered movement on the site */
+  --ease-quiet: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+html {
+  scroll-behavior: smooth;
+  /* keep anchor targets clear of the sticky header */
+  scroll-padding-top: 5.5rem;
 }
 
 body {
@@ -22,6 +31,8 @@ body {
   color: var(--color-ink);
   font-family: var(--font-body);
   -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
 }
 
 h1,
@@ -29,6 +40,43 @@ h2,
 h3,
 .font-display {
   font-family: var(--font-display);
+}
+
+/* the display serif sets tighter at editorial sizes, and headlines
+   should never leave a single orphaned word on the last line */
+h1,
+h2,
+h3 {
+  text-wrap: balance;
+}
+
+h1 {
+  letter-spacing: -0.012em;
+}
+
+h2 {
+  letter-spacing: -0.008em;
+}
+
+p {
+  text-wrap: pretty;
+}
+
+::selection {
+  background-color: rgba(216, 202, 166, 0.55);
+  color: var(--color-espresso);
+}
+
+/* One branded focus ring for every interactive element. Only ever shown to
+   keyboard users, so it never intrudes on pointer interaction. */
+:where(a, button, summary, input, select, textarea, [tabindex]):focus-visible {
+  outline: 2px solid var(--color-gold-deep);
+  outline-offset: 3px;
+}
+
+/* dark sections need the ring to read against espresso */
+.section-cta-signature :where(a, button):focus-visible {
+  outline-color: var(--color-champagne);
 }
 
 /* Neutral gallery light keeps colorless stones crisp. */
@@ -56,6 +104,14 @@ h3,
     #faf8f3;
 }
 
+/* The hero photograph carries its own warm background, which would otherwise
+   read as a hard rectangle sitting on the ivory. Feathering the outer edge
+   dissolves the seam while leaving the ring itself fully opaque. */
+.hero-figure {
+  -webkit-mask-image: linear-gradient(to right, #000 72%, transparent 100%);
+  mask-image: linear-gradient(to right, #000 72%, transparent 100%);
+}
+
 .hero-ring-light {
   position: absolute;
   inset: 12% 2% 2%;
@@ -64,12 +120,6 @@ h3,
     radial-gradient(62% 30% at 52% 78%, rgba(168, 141, 83, 0.2) 0%, rgba(168, 141, 83, 0) 70%);
   filter: blur(1px);
   pointer-events: none;
-}
-
-.section-champagne {
-  background:
-    radial-gradient(80% 56% at 50% 0%, rgba(255, 255, 255, 0.52) 0%, rgba(255, 255, 255, 0) 58%),
-    linear-gradient(180deg, #f7f2e8 0%, #f2eadb 100%);
 }
 
 .section-diamond-light {
@@ -140,12 +190,6 @@ h3,
   .product-card-trust::after {
     width: 0.65rem;
   }
-
-  .btn-primary,
-  .btn-outline,
-  .btn-whatsapp {
-    min-height: 46px;
-  }
 }
 
 /* header nav link — gold hairline grows from center on hover */
@@ -177,6 +221,15 @@ h3,
 }
 
 .nav-link:hover::after {
+  transform: scaleX(1);
+}
+
+/* the section you are currently in keeps its hairline drawn */
+.nav-link[aria-current="page"] {
+  color: var(--color-ink);
+}
+
+.nav-link[aria-current="page"]::after {
   transform: scaleX(1);
 }
 
@@ -218,39 +271,57 @@ h3,
   font-weight: 600;
 }
 
-.btn-primary {
+/* Shared button geometry — every variant sits on the same baseline, so
+   buttons stay optically identical when they sit side by side. */
+.btn-primary,
+.btn-whatsapp,
+.btn-outline,
+.btn-inverse,
+.btn-outline-inverse {
   display: inline-flex;
+  min-height: 48px;
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
-  background-color: var(--color-espresso);
-  color: var(--color-ivory);
   padding: 0.9rem 2.2rem;
   font-size: 0.95rem;
   letter-spacing: 0.06em;
-  transition: background-color 0.25s ease;
+  text-align: center;
+  transition:
+    background-color 0.25s ease,
+    border-color 0.25s ease,
+    color 0.25s ease,
+    box-shadow 0.25s ease,
+    transform 0.18s var(--ease-quiet);
+}
+
+.btn-primary:active,
+.btn-whatsapp:active,
+.btn-outline:active,
+.btn-inverse:active,
+.btn-outline-inverse:active {
+  transform: translateY(1px);
+}
+
+.btn-primary {
+  background-color: var(--color-espresso);
+  color: var(--color-ivory);
 }
 
 .btn-primary:hover {
   background-color: var(--color-gold-deep);
+  box-shadow: 0 10px 24px rgba(134, 113, 63, 0.22);
 }
 
 .btn-whatsapp {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
   gap: 0.45rem;
   border: 1px solid rgba(168, 141, 83, 0.7);
   background-color: rgba(250, 248, 243, 0.62);
   color: var(--color-ink);
-  padding: 0.86rem 1.55rem;
+  padding-inline: 1.55rem;
   font-size: 0.92rem;
   letter-spacing: 0.045em;
   backdrop-filter: blur(10px);
-  transition:
-    border-color 0.25s ease,
-    background-color 0.25s ease,
-    color 0.25s ease;
 }
 
 .btn-whatsapp:hover {
@@ -270,16 +341,8 @@ h3,
 }
 
 .btn-outline {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
   border: 1px solid var(--color-ink);
   color: var(--color-ink);
-  padding: 0.9rem 2.2rem;
-  font-size: 0.95rem;
-  letter-spacing: 0.06em;
-  transition: all 0.25s ease;
 }
 
 .btn-outline:hover {
@@ -288,21 +351,9 @@ h3,
 }
 
 .btn-inverse {
-  display: inline-flex;
-  min-height: 46px;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
   border: 1px solid rgba(250, 248, 243, 0.92);
   background: var(--color-ivory);
   color: var(--color-espresso);
-  padding: 0.9rem 2.2rem;
-  font-size: 0.95rem;
-  letter-spacing: 0.06em;
-  transition:
-    background-color 0.25s ease,
-    border-color 0.25s ease,
-    color 0.25s ease;
 }
 
 .btn-inverse:hover {
@@ -312,17 +363,8 @@ h3,
 }
 
 .btn-outline-inverse {
-  min-height: 46px;
-  align-items: center;
-  justify-content: center;
   border: 1px solid rgba(216, 202, 166, 0.62);
   color: var(--color-ivory);
-  padding: 0.9rem 2.2rem;
-  font-size: 0.95rem;
-  letter-spacing: 0.06em;
-  transition:
-    background-color 0.25s ease,
-    border-color 0.25s ease;
 }
 
 .btn-outline-inverse:hover {
@@ -342,21 +384,33 @@ h3,
 }
 
 .animate-fade-up {
-  animation: fade-up 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
-}
-
-.animate-fade-up-delay {
-  animation: fade-up 0.9s cubic-bezier(0.22, 1, 0.36, 1) 0.25s both;
+  animation: fade-up 0.9s var(--ease-quiet) both;
 }
 
 /* staggered entrance for the full-screen menu */
 .menu-item {
-  animation: fade-up 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation: fade-up 0.55s var(--ease-quiet) both;
 }
 
 /* hero entrance cascade — pair with inline animation-delay */
 .cascade {
-  animation: fade-up 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation: fade-up 0.9s var(--ease-quiet) both;
+}
+
+/* the mobile product bar rises rather than appearing */
+@keyframes rise-in {
+  from {
+    opacity: 0;
+    transform: translateY(100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-rise-in {
+  animation: rise-in 0.4s var(--ease-quiet) both;
 }
 
 /* the ring settles gently into place on load, then rests */
@@ -449,6 +503,10 @@ h3,
 }
 
 @media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
   *,
   *::before,
   *::after {
@@ -458,30 +516,114 @@ h3,
   }
 }
 
-/* hide scrollbars on mobile product rails */
-.no-scrollbar {
-  scrollbar-width: none;
-  -ms-overflow-style: none;
+/* Breadcrumb links stay visually small but keep a thumb-sized hit area. */
+.breadcrumb a {
+  display: inline-flex;
+  min-height: 2.25rem;
+  align-items: center;
+  transition: color 0.25s ease;
 }
 
-.no-scrollbar::-webkit-scrollbar {
-  display: none;
+.breadcrumb a:hover {
+  color: var(--color-gold-deep);
+}
+
+/* ── Header ───────────────────────────────────────────── */
+.site-header {
+  transition:
+    box-shadow 0.35s ease,
+    background-color 0.35s ease,
+    border-color 0.35s ease;
+}
+
+/* once the page moves, the header earns a hairline shadow so it reads as
+   a layer above the content rather than part of it */
+.site-header[data-scrolled="true"] {
+  border-color: rgba(228, 221, 204, 0.9);
+  box-shadow: 0 1px 20px rgba(42, 35, 25, 0.06);
 }
 
 /* FAQ accordion (native <details>) */
 details.faq-item summary {
   cursor: pointer;
   list-style: none;
+  transition: color 0.25s ease;
 }
 
 details.faq-item summary::-webkit-details-marker {
   display: none;
 }
 
+details.faq-item summary:hover {
+  color: var(--color-gold-deep);
+}
+
 details.faq-item summary .faq-icon {
-  transition: transform 0.25s ease;
+  transition:
+    transform 0.35s var(--ease-quiet),
+    color 0.25s ease;
 }
 
 details.faq-item[open] summary .faq-icon {
   transform: rotate(45deg);
+}
+
+/* the answer eases in rather than snapping open */
+details.faq-item[open] > :not(summary) {
+  animation: faq-reveal 0.4s var(--ease-quiet) both;
+}
+
+@keyframes faq-reveal {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ── Form controls ────────────────────────────────────── */
+.field {
+  width: 100%;
+  min-height: 48px;
+  border: 1px solid var(--color-line);
+  background-color: #fff;
+  padding: 0.75rem 1rem;
+  font-size: 0.95rem;
+  color: var(--color-ink);
+  transition:
+    border-color 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.field::placeholder {
+  color: rgba(110, 103, 88, 0.72);
+}
+
+.field:hover {
+  border-color: rgba(168, 141, 83, 0.45);
+}
+
+.field:focus {
+  border-color: var(--color-gold-deep);
+  box-shadow: 0 0 0 3px rgba(168, 141, 83, 0.14);
+  outline: none;
+}
+
+/* native select arrow is replaced so it matches the hairline language */
+select.field {
+  appearance: none;
+  background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 8' fill='none' stroke='%236e6758' stroke-width='1.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M1 1.5 6 6.5l5-5'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: left 1rem center;
+  background-size: 12px 8px;
+  padding-left: 2.5rem;
+}
+
+textarea.field {
+  min-height: 7rem;
+  resize: vertical;
+  line-height: 1.7;
 }

@@ -106,7 +106,7 @@ function EditorialBestsellers({ items }: { items: Product[] }) {
             <p className="mt-2 font-display text-lg text-ink-soft">
               החל מ־{formatPrice(featured.priceFrom)}
             </p>
-            <span className="mt-5 inline-block border-b border-gold/60 pb-1 text-xs font-semibold tracking-[0.1em] text-ink-soft transition-colors group-hover:border-gold-deep group-hover:text-ink">
+            <span className="mt-5 inline-flex min-h-9 items-center border-b border-gold/60 pb-1 text-xs font-semibold tracking-[0.1em] text-ink-soft transition-colors group-hover:border-gold-deep group-hover:text-ink">
               לצפייה בפריט
             </span>
           </div>
@@ -200,6 +200,21 @@ export default function HomePage() {
           <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(250,248,243,0.9)_0%,rgba(250,248,243,0.7)_34%,rgba(250,248,243,0.08)_62%,rgba(250,248,243,0.78)_100%)]" />
         </div>
 
+        {/* desktop: the photograph bleeds to the viewport edge and to full
+            height, so it reads as an editorial half rather than a framed box */}
+        <div className="hero-figure absolute inset-y-0 left-0 hidden w-[52%] lg:block">
+          <div className="hero-ring-light" />
+          <Image
+            src={assetPath("/images/hero/v2/home-hero-desktop.webp")}
+            alt="טבעת יהלום מעבדה מרכזית בזהב צהוב"
+            fill
+            priority
+            unoptimized
+            sizes="52vw"
+            className="hero-settle object-cover object-[72%_center]"
+          />
+        </div>
+
         <div className="relative z-10 mx-auto grid min-h-[calc(74svh-60px)] max-w-7xl items-start px-4 py-4 sm:px-6 lg:min-h-[min(82vh,760px)] lg:grid-cols-[0.86fr_1.14fr] lg:items-center lg:gap-10 lg:px-8 lg:py-14">
           <div className="pt-3 text-center sm:pt-10 lg:order-first lg:max-w-lg lg:pt-0 lg:text-right">
             <h1
@@ -239,20 +254,25 @@ export default function HomePage() {
             </p>
           </div>
 
-          <div className="animate-fade-up relative hidden lg:order-last lg:block lg:min-h-[520px]">
-            <div className="hero-ring-light" />
-            <Image
-              src={assetPath("/images/hero/v2/home-hero-desktop.webp")}
-              alt="טבעת יהלום מעבדה מרכזית בזהב צהוב"
-              fill
-              priority
-              unoptimized
-              sizes="58vw"
-              className="hero-settle z-10 object-cover object-[72%_center]"
-            />
-          </div>
         </div>
 
+        {/* quiet cue that the page continues below the fold */}
+        <span
+          className="pointer-events-none absolute inset-x-0 bottom-6 z-10 hidden justify-center lg:flex"
+          aria-hidden
+        >
+          <svg
+            className="scroll-hint h-5 w-5 text-stone"
+            viewBox="0 0 20 20"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="1.2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          >
+            <path d="M5 7.5 10 12.5l5-5" />
+          </svg>
+        </span>
       </section>
 
       {/* ── Bestsellers ───────────────────────────────────── */}
@@ -344,14 +364,19 @@ export default function HomePage() {
 
       {/* ── Trust strip ──────────────────────────────────── */}
       <section className="section-proof border-y border-line">
-        <div className="mx-auto flex max-w-3xl flex-wrap items-center justify-center gap-x-3 gap-y-1 px-5 py-4 text-center sm:px-8 lg:py-6">
+        <ul className="mx-auto flex max-w-3xl flex-wrap items-center justify-center gap-x-4 gap-y-2 px-5 py-5 text-center sm:gap-x-7 sm:px-8 lg:py-7">
           {["יהלומים מוסמכים", "זהב 14K/18K", "משלוח מבוטח", "אחריות מלאה"].map((item, index) => (
-            <span key={item} className="flex items-center gap-3 text-[0.7rem] font-semibold tracking-[0.08em] text-ink-soft sm:text-sm">
+            <li
+              key={item}
+              className="flex items-center gap-x-4 text-[0.72rem] font-semibold tracking-[0.12em] text-ink-soft sm:gap-x-7 sm:text-[0.82rem]"
+            >
+              {/* separators only once the strip fits on one line, so none can
+                  dangle at the start of a wrapped row */}
               {index > 0 && <span className="hidden h-1 w-1 rotate-45 bg-gold/65 sm:block" aria-hidden />}
               {item}
-            </span>
+            </li>
           ))}
-        </div>
+        </ul>
       </section>
 
       {/* ── Consultation CTA ─────────────────────────────── */}
@@ -386,7 +411,7 @@ export default function HomePage() {
             <h2 className="font-display text-[2rem] font-medium leading-none sm:text-4xl">לדעת מה בוחרים.</h2>
             <Link
               href="/journal"
-              className="shrink-0 border-b border-gold/55 pb-1 text-xs font-semibold tracking-[0.05em] text-ink-soft hover:border-gold hover:text-ink sm:text-sm"
+              className="inline-flex min-h-9 shrink-0 items-center border-b border-gold/55 pb-1 text-xs font-semibold tracking-[0.05em] text-ink-soft transition-colors hover:border-gold hover:text-ink sm:text-sm"
             >
               לכל המדריכים
             </Link>
@@ -441,21 +466,19 @@ export default function HomePage() {
       </section>
 
       {/* ── FAQ ──────────────────────────────────────────── */}
-      <section className="section-faq py-8 lg:py-14">
+      <section className="section-faq py-12 sm:py-14 lg:py-20">
         <div className="mx-auto max-w-2xl px-4 sm:px-6">
-          <h2 className="text-center font-display text-xl font-medium sm:text-3xl">
-            פרטים שכדאי לדעת
-          </h2>
-          <div className="mt-5 sm:mt-7">
-            {faqs.map((f, index) => (
-              <details key={f.q} className={`faq-item border-b border-line ${index > 2 ? "hidden lg:block" : "block"}`}>
-                <summary className="flex items-center justify-between gap-4 py-3.5 sm:py-4">
-                  <span className="text-sm font-semibold leading-6 text-ink-soft">{f.q}</span>
-                  <span className="faq-icon shrink-0 text-base text-gold" aria-hidden>
+          <SectionHeading title="פרטים שכדאי לדעת" variant="centered" />
+          <div className="mt-8 border-t border-line sm:mt-10">
+            {faqs.map((f) => (
+              <details key={f.q} className="faq-item border-b border-line">
+                <summary className="flex items-baseline justify-between gap-5 py-4 sm:py-5">
+                  <span className="text-[0.95rem] font-semibold leading-7 text-ink">{f.q}</span>
+                  <span className="faq-icon shrink-0 text-lg leading-none text-gold" aria-hidden>
                     +
                   </span>
                 </summary>
-                <p className="pb-5 text-sm leading-7 text-stone">{f.a}</p>
+                <p className="max-w-xl pb-6 text-sm leading-7 text-stone sm:text-[0.95rem]">{f.a}</p>
               </details>
             ))}
           </div>

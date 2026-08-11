@@ -84,7 +84,7 @@ export default async function ProductPage({ params }: Props) {
   return (
     <>
       <div className="mx-auto max-w-[88rem] px-4 py-5 sm:px-6 lg:px-8 lg:py-9">
-      <nav className="mb-6 hidden text-xs tracking-[0.04em] text-stone md:block lg:mb-9" aria-label="פירורי לחם">
+      <nav className="breadcrumb mb-4 hidden text-xs tracking-[0.04em] text-stone md:block lg:mb-7" aria-label="פירורי לחם">
         <Link href="/" className="hover:text-gold">
           ראשי
         </Link>

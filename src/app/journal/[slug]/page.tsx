@@ -83,14 +83,14 @@ export default async function GuidePage({ params }: Props) {
 
   return (
     <div className="mx-auto max-w-3xl px-4 py-14 sm:px-6">
-      <nav className="text-xs text-stone" aria-label="פירורי לחם">
+      <nav className="breadcrumb -mt-2 text-xs text-stone" aria-label="פירורי לחם">
         <Link href="/" className="hover:text-gold">ראשי</Link>
         <span className="mx-2">/</span>
         <Link href="/journal" className="hover:text-gold">LIBI Journal</Link>
       </nav>
 
       <article>
-        <header className="mt-8">
+        <header className="mt-5">
           <p className="eyebrow">
             {guide.readingMinutes} דקות קריאה
             {updatedLabel && ` · עודכן ${updatedLabel}`}
@@ -195,7 +195,7 @@ export default async function GuidePage({ params }: Props) {
                   href={source.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="border-b border-gold/55 pb-0.5 text-ink-soft hover:border-gold hover:text-ink"
+                  className="inline-flex min-h-9 items-center border-b border-gold/55 pb-0.5 text-ink-soft transition-colors hover:border-gold hover:text-ink"
                 >
                   {source.label}
                 </a>

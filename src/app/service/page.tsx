@@ -49,25 +49,34 @@ const sections = [
 export default function ServicePage() {
   return (
     <div className="mx-auto max-w-3xl px-4 py-14 sm:px-6">
-      <header>
+      <header className="border-b border-line pb-8 sm:pb-10">
         <p className="eyebrow">שירות ומדיניות</p>
-        <h1 className="mt-3 font-display text-4xl font-medium">
+        <h1 className="mt-3 font-display text-4xl font-medium leading-tight sm:text-5xl">
           משלוחים, אחריות והחזרות
         </h1>
-        <p className="mt-4 leading-relaxed text-stone">
+        <p className="mt-5 leading-8 text-stone">
           קנייה של תכשיט יהלום צריכה להרגיש בטוחה מהרגע הראשון. אלה
           ההתחייבויות שלנו אליכם.
         </p>
       </header>
 
-      <div className="mt-12 space-y-12">
-        {sections.map((s) => (
-          <section key={s.title}>
-            <h2 className="font-display text-2xl font-medium">{s.title}</h2>
-            <ul className="mt-4 space-y-3">
+      {/* numbered, rule-separated — same rhythm as the product standard list */}
+      <div className="mt-10 sm:mt-12">
+        {sections.map((s, index) => (
+          <section
+            key={s.title}
+            className="grid gap-x-6 gap-y-4 border-b border-line py-8 sm:grid-cols-[minmax(9rem,0.4fr)_minmax(0,1fr)] sm:py-10"
+          >
+            <div className="flex items-baseline gap-3">
+              <span className="font-display text-sm text-gold-deep" aria-hidden>
+                {String(index + 1).padStart(2, "0")}
+              </span>
+              <h2 className="font-display text-2xl font-medium leading-tight">{s.title}</h2>
+            </div>
+            <ul className="space-y-3">
               {s.items.map((item) => (
-                <li key={item} className="flex gap-3 leading-relaxed text-ink-soft">
-                  <span className="mt-2.5 h-1 w-1 shrink-0 rounded-full bg-gold" />
+                <li key={item} className="flex gap-3 leading-7 text-ink-soft">
+                  <span className="mt-3 h-1 w-1 shrink-0 rounded-full bg-gold" aria-hidden />
                   {item}
                 </li>
               ))}
@@ -76,7 +85,7 @@ export default function ServicePage() {
         ))}
       </div>
 
-      <div className="mt-16 bg-cream p-8 text-center">
+      <div className="mt-14 border border-line bg-cream p-8 text-center sm:p-10">
         <h2 className="font-display text-xl">שאלה שלא מופיעה כאן?</h2>
         <a
           href={waLink(defaultWaMessage)}

@@ -25,13 +25,14 @@ export default function Footer() {
           <p className="mx-auto mt-4 hidden max-w-[18rem] text-sm leading-relaxed text-stone sm:block">
             יהלומי מעבדה בזהב 14K/18K. בחירה אישית, תעודה ואחריות.
           </p>
-          <div className="mt-3 flex justify-center gap-5 sm:mt-5">
+          {/* generous hit areas — the icons stay 20px, the targets are 44px */}
+          <div className="mt-1 flex justify-center gap-2 sm:mt-3">
             <a
               href={site.instagram}
               target="_blank"
               rel="noopener noreferrer"
               aria-label="אינסטגרם"
-              className="text-stone transition-colors hover:text-gold"
+              className="flex h-11 w-11 items-center justify-center text-stone transition-colors hover:text-gold"
             >
               <InstagramIcon className="h-5 w-5" />
             </a>
@@ -40,7 +41,7 @@ export default function Footer() {
               target="_blank"
               rel="noopener noreferrer"
               aria-label="וואטסאפ"
-              className="text-stone transition-colors hover:text-gold"
+              className="flex h-11 w-11 items-center justify-center text-stone transition-colors hover:text-gold"
             >
               <WhatsAppIcon className="h-5 w-5" />
             </a>
@@ -50,10 +51,10 @@ export default function Footer() {
         <div className="mt-6 grid grid-cols-2 gap-x-7 gap-y-7 border-t border-line pt-6 sm:mt-10 sm:grid-cols-3 sm:gap-8 sm:pt-8 lg:mx-auto lg:max-w-4xl lg:gap-12">
           <nav aria-label="הקולקציה">
             <h3 className="text-sm font-semibold tracking-wider">הקולקציה</h3>
-            <ul className="mt-4 space-y-2.5 text-sm text-stone">
+            <ul className="mt-2 text-sm text-stone">
               {collectionLinks.map((link) => (
                 <li key={link.href}>
-                  <Link className="hover:text-gold" href={link.href}>
+                  <Link className="inline-flex min-h-10 items-center transition-colors hover:text-gold" href={link.href}>
                     {link.label}
                   </Link>
                 </li>
@@ -63,10 +64,10 @@ export default function Footer() {
 
           <nav aria-label="מידע">
             <h3 className="text-sm font-semibold tracking-wider">מידע</h3>
-            <ul className="mt-4 space-y-2.5 text-sm text-stone">
+            <ul className="mt-2 text-sm text-stone">
               {informationLinks.map((link) => (
                 <li key={link.href}>
-                  <Link className="hover:text-gold" href={link.href}>
+                  <Link className="inline-flex min-h-10 items-center transition-colors hover:text-gold" href={link.href}>
                     {link.label}
                   </Link>
                 </li>
@@ -78,19 +79,19 @@ export default function Footer() {
             <h3 id="footer-consultation" className="text-sm font-semibold tracking-wider">
               ייעוץ אישי
             </h3>
-            <ul className="mt-4 space-y-3 text-sm text-ink-soft">
+            <ul className="mt-2 text-sm text-ink-soft">
               <li>
-                <a className="inline-flex items-center gap-2 hover:text-gold" href={waLink(defaultWaMessage)} target="_blank" rel="noopener noreferrer">
+                <a className="inline-flex min-h-10 items-center gap-2 transition-colors hover:text-gold" href={waLink(defaultWaMessage)} target="_blank" rel="noopener noreferrer">
                   <WhatsAppIcon className="h-4 w-4" />
                   <span>וואטסאפ: {site.phoneDisplay}</span>
                 </a>
               </li>
               <li>
-                <a className="hover:text-gold" href={`mailto:${site.email}`}>
+                <a className="inline-flex min-h-10 items-center transition-colors hover:text-gold" href={`mailto:${site.email}`}>
                   {site.email}
                 </a>
               </li>
-              <li className="pt-0.5 text-xs leading-relaxed text-stone">א׳–ה׳ 9:00–19:00 · ו׳ 9:00–13:00</li>
+              <li className="pt-2 text-xs leading-relaxed text-stone">א׳–ה׳ 9:00–19:00 · ו׳ 9:00–13:00</li>
             </ul>
           </section>
         </div>
