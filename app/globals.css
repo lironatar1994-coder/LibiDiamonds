@@ -1,26 +1,396 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/* ============================================================
+   LibiDiamonds — Design tokens ("Pearl & Blush")
+
+   Bright, product-first palette modelled on the Israeli diamond houses that
+   sell best online: white stage for the stones, a warm pearl and a bridal
+   blush as alternate surfaces, deep navy ink for type and primary actions,
+   and gold kept for detail. Every text pairing below was measured against
+   WCAG 2.1 AA (4.5:1) on white, pearl and blush.
+   ============================================================ */
+@theme {
+  /* Surfaces */
+  --color-white: #ffffff;
+  --color-pearl: #f8f4ef;
+  --color-blush: #f6e9e4;
+  --color-blush-deep: #ecd6ce;
+  --color-mist: #eef1f5;
+
+  /* Ink — headings, primary buttons, the announcement bar */
+  --color-navy: #1d2940;
+  --color-navy-soft: #2c3a57;
+
+  /* Gold — `gold` is decorative only (icons, stars, hairlines: 2.9:1 on
+     white). `gold-deep` is the text-size gold: 5.7:1 white, 4.85:1 blush. */
+  --color-gold: #b8925a;
+  --color-gold-light: #e7d3ae;
+  --color-gold-deep: #7d6234;
+
+  /* Text */
+  --color-body: #3d4354;
+  --color-muted: #5f6375;
+
+  /* Hairlines */
+  --color-line: #ebe4dc;
+  --color-line-strong: #dcd2c6;
+
+  /* WhatsApp — deepened from brand green so white text clears 5.4:1 */
+  --color-whatsapp: #0f7a3f;
+  --color-whatsapp-hover: #0b6634;
+
+  /* ---- Legacy aliases: interior pages still use these names ---- */
+  --color-ink: var(--color-navy);
+  --color-graphite: var(--color-navy);
+  --color-ivory: var(--color-white);
+  --color-cream: var(--color-pearl);
+  --color-sand: var(--color-blush);
+  --color-champagne: var(--color-gold);
+  --color-champagne-deep: var(--color-gold-deep);
+  --color-champagne-dim: var(--color-gold);
+  --color-on-dark: #f4f1ec;
+  --color-on-dark-muted: #b9bfcc;
+  --color-line-dark: #3a4763;
+
+  /* Fonts */
+  --font-display: var(--font-frank), "Times New Roman", serif;
+  --font-body: var(--font-assistant), system-ui, sans-serif;
+
+  /* Type scale */
+  --text-kicker: 0.8125rem;
+  --text-display-sm: clamp(1.625rem, 1.25rem + 1.6vw, 2.25rem);
+  --text-display: clamp(1.875rem, 1.35rem + 2.4vw, 3rem);
+  --text-display-lg: clamp(2.25rem, 1.4rem + 3.8vw, 4.25rem);
+
+  /* Radii & shadow */
+  --radius-card: 1rem;
+  --shadow-soft: 0 1px 2px rgba(29, 41, 64, 0.04),
+    0 12px 32px -12px rgba(29, 41, 64, 0.14);
+  --shadow-lift: 0 2px 4px rgba(29, 41, 64, 0.05),
+    0 22px 48px -18px rgba(29, 41, 64, 0.24);
+
+  /* Motion */
+  --ease-lux: cubic-bezier(0.22, 0.61, 0.36, 1);
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* ============================================================
+   Base
+   ============================================================ */
+@layer base {
+  * {
+    min-inline-size: 0;
+  }
+
+  html {
+    -webkit-text-size-adjust: 100%;
+    scroll-behavior: smooth;
+    /* Sticky header height, so in-page anchors don't land underneath it */
+    scroll-padding-top: 8.5rem;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+  }
+
+  body {
+    background-color: var(--color-white);
+    color: var(--color-body);
+    font-family: var(--font-body);
+    font-weight: 400;
+    font-size: 1rem;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-display);
+    font-weight: 400;
+    line-height: 1.18;
+    color: var(--color-navy);
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  /* Design-direction previews own their type: headings inherit from the
+     preview root instead of taking the site-wide display face and navy. */
+  [data-direction] :where(h1, h2, h3, h4) {
+    color: inherit;
+    font-family: inherit;
+    font-weight: inherit;
+    line-height: inherit;
+    letter-spacing: inherit;
+  }
+
+  ::selection {
+    background-color: var(--color-blush-deep);
+    color: var(--color-navy);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-gold-deep);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  /* Hebrew numerals & prices stay LTR-clean inside RTL text */
+  .num {
+    unicode-bidi: plaintext;
+    font-variant-numeric: tabular-nums;
+  }
+}
+
+/* ============================================================
+   Component layer
+   ============================================================ */
+@layer components {
+  .shell {
+    margin-inline: auto;
+    max-inline-size: 84rem;
+    padding-inline: 1rem;
+  }
+
+  @media (min-width: 640px) {
+    .shell {
+      padding-inline: 1.5rem;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .shell {
+      padding-inline: 2.5rem;
+    }
+  }
+
+  .shell-narrow {
+    margin-inline: auto;
+    max-inline-size: 46rem;
+    padding-inline: 1rem;
+  }
+
+  /* Small label above headings. Hebrew has no capitals, so tracking stays
+     modest — wide-tracked Hebrew reads as broken, not as luxury. */
+  .kicker {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: var(--text-kicker);
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    color: var(--color-gold-deep);
+  }
+
+  .kicker::before {
+    content: "";
+    inline-size: 0.4375rem;
+    block-size: 0.4375rem;
+    background-color: var(--color-gold);
+    transform: rotate(45deg);
+    flex-shrink: 0;
+  }
+
+  .kicker-on-dark {
+    color: var(--color-gold-light);
+  }
+
+  .kicker-on-dark::before {
+    background-color: var(--color-gold-light);
+  }
+
+  .rule {
+    block-size: 1px;
+    background-color: var(--color-line);
+    border: 0;
+  }
+
+  .rule-dark {
+    background-color: var(--color-line-dark);
+  }
+
+  /* Text link with an underline that draws in */
+  .link-draw {
+    position: relative;
+    display: inline-block;
+    padding-block-end: 0.15rem;
+    font-weight: 600;
+    color: inherit;
+  }
+
+  .link-draw::after {
+    content: "";
+    position: absolute;
+    inset-inline-start: 0;
+    inset-block-end: 0;
+    inline-size: 100%;
+    block-size: 1px;
+    background-color: currentColor;
+    opacity: 0.4;
+    transform-origin: inline-start;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .link-draw::after {
+      transition: transform 0.45s var(--ease-lux), opacity 0.3s ease;
+    }
+
+    .link-draw:hover::after,
+    .link-draw:focus-visible::after {
+      opacity: 1;
+    }
+  }
+
+  /* Slow image zoom on card hover */
+  .zoom-frame {
+    overflow: hidden;
+  }
+
+  .zoom-frame img,
+  .zoom-frame .ph {
+    transition: transform 0.9s var(--ease-lux);
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .group:hover .zoom-frame img,
+    .group:hover .zoom-frame .ph {
+      transform: scale(1.05);
+    }
+  }
+
+  /* Reveal on scroll */
+  .reveal {
+    opacity: 1;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .reveal {
+      opacity: 0;
+      transform: translateY(1.25rem);
+      transition: opacity 0.8s var(--ease-lux), transform 0.9s var(--ease-lux);
+      transition-delay: var(--reveal-delay, 0ms);
+    }
+
+    .reveal.is-visible {
+      opacity: 1;
+      transform: none;
+    }
+  }
+
+  /* Image placeholder — soft pearl with a gold facet, never a grey box */
+  .ph {
+    position: relative;
+    display: block;
+    inline-size: 100%;
+    block-size: 100%;
+    background-color: var(--color-pearl);
+    background-image: radial-gradient(
+      60% 50% at 50% 40%,
+      rgba(255, 255, 255, 0.95) 0%,
+      rgba(248, 244, 239, 0.6) 55%,
+      rgba(236, 214, 206, 0.45) 100%
+    );
+  }
+
+  .ph-light {
+    background-color: var(--color-pearl);
+  }
+
+  .section {
+    padding-block: clamp(3.5rem, 6vw, 6.5rem);
+  }
+
+  .section-tight {
+    padding-block: clamp(2.5rem, 4vw, 4rem);
+  }
+
+  /* Horizontal snap rail — mobile carousels without JS */
+  .rail {
+    display: grid;
+    grid-auto-flow: column;
+    gap: 0.875rem;
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+    padding-block-end: 0.25rem;
+  }
+
+  .rail::-webkit-scrollbar {
+    display: none;
+  }
+
+  .rail > * {
+    scroll-snap-align: start;
+  }
+}
+
+/* ============================================================
+   Utilities
+   ============================================================ */
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .hair-t {
+    border-block-start: 1px solid var(--color-line);
+  }
+
+  .hair-b {
+    border-block-end: 1px solid var(--color-line);
+  }
+
+  .hair-e {
+    border-inline-end: 1px solid var(--color-line);
+  }
+
+  .hair-t-dark {
+    border-block-start: 1px solid var(--color-line-dark);
+  }
+
+  .hair-b-dark {
+    border-block-end: 1px solid var(--color-line-dark);
+  }
+
+  .hair-e-dark {
+    border-inline-end: 1px solid var(--color-line-dark);
+  }
+
+  .track-wide {
+    letter-spacing: 0.04em;
+  }
+
+  .track-wider {
+    letter-spacing: 0.08em;
+  }
+
+  .shadow-soft {
+    box-shadow: var(--shadow-soft);
+  }
+
+  .shadow-lift {
+    box-shadow: var(--shadow-lift);
+  }
+
+  .rounded-card {
+    border-radius: var(--radius-card);
+  }
 }
